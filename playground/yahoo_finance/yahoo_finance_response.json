@@ -1,0 +1,33 @@
+{
+  "command": "fast-info",
+  "source": "yfinance (Yahoo Finance – API không chính thức)",
+  "request_descriptor": "yfinance.Ticker('AAPL').fast_info",
+  "request_params": {
+    "symbol": "AAPL"
+  },
+  "response": {
+    "symbol": "AAPL",
+    "fast_info": {
+      "currency": "USD",
+      "dayHigh": 273.2200012207031,
+      "dayLow": 268.6600036621094,
+      "exchange": "NMS",
+      "fiftyDayAverage": 260.26299926757815,
+      "lastPrice": 270.5,
+      "lastVolume": 5897057,
+      "marketCap": 3971248370000.0,
+      "open": 272.3349914550781,
+      "previousClose": 267.86,
+      "quoteType": "EQUITY",
+      "regularMarketPreviousClose": 267.6099853515625,
+      "shares": 14681140000,
+      "tenDayAverageVolume": 44605700,
+      "threeMonthAverageVolume": 45733958,
+      "timezone": "America/New_York",
+      "twoHundredDayAverage": 253.91669921875,
+      "yearChange": 0.2670327013156253,
+      "yearHigh": 288.6199951171875,
+      "yearLow": 193.25
+    }
+  }
+}

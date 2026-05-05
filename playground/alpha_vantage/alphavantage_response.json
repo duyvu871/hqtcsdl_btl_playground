@@ -1,0 +1,2624 @@
+{
+  "command": "news",
+  "request_url_redacted": "https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=CRYPTO%3ABTC%2CCRYPTO%3AETH&time_from=20260421T1409&time_to=20260428T1409&limit=20&sort=RELEVANCE&apikey=%2A%2A%2A",
+  "request_params_redacted": {
+    "function": "NEWS_SENTIMENT",
+    "tickers": "CRYPTO:BTC,CRYPTO:ETH",
+    "time_from": "20260421T1409",
+    "time_to": "20260428T1409",
+    "limit": "20",
+    "sort": "RELEVANCE"
+  },
+  "response": {
+    "items": "50",
+    "sentiment_score_definition": "x <= -0.35: Bearish; -0.35 < x <= -0.15: Somewhat-Bearish; -0.15 < x < 0.15: Neutral; 0.15 <= x < 0.35: Somewhat_Bullish; x >= 0.35: Bullish",
+    "relevance_score_definition": "0 < x <= 1, with a higher score indicating higher relevance.",
+    "feed": [
+      {
+        "title": "Ethereum Risks 10% Dip Versus Bitcoin Despite ETH Staking Milestone",
+        "url": "https://cointelegraph.com/markets/ethereum-decline-10percent-versus-bitcoin-despite-record-eth-staking",
+        "time_published": "20260422T161907",
+        "authors": [],
+        "summary": "Ethereum's record 32.33% staking ratio is shrinking liquid supply, reducing sell pressure and potentially supporting an ETH price recovery over time.",
+        "banner_image": "https://s3.cointelegraph.com/uploads/2026-04/019db5b1-5913-7637-a380-f8460a161cee.png",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.108179"
+          }
+        ],
+        "overall_sentiment_score": -0.15808,
+        "overall_sentiment_label": "Somewhat-Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "BMNR",
+            "relevance_score": "0.095517",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.850133",
+            "ticker_sentiment_score": "-0.40824",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.928139",
+            "ticker_sentiment_score": "-0.247459",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Ethereum To $250,000? Daredevil Thesis Says ETH Could Replace Bitcoin, Gold As Money",
+        "url": "https://www.benzinga.com/crypto/cryptocurrency/26/04/51972316/ethereum-to-250000-daredevil-thesis-says-eth-could-replace-bitcoin-gold-as-money",
+        "time_published": "20260422T145247",
+        "authors": [
+          "Parshwa Turakhiya"
+        ],
+        "summary": "Gold's monetary premium sits at approximately $29.7 trillion. Bitcoin's monetary premium is around $1.5 trillion. Together, they represent roughly $31.1 trillion held by people who want money outside government control. ETH's current market cap is approximately $280 billion-less than 1% of that ...",
+        "banner_image": "https://cdn.benzinga.com/files/images/story/2026/04/22/Bitcoin-and-Ethereum.jpeg?width=1200&height=800&fit=crop",
+        "source": "Benzinga",
+        "category_within_source": "Markets",
+        "source_domain": "www.benzinga.com",
+        "topics": [
+          {
+            "topic": "Economy - Monetary",
+            "relevance_score": "0.310843"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.161647"
+          },
+          {
+            "topic": "Technology",
+            "relevance_score": "0.5"
+          },
+          {
+            "topic": "Finance",
+            "relevance_score": "0.5"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.158519"
+          }
+        ],
+        "overall_sentiment_score": 0.016594,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.098659",
+            "ticker_sentiment_score": "0.163517",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "SCHW",
+            "relevance_score": "0.098659",
+            "ticker_sentiment_score": "0.091004",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "BRK-A",
+            "relevance_score": "0.098659",
+            "ticker_sentiment_score": "-0.006472",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.543004",
+            "ticker_sentiment_score": "0.085948",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.952685",
+            "ticker_sentiment_score": "0.017073",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "ETH Triple Top Rejects $2.4K As Analysts Flag Weakness Against BTC",
+        "url": "https://cointelegraph.com/markets/ether-triple-top-pattern-rejects-24k-as-eth-analyst-questions-uptrend",
+        "time_published": "20260427T231940",
+        "authors": [],
+        "summary": "Ether charts flash an ominous triple-top pattern as ETH fails to overcome $2,400. Will bears maintain control over the altcoin's price action?",
+        "banner_image": "https://resizer.cointelegraph.com/cdn-cgi/image/f=auto,onerror=redirect,w=896,q=90/https://payload.cointelegraph.com/api/media/file/019dd051-72c1-77d7-96c1-77950736252b.png?prefix=media%2Fcontent",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.158519"
+          }
+        ],
+        "overall_sentiment_score": -0.141832,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.479683",
+            "ticker_sentiment_score": "-0.022156",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.801457",
+            "ticker_sentiment_score": "-0.158313",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Crypto Market Maker GSR Launches Multi-Asset Crypto ETF",
+        "url": "https://cointelegraph.com/news/crypto-market-maker-gsr-launched-multi-asset-etf",
+        "time_published": "20260423T044654",
+        "authors": [],
+        "summary": "The GSR Crypto Core3 ETF is GSR's first crypto exchange-traded product, giving investors access to the top three largest cryptocurrencies by market capitalization.",
+        "banner_image": "https://s3.cointelegraph.com/uploads/2026-04/019db89e-7406-7b00-ba46-6e952e6b8c49.png",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Finance",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.576289"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.998663"
+          }
+        ],
+        "overall_sentiment_score": 0.238736,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "SCHW",
+            "relevance_score": "0.107495",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "AWON",
+            "relevance_score": "0.107495",
+            "ticker_sentiment_score": "0.205144",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "GS",
+            "relevance_score": "0.213048",
+            "ticker_sentiment_score": "0.253657",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "MS",
+            "relevance_score": "0.107495",
+            "ticker_sentiment_score": "0.177675",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.776097",
+            "ticker_sentiment_score": "0.422899",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.500753",
+            "ticker_sentiment_score": "0.193027",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Tom Lee's BitMine Buys Another $23 Million in ETH From Ethereum Foundation",
+        "url": "https://decrypt.co/365449/tom-lees-bitmine-buys-3-million-eth-ethereum-foundation",
+        "time_published": "20260424T154908",
+        "authors": [
+          "Andrew Hayward"
+        ],
+        "summary": "Top Ethereum treasury firm BitMine Immersion Technologies made its second ETH buy from the Ethereum Foundation.",
+        "banner_image": "https://cdn.decrypt.co/resize/1024/height/512/wp-content/uploads/2025/05/Ethereum-decrypt-style-03-gID_7.png",
+        "source": "Decrypt.co",
+        "category_within_source": "n/a",
+        "source_domain": "decrypt.co",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.310843"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.161647"
+          }
+        ],
+        "overall_sentiment_score": 0.096282,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "BMNR",
+            "relevance_score": "0.352223",
+            "ticker_sentiment_score": "0.110555",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.121037",
+            "ticker_sentiment_score": "0.068013",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.966991",
+            "ticker_sentiment_score": "0.2021",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin ETFs End Inflow Streak as BTC Slips Below $77K",
+        "url": "https://cointelegraph.com/news/bitcoin-etf-end-nine-day-inflow-streak-btc-77k",
+        "time_published": "20260428T100948",
+        "authors": [],
+        "summary": "US spot Bitcoin ETFs post $263 million in outflows, ending a nine-day inflow streak as Bitcoin failed to reclaim $80,000 in its latest run.",
+        "banner_image": "https://resizer.cointelegraph.com/cdn-cgi/image/f=auto,onerror=redirect,w=786,q=90/https://payload.cointelegraph.com/api/media/file/pasted-image-95.png?prefix=media%2Fcontent",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Finance",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.990678"
+          }
+        ],
+        "overall_sentiment_score": -0.086052,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "MSBT",
+            "relevance_score": "0.193465",
+            "ticker_sentiment_score": "0.245164",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "MS",
+            "relevance_score": "0.097457",
+            "ticker_sentiment_score": "0.172582",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.933751",
+            "ticker_sentiment_score": "-0.06819",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.097457",
+            "ticker_sentiment_score": "-0.152334",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Morning Minute: Fidelity Is Cautiously Bullish on Crypto",
+        "url": "https://decrypt.co/365776/morning-minute-fidelity-is-cautiously-bullish-on-crypto",
+        "time_published": "20260428T112849",
+        "authors": [
+          "Tyler Warner"
+        ],
+        "summary": "Fidelity says crypto may finally be finding its floor, while the White House is teasing a major strategic Bitcoin reserve update.",
+        "banner_image": "https://cdn.decrypt.co/resize/1024/height/512/wp-content/uploads/2026/01/fidelity-bitcoin-decrypt-style-gID_7.jpg",
+        "source": "Decrypt.co",
+        "category_within_source": "n/a",
+        "source_domain": "decrypt.co",
+        "topics": [
+          {
+            "topic": "Economy - Monetary",
+            "relevance_score": "0.158519"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.998333"
+          },
+          {
+            "topic": "Earnings",
+            "relevance_score": "0.158519"
+          },
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.451494"
+          }
+        ],
+        "overall_sentiment_score": 0.02867,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "SPOT",
+            "relevance_score": "0.033515",
+            "ticker_sentiment_score": "-0.01443",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "SATA",
+            "relevance_score": "0.033515",
+            "ticker_sentiment_score": "-0.03455",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.666149",
+            "ticker_sentiment_score": "-0.063317",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.356051",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Crypto Markets Today, April 27: Bitcoin Slips Below $77,000 as Rally Falters",
+        "url": "https://www.fool.com/coverage/stock-market-today/2026/04/27/crypto-markets-today-april-27-bitcoin-slips-below-usd77-000-as-rally-falters/",
+        "time_published": "20260427T215137",
+        "authors": [
+          "Emma Newbery"
+        ],
+        "summary": "Crypto markets stutter as stalled U.S.-Iran peace talks weigh on prices, today, April 27, 2026.",
+        "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F867022%2Fdigital-illustration-of-a-bitcoin.jpg&w=3840&op=resize",
+        "source": "Motley Fool",
+        "category_within_source": "n/a",
+        "source_domain": "www.fool.com",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.310843"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.451494"
+          }
+        ],
+        "overall_sentiment_score": -0.227487,
+        "overall_sentiment_label": "Somewhat-Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.682689",
+            "ticker_sentiment_score": "-0.191965",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.310843",
+            "ticker_sentiment_score": "-0.018496",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:AAVE",
+            "relevance_score": "0.158519",
+            "ticker_sentiment_score": "-0.199077",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "BitMine Expands ETH Holdings Despite $6.5B in Unrealized Losses",
+        "url": "https://cointelegraph.com/news/bitmine-eth-holdings-unrealized-losses-staking-rewards",
+        "time_published": "20260427T185608",
+        "authors": [],
+        "summary": "The crypto treasury company continues to buy Ether and earn staking rewards, even as price swings leave billions in unrealized losses on its balance sheet.",
+        "banner_image": "https://resizer.cointelegraph.com/cdn-cgi/image/f=auto,onerror=redirect,w=787,q=90/https://payload.cointelegraph.com/api/media/file/pasted-image-74.png?prefix=media%2Fcontent",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.266143"
+          }
+        ],
+        "overall_sentiment_score": 0.043928,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "BMNR",
+            "relevance_score": "0.18602",
+            "ticker_sentiment_score": "0.007734",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.18602",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.804375",
+            "ticker_sentiment_score": "-0.012295",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Hyperliquid Whale Shorts Bitcoin, Is A $75K Retest Incoming",
+        "url": "https://cointelegraph.com/markets/hyperliquid-whale-holds-38m-short-against-bitcoin-but-does-it-matter",
+        "time_published": "20260425T023518",
+        "authors": [],
+        "summary": "A Hyperliquid whale holds large short positions against Bitcoin and several altcoins. Does the position provide any signal on the markets' future outcomes?",
+        "banner_image": "https://resizer.cointelegraph.com/cdn-cgi/image/f=auto,onerror=redirect,w=896,q=90/https://payload.cointelegraph.com/api/media/file/pasted-image-59.png?prefix=media%2Fcontent",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.576289"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.161647"
+          }
+        ],
+        "overall_sentiment_score": -0.08001,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.648769",
+            "ticker_sentiment_score": "-0.1267",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.328236",
+            "ticker_sentiment_score": "-0.190223",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "CRYPTO:AVAX",
+            "relevance_score": "0.067536",
+            "ticker_sentiment_score": "-0.113733",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin Developer Plans to 'Reassign' Coins Linked to Satoshi Nakamoto in Hard Fork",
+        "url": "https://decrypt.co/365712/bitcoin-developer-reassign-coins-linked-satoshi-nakamoto-hard-fork",
+        "time_published": "20260427T201529",
+        "authors": [
+          "Jason Nelson"
+        ],
+        "summary": "Paul Sztorc's proposed eCash fork would give investors coins cloned from wallets believed to belong to Bitcoin creator Satoshi Nakamoto.",
+        "banner_image": "https://cdn.decrypt.co/resize/1024/height/512/wp-content/uploads/2025/07/satoshi-nakamoto-decrypt-style-02-gID_7.jpg",
+        "source": "Decrypt.co",
+        "category_within_source": "n/a",
+        "source_domain": "decrypt.co",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.158519"
+          }
+        ],
+        "overall_sentiment_score": 0.012118,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.765876",
+            "ticker_sentiment_score": "0.071613",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.201244",
+            "ticker_sentiment_score": "0.033369",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETC",
+            "relevance_score": "0.201244",
+            "ticker_sentiment_score": "0.033369",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BCH",
+            "relevance_score": "0.201244",
+            "ticker_sentiment_score": "0.033369",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Better Growth Investment to Buy With $500: Ethereum vs. Strategy",
+        "url": "https://www.fool.com/investing/2026/04/25/better-growth-investment-to-buy-with-500-ethereum/",
+        "time_published": "20260426T023000",
+        "authors": [
+          "Alex Carchidi"
+        ],
+        "summary": "These two assets take very different approaches to generating value.",
+        "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F867162%2Finvestors-ponders-crypto-chart-at-desk.jpg&w=3840&op=resize",
+        "source": "Motley Fool",
+        "category_within_source": "n/a",
+        "source_domain": "www.fool.com",
+        "topics": [
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.451494"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.365926"
+          }
+        ],
+        "overall_sentiment_score": 0.33748,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "MSTR",
+            "relevance_score": "0.053749",
+            "ticker_sentiment_score": "0.223847",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.410338",
+            "ticker_sentiment_score": "0.362323",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.499789",
+            "ticker_sentiment_score": "0.450263",
+            "ticker_sentiment_label": "Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin, Ether Rally Higher As US Monetary Plan Excites Bulls",
+        "url": "https://cointelegraph.com/markets/four-reasons-why-the-crypto-market-is-rallying-today-will-bulls-maintain-control",
+        "time_published": "20260423T003000",
+        "authors": [],
+        "summary": "Bitcoin and Ether surged as US liquidity measures and record spot ETF inflows offset investors' recession fears and their concerns over the war in Iran.",
+        "banner_image": "https://s3.cointelegraph.com/uploads/2026-04/019db704-b0fc-726b-b8c8-912ac714cad4.png",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Life Sciences",
+            "relevance_score": "0.2"
+          },
+          {
+            "topic": "Energy & Transportation",
+            "relevance_score": "0.2"
+          },
+          {
+            "topic": "Technology",
+            "relevance_score": "0.2"
+          },
+          {
+            "topic": "Finance",
+            "relevance_score": "0.2"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.310843"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.99246"
+          },
+          {
+            "topic": "Manufacturing",
+            "relevance_score": "0.2"
+          },
+          {
+            "topic": "Earnings",
+            "relevance_score": "0.614606"
+          }
+        ],
+        "overall_sentiment_score": 0.12364,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "TSLA",
+            "relevance_score": "0.11983",
+            "ticker_sentiment_score": "0.011997",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "INTC",
+            "relevance_score": "0.11983",
+            "ticker_sentiment_score": "0.138534",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "MS",
+            "relevance_score": "0.060085",
+            "ticker_sentiment_score": "0.232643",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CANG",
+            "relevance_score": "0.11983",
+            "ticker_sentiment_score": "0.241212",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CORZQ",
+            "relevance_score": "0.060085",
+            "ticker_sentiment_score": "0.206006",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "RIOT",
+            "relevance_score": "0.11983",
+            "ticker_sentiment_score": "0.241212",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "MSBT",
+            "relevance_score": "0.11983",
+            "ticker_sentiment_score": "0.269363",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "SO",
+            "relevance_score": "0.060085",
+            "ticker_sentiment_score": "0.118422",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "FOREX:USD",
+            "relevance_score": "0.060085",
+            "ticker_sentiment_score": "0.199382",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.672864",
+            "ticker_sentiment_score": "0.267368",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.236972",
+            "ticker_sentiment_score": "-0.028881",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Is Owning Just Bitcoin and Ethereum Enough for a Crypto Portfolio?",
+        "url": "https://www.fool.com/investing/2026/04/23/is-owning-just-bitcoin-and-ethereum-enough-for-a-c/",
+        "time_published": "20260423T100900",
+        "authors": [
+          "Alex Carchidi"
+        ],
+        "summary": "Simple portfolios can often outperform overly complicated ones.",
+        "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F864908%2Fbitcoin-digital-flux.jpg&w=3840&op=resize",
+        "source": "Motley Fool",
+        "category_within_source": "n/a",
+        "source_domain": "www.fool.com",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.576289"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.744043"
+          }
+        ],
+        "overall_sentiment_score": 0.223468,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.517534",
+            "ticker_sentiment_score": "0.280731",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.384102",
+            "ticker_sentiment_score": "0.212624",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Got $1,000 to Invest in Crypto? Here's How to Think About Allocating It.",
+        "url": "https://www.fool.com/investing/2026/04/26/got-1000-to-invest-in-crypto-heres-how-to-think-ab/",
+        "time_published": "20260426T123700",
+        "authors": [
+          "Dominic Basulto"
+        ],
+        "summary": "Creating a diversified, high-upside crypto portfolio is easier than you might think.",
+        "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F864907%2Ftrader-at-night.jpg&w=3840&op=resize",
+        "source": "Motley Fool",
+        "category_within_source": "n/a",
+        "source_domain": "www.fool.com",
+        "topics": [
+          {
+            "topic": "Finance",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.682689"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.451494"
+          }
+        ],
+        "overall_sentiment_score": 0.082165,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "COIN",
+            "relevance_score": "0.091162",
+            "ticker_sentiment_score": "0.120645",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "AWON",
+            "relevance_score": "0.091162",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.43303",
+            "ticker_sentiment_score": "0.048689",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.43303",
+            "ticker_sentiment_score": "0.051645",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "IBIT and ETHA Charge the Same. The Similarities End There.",
+        "url": "https://www.fool.com/coverage/etfs/2026/04/24/ibit-and-etha-charge-the-same-the-similarities-end-there/",
+        "time_published": "20260424T234901",
+        "authors": [
+          "Seena Hassouna"
+        ],
+        "summary": "Both funds offer single-asset crypto exposure at the same cost-yet their risk profiles and asset sizes set them worlds apart.",
+        "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F867225%2Fmarket-data.jpg&w=3840&op=resize",
+        "source": "Motley Fool",
+        "category_within_source": "n/a",
+        "source_domain": "www.fool.com",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.310843"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.993781"
+          }
+        ],
+        "overall_sentiment_score": 0.099472,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.356609",
+            "ticker_sentiment_score": "0.250807",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.483111",
+            "ticker_sentiment_score": "0.25191",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin Taps $79,000 As April Rally Extends To 16%: Why Is BTC Going Up?",
+        "url": "https://www.benzinga.com/crypto/cryptocurrency/26/04/52059559/bitcoin-taps-79000-as-april-rally-extends-to-16-why-is-btc-going-up",
+        "time_published": "20260427T122902",
+        "authors": [
+          "Parshwa Turakhiya"
+        ],
+        "summary": "Bitcoin ( CRYPTO: BTC ) hit a 12-week high of $79,488 on Monday morning as Iran offered a new proposal to reopen the Strait of Hormuz, extending April's rally to 16%. The rally marked the highest level since January 31 and the first monthly double-digit gain since May 2025.",
+        "banner_image": "https://cdn.benzinga.com/files/images/story/2026/04/27/Bitcoin-Btc-Virtual-Cryptocurrency-In-Fr.jpeg?width=1200&height=800&fit=crop",
+        "source": "Benzinga",
+        "category_within_source": "Markets",
+        "source_domain": "www.benzinga.com",
+        "topics": [
+          {
+            "topic": "Economy - Monetary",
+            "relevance_score": "0.310843"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.77141"
+          },
+          {
+            "topic": "Earnings",
+            "relevance_score": "0.158519"
+          },
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.158519"
+          }
+        ],
+        "overall_sentiment_score": 0.106097,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "CSHR",
+            "relevance_score": "0.093289",
+            "ticker_sentiment_score": "0.242602",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.093289",
+            "ticker_sentiment_score": "0.161253",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.651499",
+            "ticker_sentiment_score": "0.065458",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.185306",
+            "ticker_sentiment_score": "0.100689",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Spot Bitcoin ETFs See 9-Day Inflow Streak as Investors Show Conviction",
+        "url": "https://cointelegraph.com/news/spot-bitcoin-etfs-see-9-day-inflow-streak-as-investors-show-resilience",
+        "time_published": "20260425T083546",
+        "authors": [],
+        "summary": "US spot Bitcoin ETFs recorded $2.12 billion in inflows over nine days, signaling growing conviction among investors.",
+        "banner_image": "https://resizer.cointelegraph.com/cdn-cgi/image/f=auto,onerror=redirect,w=896,q=90/https://payload.cointelegraph.com/api/media/file/9-day.PNG?prefix=media%2Fcontent",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.976671"
+          }
+        ],
+        "overall_sentiment_score": 0.235404,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.570165",
+            "ticker_sentiment_score": "0.22001",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.264897",
+            "ticker_sentiment_score": "0.305293",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin Holds Near $77,000 As Ethereum, XRP, Dogecoin Go Sideways",
+        "url": "https://www.benzinga.com/crypto/cryptocurrency/26/04/51995253/bitcoin-holds-near-77000-as-ethereum-xrp-dogecoin-go-sideways",
+        "time_published": "20260423T121433",
+        "authors": [
+          "Khyathi Dalal"
+        ],
+        "summary": "Bitcoin is trading sideways as Bitcoin ETFs saw $85.04 million in net inflows on Wednesday, while Ethereum ETFs reported $42.8 million in net inflows. Meme coin market capitalization is trading 4.5% lower over the past 24 hours.",
+        "banner_image": "https://cdn.benzinga.com/files/images/story/2026/04/23/Cryptocurrency--Bitcoin-Coin-Down-Trend-.jpeg?width=1200&height=800&fit=crop",
+        "source": "Benzinga",
+        "category_within_source": "Markets",
+        "source_domain": "www.benzinga.com",
+        "topics": [
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.77141"
+          }
+        ],
+        "overall_sentiment_score": -0.102367,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.126784",
+            "ticker_sentiment_score": "0.179193",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.575055",
+            "ticker_sentiment_score": "-0.21592",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.250386",
+            "ticker_sentiment_score": "-0.253114",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "CRYPTO:DOGE",
+            "relevance_score": "0.126784",
+            "ticker_sentiment_score": "-0.065166",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Kevin O'Leary Says 'Just Own Bitcoin And Ethereum' As Altcoins 'Never Came Back'",
+        "url": "https://www.benzinga.com/crypto/cryptocurrency/26/04/52001824/kevin-oleary-says-just-own-bitcoin-and-ethereum-as-altcoins-never-came-back",
+        "time_published": "20260423T143123",
+        "authors": [
+          "Parshwa Turakhiya"
+        ],
+        "summary": "O'Leary said he dumped all his altcoin holdings after the October 2025 crash and now holds only Bitcoin and Ethereum. \"So what's happened to the poo-poos is they collapsed last October, and all of them, thousands of them, never came back,\" O'Leary said. \"So I dumped all my coins, and I own those ...",
+        "banner_image": "https://cdn.benzinga.com/files/images/story/2026/04/23/OLeary-Advocates-Catastrophe-Fund.jpeg?width=1200&height=800&fit=crop",
+        "source": "Benzinga",
+        "category_within_source": "Markets",
+        "source_domain": "www.benzinga.com",
+        "topics": [
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.158519"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.108179"
+          }
+        ],
+        "overall_sentiment_score": 0.02166,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.146916",
+            "ticker_sentiment_score": "0.193446",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.645516",
+            "ticker_sentiment_score": "0.062321",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.146916",
+            "ticker_sentiment_score": "-0.290062",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin Surges Toward $80K in April: Should Investors Buy Crypto Now?",
+        "url": "https://www.zacks.com/stock/news/2908878/bitcoin-surges-toward-80k-in-april-should-investors-buy-crypto-now",
+        "time_published": "20260427T190000",
+        "authors": [
+          "Urmimala Biswas"
+        ],
+        "summary": "Bitcoin nears $80K as easing tensions and soft inflation fuel short squeeze, but fading momentum, tight liquidity and Fed uncertainty temper outlook.",
+        "banner_image": "https://staticx-tuner.zacks.com/images/default_article_images/default244.jpg",
+        "source": "Zacks Commentary",
+        "category_within_source": "n/a",
+        "source_domain": "www.zacks.com",
+        "topics": [
+          {
+            "topic": "Economy - Monetary",
+            "relevance_score": "0.928139"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.158519"
+          }
+        ],
+        "overall_sentiment_score": 0.052445,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.663497",
+            "ticker_sentiment_score": "-0.118883",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.109206",
+            "ticker_sentiment_score": "0.345802",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin, Altcoins Remain Range Bound As Bulls And Bears Fight For Control",
+        "url": "https://cointelegraph.com/markets/price-predictions-427-spx-dxy-btc-eth-xrp-bnb-sol-doge-hype-ada",
+        "time_published": "20260427T195919",
+        "authors": [],
+        "summary": "Bitcoin fails to top $80,000 as analysts debate whether BTC has truly changed its trend or remains in the grasp of the bears.",
+        "banner_image": "https://resizer.cointelegraph.com/cdn-cgi/image/f=auto,onerror=redirect,w=896,q=90/https://payload.cointelegraph.com/api/media/file/019dcf8b-57a1-7ab4-8ee5-cf42b252670f.png?prefix=media%2Fcontent",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.451494"
+          },
+          {
+            "topic": "Economy - Macro",
+            "relevance_score": "0.158519"
+          }
+        ],
+        "overall_sentiment_score": -0.057558,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRDD",
+            "relevance_score": "0.032961",
+            "ticker_sentiment_score": "0.229676",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "FOREX:USD",
+            "relevance_score": "0.032961",
+            "ticker_sentiment_score": "0.039342",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.636698",
+            "ticker_sentiment_score": "0.116166",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BNB",
+            "relevance_score": "0.131284",
+            "ticker_sentiment_score": "0.012578",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:XRP",
+            "relevance_score": "0.131284",
+            "ticker_sentiment_score": "-0.046591",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.131284",
+            "ticker_sentiment_score": "-0.029772",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:DOGE",
+            "relevance_score": "0.131284",
+            "ticker_sentiment_score": "-0.02715",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:USDT",
+            "relevance_score": "0.259037",
+            "ticker_sentiment_score": "-0.053092",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ADA",
+            "relevance_score": "0.131284",
+            "ticker_sentiment_score": "-0.020966",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "GSR Launches Actively Managed Bitcoin, Ethereum and Solana Basket ETF on Nasdaq",
+        "url": "https://decrypt.co/365127/gsr-actively-managed-bitcoin-ethereum-solana-etf-nasdaq",
+        "time_published": "20260422T154759",
+        "authors": [
+          "Logan Hitchcock"
+        ],
+        "summary": "Crypto market maker GSR has launched an actively managed ETF on the Nasdaq that includes Bitcoin, Ethereum, and Solana.",
+        "banner_image": "https://cdn.decrypt.co/resize/1024/height/512/wp-content/uploads/2025/06/etf-decrypt-style-03-gID_7.png",
+        "source": "Decrypt.co",
+        "category_within_source": "n/a",
+        "source_domain": "decrypt.co",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.310843"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.995921"
+          }
+        ],
+        "overall_sentiment_score": 0.295318,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "AWON",
+            "relevance_score": "0.113597",
+            "ticker_sentiment_score": "0.19575",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.331765",
+            "ticker_sentiment_score": "0.366183",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.432291",
+            "ticker_sentiment_score": "0.43514",
+            "ticker_sentiment_label": "Bullish"
+          }
+        ]
+      },
+      {
+        "title": "ETHA Grows Larger Than HODL With Higher Recent Returns",
+        "url": "https://www.fool.com/coverage/etfs/2026/04/26/etha-grows-larger-than-hodl-with-higher-recent-returns/",
+        "time_published": "20260426T162008",
+        "authors": [
+          "Seena Hassouna"
+        ],
+        "summary": "Key differences in scale, cost, and risk set these two single-crypto ETFs apart for investors weighing direct digital asset exposure.",
+        "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F866106%2Foil.jpg&w=3840&op=resize",
+        "source": "Motley Fool",
+        "category_within_source": "n/a",
+        "source_domain": "www.fool.com",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.682689"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.994953"
+          }
+        ],
+        "overall_sentiment_score": 0.036349,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.310843",
+            "ticker_sentiment_score": "0.025565",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.451494",
+            "ticker_sentiment_score": "0.03332",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Bitmine Buys 101,901 Ethereum As ETH Holdings Cross 5 Million In World Record Push - BitMine Immersion  ( N",
+        "url": "https://www.benzinga.com/crypto/cryptocurrency/26/04/52063790/bitmine-buys-101901-ethereum-as-eth-holdings-cross-5-million-in-world-record-push",
+        "time_published": "20260427T140341",
+        "authors": [
+          "Parshwa Turakhiya"
+        ],
+        "summary": "Bitmine now owns more than 4.21% of the total ETH supply of 120.7 million tokens and is 84% of the way to its goal of acquiring 5% in just 10 months. Total crypto and cash holdings stand at $13.3 billion, including 200 Bitcoin, $200 million in Beast Industries, $91 million in Eightco Holdings ( ...",
+        "banner_image": "https://cdn.benzinga.com/files/images/story/2026/04/27/The-Bitmine-Immersion-Trade.jpeg?width=1200&height=800&fit=crop",
+        "source": "Benzinga",
+        "category_within_source": "Markets",
+        "source_domain": "www.benzinga.com",
+        "topics": [
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.158519"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.684621"
+          }
+        ],
+        "overall_sentiment_score": 0.12547,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.095517",
+            "ticker_sentiment_score": "0.16216",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "ORBS",
+            "relevance_score": "0.095517",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.095517",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.662945",
+            "ticker_sentiment_score": "0.172994",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Crypto ETPs Extend Inflow Streak as BTC Trades Above $76K",
+        "url": "https://cointelegraph.com/news/crypto-funds-1-2-billion-inflows-four-week-streak",
+        "time_published": "20260427T105836",
+        "authors": [],
+        "summary": "Crypto ETPs see $1.2 billion inflows in fourth straight week as Bitcoin leads gains and blockchain equity ETFs hit record demand, CoinShares reported.",
+        "banner_image": "https://resizer.cointelegraph.com/cdn-cgi/image/f=auto,onerror=redirect,w=845,q=90/https://payload.cointelegraph.com/api/media/file/pasted-image-68.png?prefix=media%2Fcontent",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Economy - Monetary",
+            "relevance_score": "0.158519"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.576289"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.976913"
+          }
+        ],
+        "overall_sentiment_score": 0.18777,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "CSHR",
+            "relevance_score": "0.354319",
+            "ticker_sentiment_score": "0.315109",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.642187",
+            "ticker_sentiment_score": "0.361655",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.091509",
+            "ticker_sentiment_score": "0.091479",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin, Ethereum, XRP, Dogecoin Trade Sideways As Iran Peace Push Stalls - Grayscale Bitcoin Mini Trust",
+        "url": "https://www.benzinga.com/crypto/cryptocurrency/26/04/52013015/bitcoin-ethereum-xrp-dogecoin-trade-sideways-as-iran-peace-push-stalls",
+        "time_published": "20260423T184124",
+        "authors": [
+          "Khyathi Dalal"
+        ],
+        "summary": "Bitcoin is holding around $78,000, suggesting resilience even as broader markets react to geopolitical risk-off sentiment. Coinglass data shows 100,758 traders were liquidated in the past 24 hours for $221.37 million. SoSoValue data shows net inflows of $85.04 million from spot Bitcoin ETFs on ...",
+        "banner_image": "https://cdn.benzinga.com/files/images/story/2026/04/23/Cryptocurrency-On-Binance-Trading-App--B.jpeg?width=1200&height=800&fit=crop",
+        "source": "Benzinga",
+        "category_within_source": "News",
+        "source_domain": "www.benzinga.com",
+        "topics": [
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.495866"
+          }
+        ],
+        "overall_sentiment_score": 0.023727,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.15347",
+            "ticker_sentiment_score": "0.19848",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.561184",
+            "ticker_sentiment_score": "-0.103988",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.15347",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Morning Minute: Bitcoin Passes $78k as Trump Extends Ceasefire Indefinitely",
+        "url": "https://decrypt.co/365112/morning-minute-bitcoin-passes-78k-as-trump-extends-ceasefire-indefinitely",
+        "time_published": "20260422T114953",
+        "authors": [
+          "Tyler Warner"
+        ],
+        "summary": "Bitcoin is ripping past $78K. Kevin Warsh faced off against the Senate. And Kalshi and Polymarket are now both coming for perpetual futures.",
+        "banner_image": "https://cdn.decrypt.co/resize/1024/height/512/wp-content/uploads/2025/08/bitcoin-bull-decrypt-style-gID_7.jpg",
+        "source": "Decrypt.co",
+        "category_within_source": "n/a",
+        "source_domain": "decrypt.co",
+        "topics": [
+          {
+            "topic": "Economy - Monetary",
+            "relevance_score": "0.838487"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.938793"
+          },
+          {
+            "topic": "Technology",
+            "relevance_score": "0.5"
+          },
+          {
+            "topic": "Finance",
+            "relevance_score": "0.5"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.576289"
+          }
+        ],
+        "overall_sentiment_score": -0.074504,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "SPOT",
+            "relevance_score": "0.028695",
+            "ticker_sentiment_score": "-0.058553",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "DASH",
+            "relevance_score": "0.028695",
+            "ticker_sentiment_score": "-0.054193",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "COIN",
+            "relevance_score": "0.114409",
+            "ticker_sentiment_score": "-0.086515",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.410505",
+            "ticker_sentiment_score": "-0.161778",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.280938",
+            "ticker_sentiment_score": "-0.121843",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:AAVE",
+            "relevance_score": "0.028695",
+            "ticker_sentiment_score": "-0.054193",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Anchorage Digital Adds Solana Staking via Marinade Finance",
+        "url": "https://cointelegraph.com/news/anchorage-digital-brings-automated-solana-staking-to-institutional-clients",
+        "time_published": "20260423T202736",
+        "authors": [],
+        "summary": "The integration with Marinade Finance lets clients earn yield via validator selection strategies while retaining custody and control within a single platform.",
+        "banner_image": "https://resizer.cointelegraph.com/cdn-cgi/image/f=auto,onerror=redirect,w=537,q=90/https://payload.cointelegraph.com/api/media/file/Screenshot%202026-04-23%2010.18.46%20PM.png?prefix=media%2Fcontent",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "IPO",
+            "relevance_score": "0.158519"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.986714"
+          }
+        ],
+        "overall_sentiment_score": 0.19536,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.447528",
+            "ticker_sentiment_score": "0.235794",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.233556",
+            "ticker_sentiment_score": "0.23801",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin, Ethereum, XRP, Dogecoin Trade Sideways On US-Iran Meeting Delay",
+        "url": "https://www.benzinga.com/crypto/cryptocurrency/26/04/51951824/bitcoin-ethereum-xrp-dogecoin-trade-sideways-on-us-iran-meeting-delay",
+        "time_published": "20260421T184817",
+        "authors": [
+          "Khyathi Dalal"
+        ],
+        "summary": "Bitcoin is holding above $75,000 as sentiment remains stable ahead of a possible U.S.-Iran meeting. Coinglass data shows 114,658 traders were liquidated in the past 24 hours for $286.09 million. SoSoValue data shows net inflows of $238.4 million from spot Bitcoin ETFs on Monday.",
+        "banner_image": "https://cdn.benzinga.com/files/images/story/2026/04/21/Cryptocurrency-Coins-Displaying-XRP--Sol.jpeg?width=1200&height=800&fit=crop",
+        "source": "Benzinga",
+        "category_within_source": "News",
+        "source_domain": "www.benzinga.com",
+        "topics": [
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.744043"
+          }
+        ],
+        "overall_sentiment_score": -0.002417,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.142565",
+            "ticker_sentiment_score": "0.190201",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.52759",
+            "ticker_sentiment_score": "0.045629",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.142565",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Stratiphy Restores Crypto ETN Access for UK Investors via New ISA Offering",
+        "url": "https://cointelegraph.com/news/stratiphy-crypto-etns-uk-isa-offering",
+        "time_published": "20260422T090144",
+        "authors": [],
+        "summary": "Stratiphy is reopening a tax-free route to crypto ETNs in the UK after HMRC's ISA rule change left retail investors with little practical access.",
+        "banner_image": "https://s3.cointelegraph.com/uploads/2026-04/019db41e-e4e7-7b59-aab2-3b0d84d0db03.PNG",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.310843"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.77141"
+          }
+        ],
+        "overall_sentiment_score": 0.054489,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.411848",
+            "ticker_sentiment_score": "0.047387",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTG",
+            "relevance_score": "0.086245",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.254751",
+            "ticker_sentiment_score": "0.038703",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Forget  ( XRP )  Ripple: This Cryptocurrency Has A Real Moat",
+        "url": "https://www.fool.com/investing/2026/04/21/forget-xrp-ripple-this-cryptocurrency-has-a-real-m/",
+        "time_published": "20260421T154443",
+        "authors": [
+          "Leo Sun"
+        ],
+        "summary": "Ethereum offers more stable returns with clearer long-term catalysts.",
+        "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F866240%2Fethereum-virtual-money-getty-71317.jpg&w=3840&op=resize",
+        "source": "Motley Fool",
+        "category_within_source": "n/a",
+        "source_domain": "www.fool.com",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.972193"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.795202"
+          }
+        ],
+        "overall_sentiment_score": 0.171645,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "FOREX:USD",
+            "relevance_score": "0.238133",
+            "ticker_sentiment_score": "0.074557",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.080458",
+            "ticker_sentiment_score": "0.109739",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.580956",
+            "ticker_sentiment_score": "0.287548",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "'Excellent Window' for Strategic Accumulation as Bitcoin Risk Indicator Flips Bullish",
+        "url": "https://decrypt.co/365244/excellent-window-for-strategic-accumulation-as-bitcoin-risk-indicator-flips-bullish",
+        "time_published": "20260423T124104",
+        "authors": [
+          "Akash Girimath"
+        ],
+        "summary": "With Bitcoin topping $79K Wednesday, a \"cleared risk landscape\" hints at a potential extension of its ongoing rally.",
+        "banner_image": "https://cdn.decrypt.co/resize/1024/height/512/wp-content/uploads/2025/07/Bitcoin-chart-decrypt-style-01-gID_7.png",
+        "source": "Decrypt.co",
+        "category_within_source": "n/a",
+        "source_domain": "decrypt.co",
+        "topics": [
+          {
+            "topic": "Economy - Monetary",
+            "relevance_score": "0.158519"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.360215"
+          }
+        ],
+        "overall_sentiment_score": 0.0392,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.411176",
+            "ticker_sentiment_score": "0.193158",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.213048",
+            "ticker_sentiment_score": "0.121692",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin, Ethereum, XRP, Dogecoin Steady After Iran Ceasefire Extended: Analyst Says BTC May Establish Bot",
+        "url": "https://www.benzinga.com/crypto/cryptocurrency/26/04/51959121/bitcoin-ethereum-xrp-dogecoin-steady-iran-ceasefire-btc-bottom-timeframe-analyst",
+        "time_published": "20260422T021332",
+        "authors": [
+          "Aniket Verma"
+        ],
+        "summary": "Leading cryptocurrencies held steady, while stock futures lifted Tuesday evening after President Donald Trump extended the ceasefire with Iran indefinitely. Bitcoin oscillated between $74,800 and $76,800, while trading volume remained muted.",
+        "banner_image": "https://cdn.benzinga.com/files/images/story/2026/04/21/Cryptocurrency-Bitcoin-Coin-Over-Tablet-.jpeg?width=1200&height=800&fit=crop",
+        "source": "Benzinga",
+        "category_within_source": "Trading",
+        "source_domain": "www.benzinga.com",
+        "topics": [
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.682689"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.214378"
+          }
+        ],
+        "overall_sentiment_score": 0.045602,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.09439",
+            "ticker_sentiment_score": "0.161695",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.523202",
+            "ticker_sentiment_score": "-0.227584",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.09439",
+            "ticker_sentiment_score": "-0.155354",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "CRYPTO:DOGE",
+            "relevance_score": "0.09439",
+            "ticker_sentiment_score": "-0.155354",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "CRYPTO:XRP",
+            "relevance_score": "0.09439",
+            "ticker_sentiment_score": "-0.155354",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Aave Asks Arbitrum to Unfreeze Stolen Kelp DAO Funds",
+        "url": "https://cointelegraph.com/news/arbitrum-dao-asked-to-unfreeze-30k-eth-tied-to-kelp-hacker-direct-them-to-defi-united",
+        "time_published": "20260427T042058",
+        "authors": [],
+        "summary": "More than $21 million in contributions has been made to the \"DeFi United\" relief effort so far, with another $215 million to be potentially allocated if certain governance proposals succeed.",
+        "banner_image": "https://resizer.cointelegraph.com/cdn-cgi/image/f=auto,onerror=redirect,w=785,q=90/https://payload.cointelegraph.com/api/media/file/pasted-image-63.png?prefix=media%2Fcontent",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.158519"
+          }
+        ],
+        "overall_sentiment_score": 0.123927,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.082963",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.5341",
+            "ticker_sentiment_score": "0.016795",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:AAVE",
+            "relevance_score": "0.748136",
+            "ticker_sentiment_score": "0.125463",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Morning Minute: Bitcoin Clears $79,000, Then Reverses",
+        "url": "https://decrypt.co/365243/morning-minute-bitcoin-clears-79000-then-reverses",
+        "time_published": "20260423T120313",
+        "authors": [
+          "Tyler Warner"
+        ],
+        "summary": "Justin Sun is suing Trump's World Liberty Financial, and the U.S. government is now openly running a Bitcoin node.",
+        "banner_image": "https://cdn.decrypt.co/resize/1024/height/512/wp-content/uploads/2025/07/Bitcoin-decrypt-style-28-gID_7.png",
+        "source": "Decrypt.co",
+        "category_within_source": "n/a",
+        "source_domain": "decrypt.co",
+        "topics": [
+          {
+            "topic": "Economy - Monetary",
+            "relevance_score": "0.158519"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.997902"
+          },
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.769861"
+          }
+        ],
+        "overall_sentiment_score": -0.014395,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "SPOT",
+            "relevance_score": "0.028155",
+            "ticker_sentiment_score": "-0.002743",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "SAIC",
+            "relevance_score": "0.028155",
+            "ticker_sentiment_score": "0.084102",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "FOREX:RUB",
+            "relevance_score": "0.028155",
+            "ticker_sentiment_score": "0.001884",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.40348",
+            "ticker_sentiment_score": "0.038748",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.195137",
+            "ticker_sentiment_score": "-0.009468",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin, Ethereum, XRP, Dogecoin Up 3% As Markets Hope For Iran War Settlement",
+        "url": "https://www.benzinga.com/crypto/cryptocurrency/26/04/51981463/bitcoin-ethereum-xrp-dogecoin-up-3-as-markets-hope-for-iran-war-settlement",
+        "time_published": "20260422T190919",
+        "authors": [
+          "Khyathi Dalal"
+        ],
+        "summary": "Bitcoin is nearing $79,000, supported by fresh hopes about a settlement in the Iran war. Coinglass data shows 100,948 traders were liquidated in the past 24 hours for $448.03 million. SoSoValue data shows net inflows of $11.8 million from spot Bitcoin ETFs on Tuesday.",
+        "banner_image": "https://cdn.benzinga.com/files/images/story/2026/04/22/Futuristic-Crypto-Trading-Floor-Bustling.jpeg?width=1200&height=800&fit=crop",
+        "source": "Benzinga",
+        "category_within_source": "News",
+        "source_domain": "www.benzinga.com",
+        "topics": [
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.495866"
+          }
+        ],
+        "overall_sentiment_score": 0.175817,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.154455",
+            "ticker_sentiment_score": "0.19925",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.441059",
+            "ticker_sentiment_score": "0.057065",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.154455",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin, Ethereum, XRP Retreat, Dogecoin Gains As Strait Of Hormuz Blockades Continue: Analyst Says BTC C",
+        "url": "https://www.benzinga.com/crypto/cryptocurrency/26/04/52021221/bitcoin-ethereum-xrp-dogecoin-mixed-hormuz-tensions-btc-key-level-breakout-analyst",
+        "time_published": "20260424T020420",
+        "authors": [
+          "Aniket Verma"
+        ],
+        "summary": "Leading cryptocurrencies retreated alongside stocks on Thursday, amid lingering uncertainty over the Iran conflict. Bitcoin wobbled in the $78,000 zone after teasing $80,000 the day before. Trading volume plunged 23% over the last 24 hours.",
+        "banner_image": "https://cdn.benzinga.com/files/images/story/2026/04/23/Cryptocurrency-Bitcoin-Coin-Over-Tablet-.jpeg?width=1200&height=800&fit=crop",
+        "source": "Benzinga",
+        "category_within_source": "Trading",
+        "source_domain": "www.benzinga.com",
+        "topics": [
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.451494"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.161647"
+          }
+        ],
+        "overall_sentiment_score": -0.120955,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.09402",
+            "ticker_sentiment_score": "0.161545",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.276909",
+            "ticker_sentiment_score": "-0.290938",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.276909",
+            "ticker_sentiment_score": "0.050511",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:DOGE",
+            "relevance_score": "0.09402",
+            "ticker_sentiment_score": "-0.212312",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin 'Q-Day' Draws Nearer as Quantum Researcher Breaks Simplified Key",
+        "url": "https://decrypt.co/365444/bitcoin-q-day-draws-nearer-quantum-researcher-breaks-simplified-key",
+        "time_published": "20260424T152458",
+        "authors": [
+          "Jason Nelson"
+        ],
+        "summary": "Project Eleven awarded 1 BTC to an Italian researcher after a public quantum computer breaks a 15-bit elliptic curve key, the largest public demonstration of its kind to date.",
+        "banner_image": "https://cdn.decrypt.co/resize/1024/height/512/wp-content/uploads/2026/04/quantum-decrypt-style-gID_7.jpg",
+        "source": "Decrypt.co",
+        "category_within_source": "n/a",
+        "source_domain": "decrypt.co",
+        "topics": [
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.158519"
+          }
+        ],
+        "overall_sentiment_score": -0.017037,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.166169",
+            "ticker_sentiment_score": "-0.084638",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.424139",
+            "ticker_sentiment_score": "-0.028853",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.11123",
+            "ticker_sentiment_score": "-0.084804",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Morning Minute: NFTs Storm Back, Led by Bored Apes",
+        "url": "https://decrypt.co/365600/morning-minute-nfts-storm-back-led-by-bored-apes",
+        "time_published": "20260427T115700",
+        "authors": [
+          "Tyler Warner"
+        ],
+        "summary": "Bitcoin made its highest weekly close since January. Western Union is launching a stablecoin. And NFTs are making a major comeback.",
+        "banner_image": "https://cdn.decrypt.co/resize/1024/height/512/wp-content/uploads/2025/10/bored-ape-otherside-decrypt-style2-scaled-gID_7.jpg",
+        "source": "Decrypt.co",
+        "category_within_source": "n/a",
+        "source_domain": "decrypt.co",
+        "topics": [
+          {
+            "topic": "Economy - Monetary",
+            "relevance_score": "0.576289"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.905476"
+          },
+          {
+            "topic": "Earnings",
+            "relevance_score": "0.158519"
+          },
+          {
+            "topic": "Real Estate & Construction",
+            "relevance_score": "0.5"
+          },
+          {
+            "topic": "Finance",
+            "relevance_score": "0.5"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.99489"
+          }
+        ],
+        "overall_sentiment_score": 0.076963,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "APG",
+            "relevance_score": "0.026184",
+            "ticker_sentiment_score": "0.158922",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "MS",
+            "relevance_score": "0.026184",
+            "ticker_sentiment_score": "-0.028194",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "WU",
+            "relevance_score": "0.130358",
+            "ticker_sentiment_score": "0.082364",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "FOREX:JPY",
+            "relevance_score": "0.026184",
+            "ticker_sentiment_score": "-0.028194",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "FOREX:USD",
+            "relevance_score": "0.05234",
+            "ticker_sentiment_score": "0.124567",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.130358",
+            "ticker_sentiment_score": "-0.036598",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.400531",
+            "ticker_sentiment_score": "-0.052368",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:AAVE",
+            "relevance_score": "0.07844",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:LINK",
+            "relevance_score": "0.026184",
+            "ticker_sentiment_score": "-0.028194",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:LTC",
+            "relevance_score": "0.026184",
+            "ticker_sentiment_score": "-0.028194",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Is Ripple  ( XRP )  Going To $0?",
+        "url": "https://www.fool.com/investing/2026/04/21/is-ripple-xrp-going-to-0/",
+        "time_published": "20260421T144406",
+        "authors": [
+          "Leo Sun"
+        ],
+        "summary": "This volatile token faces existential challenges.",
+        "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F866237%2Fblockchain.jpg&w=3840&op=resize",
+        "source": "Motley Fool",
+        "category_within_source": "n/a",
+        "source_domain": "www.fool.com",
+        "topics": [
+          {
+            "topic": "Economy - Monetary",
+            "relevance_score": "0.158519"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.890401"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.576289"
+          }
+        ],
+        "overall_sentiment_score": -0.126287,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "FOREX:USD",
+            "relevance_score": "0.262994",
+            "ticker_sentiment_score": "-0.181797",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.262994",
+            "ticker_sentiment_score": "-0.278371",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.262994",
+            "ticker_sentiment_score": "-0.278371",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "ETH Buy Pressure Hits $5.5B As Price Nears Key Breakout",
+        "url": "https://cointelegraph.com/markets/ether-taker-volume-rises-by-72percent-as-traders-target-eth-liquidity-gap-at-dollar2-6k",
+        "time_published": "20260423T044721",
+        "authors": [],
+        "summary": "ETH derivatives show strong buyer dominance, leading traders to target $2,500 to $2,600 as the next crucial rally.",
+        "banner_image": "https://s3.cointelegraph.com/uploads/2026-04/019db5f0-96da-7353-85a8-13b1924660f7.png",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [],
+        "overall_sentiment_score": 0.111577,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.108958",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.41627",
+            "ticker_sentiment_score": "-0.170358",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin Taps $78,000, Ethereum, XRP, Dogecoin Rise As Trump Extends Iran Ceasefire",
+        "url": "https://www.benzinga.com/crypto/cryptocurrency/26/04/51963448/bitcoin-taps-78000-ethereum-xrp-dogecoin-rise-as-trump-extends-iran-ceasefire",
+        "time_published": "20260422T112442",
+        "authors": [
+          "Khyathi Dalal"
+        ],
+        "summary": "Bitcoin climbed back above $78,000 after President Trump extended the Iran ceasefire. Liquidations stand at $246.08 million over the past 24 hours while Bitcoin ETFs saw $11.8 million in net inflows on Tuesday, while Ethereum ETFs reported $43.4 million in net inflows.",
+        "banner_image": "https://cdn.benzinga.com/files/images/story/2026/04/22/Cryptocurrency-Bitcoin-Coin-Over-Tablet-_0.jpeg?width=1200&height=800&fit=crop",
+        "source": "Benzinga",
+        "category_within_source": "News",
+        "source_domain": "www.benzinga.com",
+        "topics": [
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.650727"
+          }
+        ],
+        "overall_sentiment_score": 0.044933,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.132368",
+            "ticker_sentiment_score": "0.182938",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.261117",
+            "ticker_sentiment_score": "0.089797",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.261117",
+            "ticker_sentiment_score": "-0.059204",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Binance.US Cuts Spot Trading Fees to Near Zero",
+        "url": "https://cointelegraph.com/news/binance-us-cuts-spot-trading-fees-to-near-zero-in-push-to-undercut-rivals",
+        "time_published": "20260422T140000",
+        "authors": [],
+        "summary": "The exchange set maker fees at 0% and taker fees at 0.02% across all pairs, extending near-zero pricing to all users with no volume tiers or subscription requirements.",
+        "banner_image": "https://images.cointelegraph.com/cdn-cgi/image/f=auto,onerror=redirect,w=1728,q=90/https://s3.cointelegraph.com/uploads/2026-04/019db1d7-cf5e-73d6-8194-4240569241f9.jpg",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Finance",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.451494"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.962106"
+          }
+        ],
+        "overall_sentiment_score": -0.014384,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "SCHW",
+            "relevance_score": "0.06623",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "COIN",
+            "relevance_score": "0.06623",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.381949",
+            "ticker_sentiment_score": "-0.068239",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.132004",
+            "ticker_sentiment_score": "0.0",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin, Ethereum, XRP, Dogecoin Retreat As Trump Discusses Iran's 'New' Proposal: Analyst Says BTC's Bia",
+        "url": "https://www.benzinga.com/crypto/cryptocurrency/26/04/52083332/bitcoin-ethereum-xrp-dogecoin-retreat-trump-iran-proposal-btc-upside-bias-analyst",
+        "time_published": "20260428T022106",
+        "authors": [
+          "Aniket Verma"
+        ],
+        "summary": "Leading cryptocurrencies took a U-turn on Monday, while stocks closed at new records, as the White House confirmed that President Donald Trump discussed Iran's new proposal to end the war. Bitcoin pulled back sharply after Sunday's spike, facing intense selling pressure as 24-hour trading volumes ...",
+        "banner_image": "https://cdn.benzinga.com/files/images/story/2026/04/27/Bitcoin-Coins-On-Reflective-Black-Surfac.jpeg?width=1200&height=800&fit=crop",
+        "source": "Benzinga",
+        "category_within_source": "News",
+        "source_domain": "www.benzinga.com",
+        "topics": [
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.451494"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.108179"
+          }
+        ],
+        "overall_sentiment_score": -0.118961,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.084423",
+            "ticker_sentiment_score": "0.158125",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.249531",
+            "ticker_sentiment_score": "-0.223602",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.249531",
+            "ticker_sentiment_score": "-0.066271",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:DOGE",
+            "relevance_score": "0.084423",
+            "ticker_sentiment_score": "-0.390579",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "CRYPTO:XRP",
+            "relevance_score": "0.084423",
+            "ticker_sentiment_score": "-0.390579",
+            "ticker_sentiment_label": "Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Crypto News: Pepeto DeFi Project Crosses $9,575,434 Raised While Bitcoin Price Prediction Reaches $300,000 to $500,000",
+        "url": "https://markets.businessinsider.com/news/stocks/crypto-news-pepeto-defi-project-crosses-9-575-434-raised-while-bitcoin-price-prediction-reaches-300-000-to-500-000-1036063059",
+        "time_published": "20260426T170800",
+        "authors": [
+          "markets.businessinsider.com"
+        ],
+        "summary": "Crypto News: Pepeto DeFi Project Crosses $9,575,434 Raised While Bitcoin Price Prediction Reaches $300,000 to ...",
+        "banner_image": "https://ml.globenewswire.com/Resource/Download/dc3f5037-350f-4156-bd55-8427b37a421d/crypto-news-bitcoin-price-prediction-ethereum-price.png",
+        "source": "Business Insider",
+        "category_within_source": "RSS",
+        "source_domain": "markets.businessinsider.com",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.310843"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.108179"
+          }
+        ],
+        "overall_sentiment_score": 0.171254,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "CSHR",
+            "relevance_score": "0.041251",
+            "ticker_sentiment_score": "0.114377",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.43062",
+            "ticker_sentiment_score": "0.305143",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.041251",
+            "ticker_sentiment_score": "-0.018713",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:DOGE",
+            "relevance_score": "0.123315",
+            "ticker_sentiment_score": "0.073248",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BNB",
+            "relevance_score": "0.041251",
+            "ticker_sentiment_score": "-0.018713",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin, Ethereum Rally, XRP, Dogecoin Hold Steady Amid Brewing Strait Of Hormuz Tensions: Analyst Sees B",
+        "url": "https://www.benzinga.com/crypto/cryptocurrency/26/04/51988950/bitcoin-ethereum-rally-xrp-dogecoin-steady-hormuz-tensions-btc-breather-analyst",
+        "time_published": "20260423T020955",
+        "authors": [
+          "Aniket Verma"
+        ],
+        "summary": "Leading cryptocurrencies rallied, while stocks closed at new records on Wednesday on the Iran ceasefire extension, even as Strait of Hormuz tensions simmer. Bitcoin nearly topped $80,000 before easing off to the low $78,000s. Trading volume spiked 36% over the last 24 hours.",
+        "banner_image": "https://cdn.benzinga.com/files/images/story/2026/04/22/Cryptocurrency--Focus-Bitcoin-On-Tablet-.jpeg?width=1200&height=800&fit=crop",
+        "source": "Benzinga",
+        "category_within_source": "Trading",
+        "source_domain": "www.benzinga.com",
+        "topics": [
+          {
+            "topic": "Technology",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.451494"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.538269"
+          }
+        ],
+        "overall_sentiment_score": -0.050652,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.09439",
+            "ticker_sentiment_score": "0.161695",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.36472",
+            "ticker_sentiment_score": "0.121657",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.09439",
+            "ticker_sentiment_score": "0.285197",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:DOGE",
+            "relevance_score": "0.09439",
+            "ticker_sentiment_score": "0.285197",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Cardano Is Quietly Building a Moat -- and the Market May Be Underpricing It",
+        "url": "https://www.fool.com/investing/2026/04/22/cardano-is-quietly-building-a-moat-and-the-market/",
+        "time_published": "20260422T171000",
+        "authors": [
+          "Leo Sun"
+        ],
+        "summary": "This little altcoin might deserve some more attention.",
+        "banner_image": "https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F866253%2Fa-visualization-of-a-blockchain.jpg&w=3840&op=resize",
+        "source": "Motley Fool",
+        "category_within_source": "n/a",
+        "source_domain": "www.fool.com",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.9545"
+          }
+        ],
+        "overall_sentiment_score": 0.316384,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRDD",
+            "relevance_score": "0.756001",
+            "ticker_sentiment_score": "0.445215",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.153961",
+            "ticker_sentiment_score": "0.075464",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.302243",
+            "ticker_sentiment_score": "0.33458",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CRYPTO:MITH",
+            "relevance_score": "0.077343",
+            "ticker_sentiment_score": "0.141957",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ADA",
+            "relevance_score": "0.756001",
+            "ticker_sentiment_score": "0.445215",
+            "ticker_sentiment_label": "Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Bitcoin Trades Near $80K As Altcoins Attempt To Break Range",
+        "url": "https://cointelegraph.com/markets/price-predictions-4-22-btc-eth-xrp-bnb-sol-doge-hype-ada-bch-xmr",
+        "time_published": "20260422T223705",
+        "authors": [],
+        "summary": "Bitcoin rally above the $78,333 resistance signals sustained buying by the bulls, clearing the path for a potential rally to $84,000.",
+        "banner_image": "https://s3.cointelegraph.com/uploads/2026-04/019db5be-af89-7e06-95aa-6aa7835c1ff1.png",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.451494"
+          }
+        ],
+        "overall_sentiment_score": 0.007262,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRDD",
+            "relevance_score": "0.035035",
+            "ticker_sentiment_score": "-0.204212",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.307389",
+            "ticker_sentiment_score": "0.01376",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BCH",
+            "relevance_score": "0.139467",
+            "ticker_sentiment_score": "0.080269",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BNB",
+            "relevance_score": "0.139467",
+            "ticker_sentiment_score": "-0.019427",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:XRP",
+            "relevance_score": "0.139467",
+            "ticker_sentiment_score": "0.008776",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.139467",
+            "ticker_sentiment_score": "0.040039",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:DOGE",
+            "relevance_score": "0.139467",
+            "ticker_sentiment_score": "0.018918",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:USDT",
+            "relevance_score": "0.339511",
+            "ticker_sentiment_score": "0.09222",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:XMR",
+            "relevance_score": "0.139467",
+            "ticker_sentiment_score": "0.042664",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ADA",
+            "relevance_score": "0.139467",
+            "ticker_sentiment_score": "-0.09973",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Blockchain.com Enables Self-Custody Perps Trading Through Hyperliquid",
+        "url": "https://cointelegraph.com/news/blockchain-com-brings-perpetual-futures-trading-to-self-custody-wallets-via-hyperliquid",
+        "time_published": "20260421T194814",
+        "authors": [],
+        "summary": "With a CFTC greenlight expected soon, industry momentum is building for the derivative contracts still only available to non-US investors.",
+        "banner_image": "https://s3.cointelegraph.com/uploads/2026-04/019db171-ad36-7789-8651-b0ed48a31d85.png",
+        "source": "Cointelegraph",
+        "category_within_source": "n/a",
+        "source_domain": "cointelegraph.com",
+        "topics": [
+          {
+            "topic": "Finance",
+            "relevance_score": "1.0"
+          },
+          {
+            "topic": "Blockchain",
+            "relevance_score": "0.451494"
+          },
+          {
+            "topic": "Financial Markets",
+            "relevance_score": "0.999186"
+          }
+        ],
+        "overall_sentiment_score": 0.162805,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "COIN",
+            "relevance_score": "0.090816",
+            "ticker_sentiment_score": "0.127863",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:BTC",
+            "relevance_score": "0.351807",
+            "ticker_sentiment_score": "0.100454",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRYPTO:ETH",
+            "relevance_score": "0.090816",
+            "ticker_sentiment_score": "0.093419",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      }
+    ]
+  }
+}

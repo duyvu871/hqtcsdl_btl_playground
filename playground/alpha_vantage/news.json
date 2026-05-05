@@ -1,0 +1,2434 @@
+{
+  "command": "news",
+  "request_url_redacted": "https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=IBM&time_from=20260421T1330&time_to=20260428T1330&limit=20&sort=RELEVANCE&apikey=%2A%2A%2A",
+  "request_params_redacted": {
+    "function": "NEWS_SENTIMENT",
+    "tickers": "IBM",
+    "time_from": "20260421T1330",
+    "time_to": "20260428T1330",
+    "limit": "20",
+    "sort": "RELEVANCE"
+  },
+  "response": {
+    "items": "50",
+    "sentiment_score_definition": "x <= -0.35: Bearish; -0.35 < x <= -0.15: Somewhat-Bearish; -0.15 < x < 0.15: Neutral; 0.15 <= x < 0.35: Somewhat_Bullish; x >= 0.35: Bullish",
+    "relevance_score_definition": "0 < x <= 1, with a higher score indicating higher relevance.",
+    "feed": [
+      {
+        "title": "HSBC Upgrades International Business Machines to Hold From Reduce, Adjusts PT to $231 From $218",
+        "url": "https://www.moomoo.com/news/post/69008218/hsbc-upgrades-international-business-machines-to-hold-from-reduce-adjusts",
+        "time_published": "20260428T100054",
+        "authors": [],
+        "summary": "HSBC has upgraded its rating for International Business Machines (IBM) from Reduce to Hold. The firm also adjusted its price target for IBM shares, increasing it from $218 to $231. This change reflects a more neutral outlook on the semiconductor giant's stock.",
+        "banner_image": null,
+        "source": "Moomoo",
+        "category_within_source": "General",
+        "source_domain": "Moomoo",
+        "topics": [
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.902438"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.709160"
+          },
+          {
+            "topic": "finance",
+            "relevance_score": "0.614865"
+          }
+        ],
+        "overall_sentiment_score": 0.441684,
+        "overall_sentiment_label": "Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.409842",
+            "ticker_sentiment_label": "Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Cisco’s Universal Quantum Switch and the rise of the quantum fabric",
+        "url": "https://siliconangle.com/2026/04/27/ciscos-universal-quantum-switch-rise-quantum-fabric/",
+        "time_published": "20260428T030718",
+        "authors": [
+          "Zeus Kerravala"
+        ],
+        "summary": "Cisco's new Universal Quantum Switch signifies a critical shift in quantum computing from isolated hardware to an interconnected fabric, allowing distributed quantum processors to function as a single logical machine. This switch, which routes entangled photons at room temperature over standard telecom fiber, addresses the scaling challenge of quantum systems and positions Cisco as a key enabler of heterogeneous quantum data centers and quantum-enhanced classical applications. IT leaders are advised to prepare for this future by treating quantum as a multivendor, networked service and building quantum-literate teams.",
+        "banner_image": "https://s3.us-west-2.amazonaws.com/cube365-prod/related-content/e810e50d-1091-4ce3-9cc2-0232848a8d60.png",
+        "source": "SiliconANGLE",
+        "category_within_source": "General",
+        "source_domain": "SiliconANGLE",
+        "topics": [
+          {
+            "topic": "technology",
+            "relevance_score": "1.000000"
+          }
+        ],
+        "overall_sentiment_score": 0.291558,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "CSCO",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.436031",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.635282",
+            "ticker_sentiment_score": "0.250045",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "MSFT",
+            "relevance_score": "0.581271",
+            "ticker_sentiment_score": "0.110538",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "IBM Quantum And AI Security Push Puts Long Term Thesis In Focus",
+        "url": "https://simplywall.st/stocks/us/software/nyse-ibm/international-business-machines/news/ibm-quantum-and-ai-security-push-puts-long-term-thesis-in-fo",
+        "time_published": "20260428T003743",
+        "authors": [
+          "Simply Wall St",
+          "Bailey Pemberton"
+        ],
+        "summary": "IBM is expanding its quantum computing footprint through a partnership with the University of Illinois and rolling out autonomous, AI-driven security solutions. These initiatives aim to integrate quantum computing and AI into real-world infrastructure and security, repositioning IBM's technology stack beyond traditional software. The moves highlight IBM's strategy to align research, products, and consulting to generate revenue from high-profile technology advancements.",
+        "banner_image": null,
+        "source": "Simply Wall Street",
+        "category_within_source": "General",
+        "source_domain": "Simply Wall Street",
+        "topics": [
+          {
+            "topic": "technology",
+            "relevance_score": "0.906971"
+          },
+          {
+            "topic": "earnings",
+            "relevance_score": "0.843219"
+          }
+        ],
+        "overall_sentiment_score": -0.029476,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.349974",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "MSFT",
+            "relevance_score": "0.639388",
+            "ticker_sentiment_score": "-0.141043",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "AMZN",
+            "relevance_score": "0.600406",
+            "ticker_sentiment_score": "-0.137746",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "GOOGL",
+            "relevance_score": "0.628208",
+            "ticker_sentiment_score": "-0.126648",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Nvidia stock hits new all-time high amid market cap speculation",
+        "url": "https://cryptobriefing.com/nvidia-stock-hits-new-all-time-high-amid-market-cap-speculation/",
+        "time_published": "20260427T165205",
+        "authors": [
+          "Estefano Gomez"
+        ],
+        "summary": "Nvidia's stock has reached a new all-time high, increasing the likelihood on Polymarket that it will be the largest company by market cap on June 30, with odds at 92.5%. This surge, however, does not significantly impact its chances of being the second-largest company by April 30, which remain extremely low. Traders are advised to monitor Nvidia's Q2 earnings and AI contract announcements as potential market movers.",
+        "banner_image": "https://static.cryptobriefing.com/wp-content/uploads/2026/04/27125048/largest-company-eoy-KS99l6lbxfCc-88-457x457.jpg",
+        "source": "Crypto Briefing",
+        "category_within_source": "General",
+        "source_domain": "Crypto Briefing",
+        "topics": [
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.924191"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.896576"
+          },
+          {
+            "topic": "earnings",
+            "relevance_score": "0.647576"
+          }
+        ],
+        "overall_sentiment_score": 0.182606,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "NVDA",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.470647",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "AAPL",
+            "relevance_score": "0.630070",
+            "ticker_sentiment_score": "-0.125625",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "INTC",
+            "relevance_score": "0.721182",
+            "ticker_sentiment_score": "0.328176",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.644089",
+            "ticker_sentiment_score": "0.126246",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "MSFT",
+            "relevance_score": "0.627363",
+            "ticker_sentiment_score": "0.146997",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "International Business Machines Corp. stock underperforms Monday when compared to competitors",
+        "url": "https://www.marketwatch.com/data-news/international-business-machines-corp-stock-underperforms-monday-when-compared-to-competitors-f777fb0e-612a332fa5bd?mod=goog_fin_scmw",
+        "time_published": "20260427T163400",
+        "authors": [
+          "MarketWatch Automation"
+        ],
+        "summary": "Shares of International Business Machines Corp. (IBM) fell 1.69% on Monday, closing at $228.05. This performance was amidst a mixed trading session where the S&P 500 Index rose and the Dow Jones Industrial Average fell. IBM's stock currently trades 29.81% below its 52-week high.",
+        "banner_image": "https://images.mktw.net/im-220105?width=700&height=466",
+        "source": "MarketWatch",
+        "category_within_source": "General",
+        "source_domain": "MarketWatch",
+        "topics": [
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.903937"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.620152"
+          }
+        ],
+        "overall_sentiment_score": -0.281071,
+        "overall_sentiment_label": "Somewhat-Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.252483",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "U.S. enterprises move Salesforce to AI, unified data and automation",
+        "url": "https://www.stocktitan.net/news/III/ai-integration-accelerates-u-s-salesforce-qmg1326b4xc5.html",
+        "time_published": "20260427T151113",
+        "authors": [],
+        "summary": "A new ISG report indicates that U.S. enterprises are increasingly adopting Salesforce platforms integrated with AI, unified data architectures, and autonomous workflows to boost operational efficiency. This shift involves moving from isolated CRM systems to integrated, cross-cloud strategies, driven by the need for real-time insights, compliance with evolving regulations, and measurable performance improvements. Companies are seeking outcome-based engagement models and leveraging modular deployments for midmarket adoption.",
+        "banner_image": null,
+        "source": "Stock Titan",
+        "category_within_source": "General",
+        "source_domain": "Stock Titan",
+        "topics": [
+          {
+            "topic": "technology",
+            "relevance_score": "1.000000"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.847622"
+          },
+          {
+            "topic": "finance",
+            "relevance_score": "0.700065"
+          }
+        ],
+        "overall_sentiment_score": 0.279086,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "III",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.386875",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "CRM",
+            "relevance_score": "0.885954",
+            "ticker_sentiment_score": "0.329145",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "ACN",
+            "relevance_score": "0.743962",
+            "ticker_sentiment_score": "0.250294",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CTSH",
+            "relevance_score": "0.647294",
+            "ticker_sentiment_score": "0.276022",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.625657",
+            "ticker_sentiment_score": "0.209533",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "International Business Machines (IBM) is One of Jim Cramer’s Top Quantum Computing Stocks",
+        "url": "https://www.insidermonkey.com/blog/international-business-machines-ibm-is-one-of-jim-cramers-top-quantum-computing-stocks-1747712/",
+        "time_published": "20260427T140247",
+        "authors": [
+          "Ramish Cheema"
+        ],
+        "summary": "Jim Cramer recommends International Business Machines (NYSE:IBM) as a top quantum computing stock, having consistently backed the company throughout 2025. He distinguishes IBM's quantum computing efforts as having \"actual quantum\" technology, unlike other companies he deems \"science projects.\" Despite a recent share price target reduction by Jefferies, the firm maintains a Buy rating, anticipating IBM could surpass first-quarter analyst estimates.",
+        "banner_image": "https://d2w7kw43nye0pi.cloudfront.net/tm5GRUxxHp_H4p4srIJxeqrBWcpmOT8-JzouaknxV48/resize:fit:480:320:0/plain/https://imonkeyblog.s3.us-east-1.amazonaws.com/blog/wp-content/uploads/2021/01/30094248/Quantum-Computing-IBM_SystemOne_RobertJones_2.jpg",
+        "source": "Insider Monkey",
+        "category_within_source": "General",
+        "source_domain": "Insider Monkey",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.845102"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.905209"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.930381"
+          },
+          {
+            "topic": "finance",
+            "relevance_score": "0.711687"
+          }
+        ],
+        "overall_sentiment_score": 0.071471,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.294606",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "CMG",
+            "relevance_score": "0.562078",
+            "ticker_sentiment_score": "0.024599",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "ADP",
+            "relevance_score": "0.573735",
+            "ticker_sentiment_score": "0.008717",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "MA",
+            "relevance_score": "0.594688",
+            "ticker_sentiment_score": "0.011377",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "LLY",
+            "relevance_score": "0.569403",
+            "ticker_sentiment_score": "0.041668",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "International Business Machines (IBM): One of the Best Low Risk High Growth Stocks?",
+        "url": "https://www.insidermonkey.com/blog/international-business-machines-ibm-one-of-the-best-low-risk-high-growth-stocks-1747222/",
+        "time_published": "20260427T135747",
+        "authors": [
+          "Usman Kabir"
+        ],
+        "summary": "International Business Machines (IBM) is transforming into a high-margin software company, driven by its watsonx AI platform and Red Hat acquisition, rather than primarily a hardware vendor. The company’s focus on providing secure AI solutions for regulated industries and a recent surge in mainframe sales are contributing to strong recurring revenue and projected free cash flow of $15.7 billion for 2026, marking its highest in over a decade. While IBM presents significant potential as a low-risk, high-growth stock, the article also suggests exploring other AI stocks with potentially higher and faster returns.",
+        "banner_image": "https://d2w7kw43nye0pi.cloudfront.net/gHTzdfd1hmviaSOvrpx6UXOy4ZqtyljU2JgzOSO9Jew/resize:fit:480:269:0/plain/https://imonkeyblog.s3.us-east-1.amazonaws.com/blog/wp-content/uploads/2023/09/23142039/IBM-insidermonkey-1695493236268.jpg",
+        "source": "Insider Monkey",
+        "category_within_source": "General",
+        "source_domain": "Insider Monkey",
+        "topics": [
+          {
+            "topic": "technology",
+            "relevance_score": "0.911914"
+          },
+          {
+            "topic": "earnings",
+            "relevance_score": "0.823988"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.704657"
+          },
+          {
+            "topic": "finance",
+            "relevance_score": "0.630692"
+          }
+        ],
+        "overall_sentiment_score": 0.225186,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.978963",
+            "ticker_sentiment_score": "0.438552",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "CMG",
+            "relevance_score": "0.555948",
+            "ticker_sentiment_score": "-0.201797",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "ADP",
+            "relevance_score": "0.565148",
+            "ticker_sentiment_score": "0.317298",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "MA",
+            "relevance_score": "0.560948",
+            "ticker_sentiment_score": "0.331048",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "LLY",
+            "relevance_score": "0.551841",
+            "ticker_sentiment_score": "0.342708",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Kestra Private Wealth Services LLC Acquires 4,714 Shares of International Business Machines Corporation $IBM",
+        "url": "https://www.marketbeat.com/instant-alerts/filing-kestra-private-wealth-services-llc-acquires-4714-shares-of-international-business-machines-corporation-ibm-2026-04-27/",
+        "time_published": "20260427T113743",
+        "authors": [
+          "MarketBeat"
+        ],
+        "summary": "Kestra Private Wealth Services LLC increased its stake in IBM by 6.1% in Q4 2025, purchasing an additional 4,714 shares to now hold 82,173 shares valued at approximately $24.34 million. IBM beat Q1 earnings expectations and raised its dividend, but the stock faced selling pressure due to underwhelming software/AI growth. Insiders have also recently bought 1,484 shares over the last three months.",
+        "banner_image": "https://www.marketbeat.com/logos/international-business-machines-co-logo-1200x675.png?v=20221020160751",
+        "source": "MarketBeat",
+        "category_within_source": "General",
+        "source_domain": "MarketBeat",
+        "topics": [
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.933729"
+          },
+          {
+            "topic": "earnings",
+            "relevance_score": "0.842096"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.722501"
+          }
+        ],
+        "overall_sentiment_score": 0.125626,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.136081",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "BNP Paribas Adjusts PT on International Business Machines to $195 From $245, Maintains Underperform Rating",
+        "url": "https://www.moomoo.com/news/post/68925003/bnp-paribas-adjusts-pt-on-international-business-machines-to-195",
+        "time_published": "20260427T102750",
+        "authors": [],
+        "summary": "BNP Paribas has revised its price target for International Business Machines (IBM) to $195, down from the previous $245. Despite the adjustment in the price target, the firm has decided to maintain its \"Underperform\" rating on the stock. This indicates a reduced optimistic outlook on IBM's future stock performance by BNP Paribas.",
+        "banner_image": null,
+        "source": "Moomoo",
+        "category_within_source": "General",
+        "source_domain": "Moomoo",
+        "topics": [
+          {
+            "topic": "finance",
+            "relevance_score": "0.917476"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.820522"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.601870"
+          }
+        ],
+        "overall_sentiment_score": -0.404622,
+        "overall_sentiment_label": "Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.446505",
+            "ticker_sentiment_label": "Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Anchyra Partners LLC Buys New Shares in International Business Machines Corporation $IBM",
+        "url": "https://www.marketbeat.com/instant-alerts/filing-anchyra-partners-llc-buys-new-shares-in-international-business-machines-corporation-ibm-2026-04-27/",
+        "time_published": "20260427T070748",
+        "authors": [
+          "MarketBeat"
+        ],
+        "summary": "Anchyra Partners LLC has acquired 2,733 shares of International Business Machines (IBM) worth approximately $810,000 in Q4. IBM reported Q1 earnings above estimates, maintained its full-year guidance, and raised its quarterly dividend. The market has a \"Moderate Buy\" consensus for IBM, with an average target price of $300.25, despite some investor concerns regarding near-term AI monetization resulting in post-earnings selling.",
+        "banner_image": "https://www.marketbeat.com/logos/international-business-machines-co-logo-1200x675.png?v=20221020160751",
+        "source": "MarketBeat",
+        "category_within_source": "General",
+        "source_domain": "MarketBeat",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.911213"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.832939"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.738645"
+          }
+        ],
+        "overall_sentiment_score": 0.135598,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.107526",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "At 9.8x Forward Cash Flow and a 3.3% Yield, Magna Looks Cheap — Unless It Isn’t",
+        "url": "https://nai500.com/blog/2026/04/at-9-8x-forward-cash-flow-and-a-3-3-yield-magna-looks-cheap-unless-it-isnt/",
+        "time_published": "20260427T053904",
+        "authors": [
+          "Sunlight Xiang"
+        ],
+        "summary": "A debate is ongoing among analysts regarding Magna International (NYSE: MGA, TSX: MG), with Scotiabank issuing a \"sector outperform\" rating and Goldman Sachs a \"sell.\" Bulls highlight Magna's strong cash flow, dividend history, and \"powertrain agnostic\" product portfolio, positioning it well in the uncertain auto industry. Bears raise concerns about tariff volatility, sluggish vehicle production, and thin profit margins.",
+        "banner_image": "https://nai500.com/wp-content/uploads/2026/03/Canada-auto-car-assemble.png",
+        "source": "NAI500",
+        "category_within_source": "General",
+        "source_domain": "NAI500",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.924979"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.826110"
+          },
+          {
+            "topic": "manufacturing",
+            "relevance_score": "0.823559"
+          },
+          {
+            "topic": "economy_macro",
+            "relevance_score": "0.604384"
+          },
+          {
+            "topic": "energy_transportation",
+            "relevance_score": "0.623509"
+          }
+        ],
+        "overall_sentiment_score": -0.019804,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "MGA",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.073241",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.580947",
+            "ticker_sentiment_score": "-0.078661",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "SBUX",
+            "relevance_score": "0.566274",
+            "ticker_sentiment_score": "0.084131",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "BMO Trims IBM Target on Soft Growth, Wedbush Sees AI Tailwinds",
+        "url": "https://www.insidermonkey.com/blog/bmo-trims-ibm-target-on-soft-growth-wedbush-sees-ai-tailwinds-1747142/",
+        "time_published": "20260426T164047",
+        "authors": [
+          "Vardah Gill"
+        ],
+        "summary": "BMO Capital Markets and Wedbush Securities both lowered their price targets for IBM, citing softer Q1 software organic growth and dilution from Confluent, respectively. Despite this, IBM beat revenue and earnings expectations in Q1 and maintained its FY26 outlook, with Wedbush noting strong AI demand in software services. IBM provides hybrid cloud, AI, and consulting services, with its business organized across Software, Consulting, Infrastructure, and Financing segments.",
+        "banner_image": "https://d2w7kw43nye0pi.cloudfront.net/gHTzdfd1hmviaSOvrpx6UXOy4ZqtyljU2JgzOSO9Jew/resize:fit:480:269:0/plain/https://imonkeyblog.s3.us-east-1.amazonaws.com/blog/wp-content/uploads/2023/09/23142039/IBM-insidermonkey-1695493236268.jpg",
+        "source": "Insider Monkey",
+        "category_within_source": "General",
+        "source_domain": "Insider Monkey",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.942480"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.807854"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.733067"
+          }
+        ],
+        "overall_sentiment_score": -0.12433,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.119539",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "International Business Machines (IBM) – Among the 10 Best Dividend Aristocrat Stocks to Buy in 2026",
+        "url": "https://www.insidermonkey.com/blog/international-business-machines-ibm-among-the-10-best-dividend-aristocrat-stocks-to-buy-in-2026-1747104/",
+        "time_published": "20260426T153745",
+        "authors": [
+          "Vardah Gill"
+        ],
+        "summary": "International Business Machines (IBM) has been identified as one of the 10 Best Dividend Aristocrat Stocks to Buy in 2026. Morgan Stanley recently raised its price target for IBM to $225 from $215, maintaining an Equal Weight rating. Despite delivering a modest beat in Q1 2026, CEO Arvind Krishna highlighted 6% revenue growth, a 13% increase in free cash flow, and strong performances in software and infrastructure segments, alongside strategic partnerships to expand AI workloads.",
+        "banner_image": "https://d2w7kw43nye0pi.cloudfront.net/gHTzdfd1hmviaSOvrpx6UXOy4ZqtyljU2JgzOSO9Jew/resize:fit:480:269:0/plain/https://imonkeyblog.s3.us-east-1.amazonaws.com/blog/wp-content/uploads/2023/09/23142039/IBM-insidermonkey-1695493236268.jpg",
+        "source": "Insider Monkey",
+        "category_within_source": "General",
+        "source_domain": "Insider Monkey",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.922505"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.843365"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.727200"
+          },
+          {
+            "topic": "finance",
+            "relevance_score": "0.643342"
+          }
+        ],
+        "overall_sentiment_score": 0.29569,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.280787",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "IBM defends after 13% Anthropic-fueled stock drop: ‘New AI tools emerge every week,’ Cobol modernization challenges remain",
+        "url": "https://www.msn.com/en-us/news/technology/ibm-defends-after-13-anthropic-fueled-stock-drop-new-ai-tools-emerge-every-week-cobol-modernization-challenges-remain/ar-AA1WXjGe?gemSnapshotKey=E1FDAEB30E-snapshot-7&uxmode=ruby",
+        "time_published": "20260426T110748",
+        "authors": [],
+        "summary": "This article will likely discuss IBM's efforts to defend its stock performance following a 13% drop, attributed in part to the rise of AI competitors like Anthropic. It will probably highlight challenges IBM faces in the rapidly evolving AI landscape, balancing new AI tool development with persistent issues such as modernizing legacy systems like Cobol, and how these factors influence investor confidence.",
+        "banner_image": null,
+        "source": "MSN",
+        "category_within_source": "General",
+        "source_domain": "MSN",
+        "topics": [
+          {
+            "topic": "technology",
+            "relevance_score": "0.848460"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.733155"
+          }
+        ],
+        "overall_sentiment_score": -0.417778,
+        "overall_sentiment_label": "Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.397823",
+            "ticker_sentiment_label": "Bearish"
+          }
+        ]
+      },
+      {
+        "title": "M&T Bank Corp Sells 378,671 Shares of International Business Machines Corporation IBM",
+        "url": "https://www.marketbeat.com/instant-alerts/filing-mt-bank-corp-sells-378671-shares-of-international-business-machines-corporation-ibm-2026-04-26/",
+        "time_published": "20260426T093548",
+        "authors": [
+          "MarketBeat"
+        ],
+        "summary": "M&T Bank Corp significantly reduced its stake in International Business Machines (IBM) by 94.5% in Q4, selling 378,671 shares and retaining 22,241 shares valued at $6.59 million. Despite IBM beating Q1 earnings and revenue estimates and raising its dividend for the 31st consecutive year, its stock experienced mixed reactions due to largely unchanged full-year guidance and analyst target cuts, pushing institutional ownership to around 58.96% with a \"Moderate Buy\" consensus. Insider transactions show modest purchases, contrasting with institutional selling trends.",
+        "banner_image": "https://www.marketbeat.com/logos/international-business-machines-co-logo-1200x675.png?v=20221020160751",
+        "source": "MarketBeat",
+        "category_within_source": "General",
+        "source_domain": "MarketBeat",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.904116"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.806966"
+          },
+          {
+            "topic": "finance",
+            "relevance_score": "0.727930"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.649604"
+          }
+        ],
+        "overall_sentiment_score": -0.156492,
+        "overall_sentiment_label": "Somewhat-Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.021843",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "MTB",
+            "relevance_score": "0.747410",
+            "ticker_sentiment_score": "-0.286139",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Cisco Systems’ Quantum Switch Push Puts Networking Giant in Race for the Next Internet",
+        "url": "https://ts2.tech/en/cisco-systems-quantum-switch-push-puts-networking-giant-in-race-for-the-next-internet/",
+        "time_published": "20260425T212422",
+        "authors": [
+          "Khadija Saeed"
+        ],
+        "summary": "Cisco Systems has unveiled a prototype quantum switch, the Cisco Universal Quantum Switch, aiming to connect various types of quantum computers and sensors using existing telecom fiber at room temperature. This move positions Cisco as a key player in developing interoperability for future quantum networks, rather than a direct competitor in quantum computer manufacturing against giants like Google and IBM. While the device is still a prototype and widespread quantum networks are years away, Cisco sees potential for earlier security applications by leveraging quantum entanglement to detect network eavesdropping.",
+        "banner_image": "https://ts2.tech/wp-content/uploads/2026/04/cisco-systems-quantum-switch-push-puts-networking-giant-in-race-for-the-next-internet-featured.jpg",
+        "source": "TechStock²",
+        "category_within_source": "General",
+        "source_domain": "TechStock²",
+        "topics": [
+          {
+            "topic": "technology",
+            "relevance_score": "1.000000"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.700553"
+          },
+          {
+            "topic": "earnings",
+            "relevance_score": "0.601465"
+          },
+          {
+            "topic": "finance",
+            "relevance_score": "0.603965"
+          }
+        ],
+        "overall_sentiment_score": 0.179703,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "CSCO",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.251349",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "GOOGL",
+            "relevance_score": "0.629705",
+            "ticker_sentiment_score": "0.135523",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.554354",
+            "ticker_sentiment_score": "0.119888",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Is Cerence a Better Buy Than Dell Technologies?",
+        "url": "https://www.trefis.com/stock/dell/articles2/597439/is-cerence-a-better-buy-than-dell-technologies/2026-04-24",
+        "time_published": "20260425T070920",
+        "authors": [
+          "Trefis Team"
+        ],
+        "summary": "This article compares Cerence (CRNC) and Dell Technologies (DELL) as investment options, asserting that Cerence offers superior revenue growth, better profitability margins, and a relatively lower valuation. While Dell Technologies has shown strong historical returns, Cerence's current financials suggest it might be a more attractive buy. The article also touches on the importance of a diversified portfolio over individual stock picks.",
+        "banner_image": "https://s3.amazonaws.com/wp-uploads-trefis/articles/wp-content/uploads/2025/09/30062349/AvB-300x200.png",
+        "source": "Trefis",
+        "category_within_source": "General",
+        "source_domain": "Trefis",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.913918"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.817541"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.721215"
+          }
+        ],
+        "overall_sentiment_score": 0.059603,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "CRNC",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.483515",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "DELL",
+            "relevance_score": "0.998540",
+            "ticker_sentiment_score": "0.143198",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "INTC",
+            "relevance_score": "0.565958",
+            "ticker_sentiment_score": "-0.116956",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "HPE",
+            "relevance_score": "0.573619",
+            "ticker_sentiment_score": "-0.112796",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.568787",
+            "ticker_sentiment_score": "-0.141964",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "IBM fails to shake AI concerns with software sales; shares drop",
+        "url": "https://www.msn.com/en-us/money/other/ibm-posts-software-sales-that-fail-to-shake-ai-concerns/ar-AA21v8E9?apiversion=v2&domshim=1&noservercache=1&noservertelemetry=1&batchservertelemetry=1&renderwebcomponents=1&wcseo=1",
+        "time_published": "20260425T063745",
+        "authors": [],
+        "summary": "IBM's shares dropped after the company's software sales failed to meet expectations, raising concerns about its ability to capitalize on the AI boom. Analysts noted that despite strong overall revenue growth, the slower software performance suggested difficulties in broad AI implementation across its client base. IBM's strategic shift towards hybrid cloud and AI under CEO Arvind Krishna is being closely watched for its impact on software growth.",
+        "banner_image": null,
+        "source": "MSN",
+        "category_within_source": "General",
+        "source_domain": "MSN",
+        "topics": [
+          {
+            "topic": "technology",
+            "relevance_score": "0.892527"
+          },
+          {
+            "topic": "earnings",
+            "relevance_score": "0.928324"
+          }
+        ],
+        "overall_sentiment_score": -0.454458,
+        "overall_sentiment_label": "Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.480365",
+            "ticker_sentiment_label": "Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Can Accenture’s Gemini Partnership With Google Cloud Shift Its AI Trajectory",
+        "url": "https://www.sahmcapital.com/news/content/can-accentures-gemini-partnership-with-google-cloud-shift-its-ai-trajectory-2026-04-23",
+        "time_published": "20260424T233658",
+        "authors": [
+          "Simply Wall St"
+        ],
+        "summary": "Accenture and Google Cloud have launched the Gemini Enterprise Acceleration Program to scale industry-specific AI agents and digital transformation for global enterprises. This initiative aims to deepen Accenture's role in clients' AI plans, offering early access to Google DeepMind's Gemini models and leveraging thousands of AI-skilled engineers. The partnership comes as Accenture faces a period of weaker share performance, and this aggressive move into AI-powered workflows and customer experiences seeks to reposition the company in the competitive digital transformation landscape, though risks like reliance on Google Cloud and potential margin pressures exist.",
+        "banner_image": "https://images.simplywall.st/company/670daeea-0a37-4767-a2f2-00ac760fb096/chart/earnings-and-revenue-growth?date=2026-04-23",
+        "source": "Sahm",
+        "category_within_source": "General",
+        "source_domain": "Sahm",
+        "topics": [
+          {
+            "topic": "technology",
+            "relevance_score": "0.828995"
+          }
+        ],
+        "overall_sentiment_score": 0.107396,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "ACN",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.104842",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.722572",
+            "ticker_sentiment_score": "0.225410",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "GOOGL",
+            "relevance_score": "0.710587",
+            "ticker_sentiment_score": "0.246209",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.617593",
+            "ticker_sentiment_score": "-0.111830",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "ASGN Posts Downbeat Q1 Results, Joins Medpace, ServiceNow And Other Big Stocks Moving Lower In Thursday's Pre-Market Session",
+        "url": "https://www.sahmcapital.com/news/content/asgn-posts-downbeat-q1-results-joins-medpace-servicenow-and-other-big-stocks-moving-lower-in-thursdays-pre-market-session-2026-04-23",
+        "time_published": "20260424T201004",
+        "authors": [
+          "Benzinga News"
+        ],
+        "summary": "ASGN Inc. (NYSE: ASGN) reported lower-than-expected first-quarter results and issued weak second-quarter guidance, causing its shares to fall significantly in pre-market trading. Several other companies, including Medpace Holdings, Altimmune, ServiceNow, and IBM, also saw their stock prices decline following various financial announcements. The broad market saw U.S. stock futures moving lower on Thursday.",
+        "banner_image": null,
+        "source": "Sahm",
+        "category_within_source": "General",
+        "source_domain": "Sahm",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "1.000000"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.906785"
+          }
+        ],
+        "overall_sentiment_score": -0.500395,
+        "overall_sentiment_label": "Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "ASGN",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.649563",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "NOW",
+            "relevance_score": "0.734816",
+            "ticker_sentiment_score": "-0.406456",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.640799",
+            "ticker_sentiment_score": "-0.400743",
+            "ticker_sentiment_label": "Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Coca-Cola (KO) Plans to Invest in South Africa by 2030",
+        "url": "https://www.insidermonkey.com/blog/coca-cola-ko-plans-to-invest-in-south-africa-by-2030-1746110/",
+        "time_published": "20260424T190049",
+        "authors": [
+          "Fatima Gulzar"
+        ],
+        "summary": "Coca-Cola and its authorized bottlers plan to invest 17.6 billion rand ($1.05 billion) in South Africa by 2030 to enhance production capacity, distribution, and innovation. This significant investment highlights Coca-Cola's commitment to the African market. Separately, the company's largest Indian bottler, SLMG Beverages, warned of potential price increases due to rising packaging costs, with plans to expand its manufacturing facilities in India.",
+        "banner_image": "https://d2w7kw43nye0pi.cloudfront.net/lqZwQv7rLIrrB5m8YQP79eTfxdyoLHsbu4bgFu-GUyw/resize:fit:480:368:0/plain/https://imonkeyblog.s3.us-east-1.amazonaws.com/blog/wp-content/uploads/2017/08/31103954/coca-cola-462776_1920.jpg",
+        "source": "Insider Monkey",
+        "category_within_source": "General",
+        "source_domain": "Insider Monkey",
+        "topics": [
+          {
+            "topic": "retail_wholesale",
+            "relevance_score": "0.918414"
+          },
+          {
+            "topic": "earnings",
+            "relevance_score": "0.834435"
+          },
+          {
+            "topic": "economy_macro",
+            "relevance_score": "0.603276"
+          }
+        ],
+        "overall_sentiment_score": 0.169379,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "KO",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.325487",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.597139",
+            "ticker_sentiment_score": "0.025060",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Form FWP GOLDMAN SACHS GROUP INC Filed by: GOLDMAN SACHS GROUP INC",
+        "url": "https://www.streetinsider.com/SEC+Filings/Form+FWP+GOLDMAN+SACHS+GROUP+INC+Filed+by%3A+GOLDMAN+SACHS+GROUP+INC/26364940.html",
+        "time_published": "20260424T180737",
+        "authors": [],
+        "summary": "Goldman Sachs Group Inc. has filed Form FWP for Dual Directional Buffered Participation Securities linked to the Nasdaq-100 Index, due May 4, 2028. These principal-at-risk securities offer participation in upside performance, subject to a maximum, and a positive return for moderate index decreases, but risk significant loss if the index declines beyond a 20% buffer. Investors are advised to thoroughly review the preliminary pricing supplement and related documents due to associated risks and the securities being less risky than ordinary debt securities, but not equivalent to direct index investment.",
+        "banner_image": "https://www.streetinsider.com/images/news2/190/19018223/upgradeSItop.jpg",
+        "source": "StreetInsider",
+        "category_within_source": "General",
+        "source_domain": "StreetInsider",
+        "topics": [
+          {
+            "topic": "finance",
+            "relevance_score": "0.939531"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.849175"
+          },
+          {
+            "topic": "ipo",
+            "relevance_score": "0.630584"
+          }
+        ],
+        "overall_sentiment_score": -0.056315,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "GS",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.113353",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "INTC",
+            "relevance_score": "0.634862",
+            "ticker_sentiment_score": "0.227612",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "NOW",
+            "relevance_score": "0.610432",
+            "ticker_sentiment_score": "-0.273787",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.646264",
+            "ticker_sentiment_score": "-0.250335",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "NFLX",
+            "relevance_score": "0.607892",
+            "ticker_sentiment_score": "0.113287",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Sprott Junior Copper Miners ETF",
+        "url": "https://etfdb.com/etf/COPJ/",
+        "time_published": "20260424T173849",
+        "authors": [],
+        "summary": "This article provides a comprehensive guide to the Sprott Junior Copper Miners ETF (COPJ), including its stock quote, holdings, and various financial metrics. It details the ETF's profile, performance, expenses, historical trading data, and concentration analysis. The guide also offers comparisons with alternative ETFs and includes geographical and sector-based breakdowns of its holdings.",
+        "banner_image": null,
+        "source": "ETF Database",
+        "category_within_source": "General",
+        "source_domain": "ETF Database",
+        "topics": [
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.934952"
+          },
+          {
+            "topic": "economy_macro",
+            "relevance_score": "0.627898"
+          },
+          {
+            "topic": "finance",
+            "relevance_score": "0.707970"
+          }
+        ],
+        "overall_sentiment_score": 0.181474,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "COPJ",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.343293",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "FDS",
+            "relevance_score": "0.644231",
+            "ticker_sentiment_score": "0.140219",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.567801",
+            "ticker_sentiment_score": "0.063509",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Quantum Computing Stocks 2026: IonQ, Rigetti, D-Wave Guide",
+        "url": "https://www.heygotrade.com/en/blog/quantum-computing-stocks-2026/",
+        "time_published": "20260424T160954",
+        "authors": [
+          "Erwanto Khusuma"
+        ],
+        "summary": "This article provides a guide to quantum computing stocks in 2026, highlighting pure-play companies like IonQ, Rigetti, D-Wave, and QUBT, and contrasting them with the quantum efforts of tech giants like Google, IBM, and Microsoft. It emphasizes that quantum computing is currently highly speculative due to the early stage of commercial application, significant R&D costs, and market volatility, suggesting it should be treated as a small, speculative part of an investment portfolio rather than a core holding. The article details the technological approaches and financial standing of each company, along with the inherent risks.",
+        "banner_image": "https://files-tr8.s3.ap-southeast-1.amazonaws.com/blog-posts/e38be12eee6a6bbd15ba94df/feature-images/69eb2aa506722-feature-image.jpg",
+        "source": "Gotrade",
+        "category_within_source": "General",
+        "source_domain": "Gotrade",
+        "topics": [
+          {
+            "topic": "technology",
+            "relevance_score": "0.907622"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.708470"
+          }
+        ],
+        "overall_sentiment_score": 0.178637,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "QBTS",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.034667",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "GOOGL",
+            "relevance_score": "0.709127",
+            "ticker_sentiment_score": "0.246712",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.640071",
+            "ticker_sentiment_score": "0.249264",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Commvault cosies up to Google’s Cloud",
+        "url": "https://www.blocksandfiles.com/data-protection/2026/04/24/commvault-cosies-up-to-googles-cloud/5218817",
+        "time_published": "20260424T144003",
+        "authors": [
+          "Chris Mellor"
+        ],
+        "summary": "Commvault has expanded its data protection offerings, Commvault Cloud and Clumio, to support Google Cloud. Commvault Cloud offers unified cyber resilience for diverse environments, while Clumio provides cloud-native, serverless SaaS for AWS and now limited Google Cloud workloads. The move aims to give multi-cloud organizations more choice and robust data protection across their various cloud infrastructures.",
+        "banner_image": "https://image.blocksandfiles.com/5218822.webp?imageId=5218822&x=0.00&y=0.00&cropw=100.00&croph=100.00&width=960&height=538&format=jpg",
+        "source": "Blocks & Files",
+        "category_within_source": "General",
+        "source_domain": "Blocks & Files",
+        "topics": [
+          {
+            "topic": "technology",
+            "relevance_score": "1.000000"
+          }
+        ],
+        "overall_sentiment_score": 0.221542,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "CVLT",
+            "relevance_score": "0.954844",
+            "ticker_sentiment_score": "0.312632",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "GOOGL",
+            "relevance_score": "0.834178",
+            "ticker_sentiment_score": "0.271554",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "GOOG",
+            "relevance_score": "0.849349",
+            "ticker_sentiment_score": "0.258288",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.579878",
+            "ticker_sentiment_score": "0.138164",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "DELL",
+            "relevance_score": "0.577536",
+            "ticker_sentiment_score": "0.108740",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "UBS Adjusts Price Target on Molina Healthcare to $180 From $151, Maintains Neutral Rating",
+        "url": "https://www.marketscreener.com/news/ubs-adjusts-price-target-on-molina-healthcare-to-180-from-151-maintains-neutral-rating-ce7f59dfdd8ff022",
+        "time_published": "20260424T135306",
+        "authors": [],
+        "summary": "UBS has increased its price target for Molina Healthcare (MOH) to $180 from $151, while choosing to maintain a \"Neutral\" rating on the stock. This adjustment reflects an updated valuation for the managed healthcare provider. The article also notes that Deutsche Bank similarly adjusted its price target for Molina Healthcare earlier the same day.",
+        "banner_image": "https://www.marketscreener.com/images/mtnewswires.png",
+        "source": "marketscreener.com",
+        "category_within_source": "General",
+        "source_domain": "marketscreener.com",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.900879"
+          },
+          {
+            "topic": "life_sciences",
+            "relevance_score": "0.828026"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.721846"
+          },
+          {
+            "topic": "finance",
+            "relevance_score": "0.640370"
+          }
+        ],
+        "overall_sentiment_score": 0.138992,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "MOH",
+            "relevance_score": "0.983940",
+            "ticker_sentiment_score": "0.203190",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "URI",
+            "relevance_score": "0.620385",
+            "ticker_sentiment_score": "0.124695",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.604241",
+            "ticker_sentiment_score": "0.142941",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "AMD",
+            "relevance_score": "0.618502",
+            "ticker_sentiment_score": "0.148020",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "TSLA",
+            "relevance_score": "0.643470",
+            "ticker_sentiment_score": "0.125221",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Oklo, NVIDIA, and Los Alamos National Laboratory Collaborate to Advance Nuclear Fuel Validation at Los Alamos in Support of Nuclear-Powered AI Factories",
+        "url": "https://oklo.com/newsroom/news-details/2026/Oklo-NVIDIA-and-Los-Alamos-National-Laboratory-Collaborate-to-Advance-Nuclear-Fuel-Validation-at-Los-Alamos-in-Support-of-Nuclear-Powered-AI-Factories/default.aspx",
+        "time_published": "20260424T113945",
+        "authors": [],
+        "summary": "Oklo Inc., NVIDIA, and Los Alamos National Laboratory have announced a collaboration to advance nuclear fuel validation and research for nuclear-powered AI factories. The agreement brings together Oklo's advanced sodium-fast-reactor platform, NVIDIA's AI infrastructure, and LANL's expertise in materials science to develop critical infrastructure and accelerate nuclear energy deployment. This partnership aims to support the federal government’s Genesis Mission by focusing on AI models, materials science for plutonium-bearing fuels, and grid reliability for AI factories.",
+        "banner_image": "https://mms.businesswire.com/media/20260423742786/en/2783430/4/Oklo_Aurora_powerhouse_with_NVIDIA.jpg",
+        "source": "Oklo Inc.",
+        "category_within_source": "General",
+        "source_domain": "Oklo Inc.",
+        "topics": [
+          {
+            "topic": "energy_transportation",
+            "relevance_score": "0.837739"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.936184"
+          }
+        ],
+        "overall_sentiment_score": 0.643022,
+        "overall_sentiment_label": "Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "OKLO",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.811699",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "NVDA",
+            "relevance_score": "0.871462",
+            "ticker_sentiment_score": "0.710617",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.621827",
+            "ticker_sentiment_score": "0.309114",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "5,598 Shares in International Business Machines Corporation $IBM Acquired by Quent Long Short Global Small Cap Fund LP",
+        "url": "https://www.marketbeat.com/instant-alerts/filing-5598-shares-in-international-business-machines-corporation-ibm-acquired-by-quent-long-short-global-small-cap-fund-lp-2026-04-24/",
+        "time_published": "20260424T110745",
+        "authors": [
+          "MarketBeat"
+        ],
+        "summary": "Quent Long Short Global Small Cap Fund LP has purchased a new stake of 5,598 shares in International Business Machines Corporation (IBM), valued at approximately $1.658 million, according to its latest 13F filing. Despite beating Q1 estimates with $15.92 billion in revenue and $1.91 EPS and raising its quarterly dividend to $1.69, IBM's stock fell about 8% after management maintained full-year guidance, leading to investor concerns about AI/software growth. Analyst views are mixed, with an average target price of $300.60, while institutional investors own approximately 59% of IBM, and insiders have made recent, modest purchases.",
+        "banner_image": "https://www.marketbeat.com/logos/international-business-machines-co-logo-1200x675.png?v=20221020160751",
+        "source": "MarketBeat",
+        "category_within_source": "General",
+        "source_domain": "MarketBeat",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.917388"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.804039"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.741383"
+          },
+          {
+            "topic": "finance",
+            "relevance_score": "0.622896"
+          },
+          {
+            "topic": "economy_macro",
+            "relevance_score": "0.646212"
+          }
+        ],
+        "overall_sentiment_score": 0.022482,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.013313",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "International Business Machines (IBM): Could It Break Trillion Dollar Barrier?",
+        "url": "https://www.insidermonkey.com/blog/international-business-machines-ibm-could-it-break-trillion-dollar-barrier-1744480/",
+        "time_published": "20260424T102800",
+        "authors": [
+          "Usman Kabir"
+        ],
+        "summary": "International Business Machines (IBM) is positioning itself as a key player in the AI market, with its watsonx platform and recent FedRAMP authorization driving significant growth, particularly in government and regulated industries. The company's generative AI business has surged to over $12.5 billion, and software revenue, led by hybrid cloud and data automation, grew 14% in Q4 2025. IBM's focus on software, infrastructure, and a consistent dividend record make it an attractive \"defensive growth play\" with AI upside.",
+        "banner_image": "https://d2w7kw43nye0pi.cloudfront.net/gHTzdfd1hmviaSOvrpx6UXOy4ZqtyljU2JgzOSO9Jew/resize:fit:480:269:0/plain/https://imonkeyblog.s3.us-east-1.amazonaws.com/blog/wp-content/uploads/2023/09/23142039/IBM-insidermonkey-1695493236268.jpg",
+        "source": "Insider Monkey",
+        "category_within_source": "General",
+        "source_domain": "Insider Monkey",
+        "topics": [
+          {
+            "topic": "technology",
+            "relevance_score": "1.000000"
+          },
+          {
+            "topic": "earnings",
+            "relevance_score": "0.908162"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.714875"
+          }
+        ],
+        "overall_sentiment_score": 0.42865,
+        "overall_sentiment_label": "Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.422222",
+            "ticker_sentiment_label": "Bullish"
+          }
+        ]
+      },
+      {
+        "title": "7-Day Sell-Off Sends Leonardo DRS Stock Down -13%",
+        "url": "https://www.trefis.com/stock/drs/articles/597323/7-day-sell-off-sends-leonardo-drs-stock-down-13/2026-04-24",
+        "time_published": "20260424T071014",
+        "authors": [
+          "Trefis Team"
+        ],
+        "summary": "Leonardo DRS (DRS) stock experienced a 7-day losing streak, resulting in a cumulative loss of 13% and a market cap reduction of $1.7 billion, now standing at $11 billion. Despite this recent downturn, the company's strong operating performance and financial condition suggest it is fairly priced. The article highlights the importance of predictive signals for managing individual stock risk before such events occur, referencing Trefis's High Quality Portfolio for better risk management.",
+        "banner_image": "https://cdn.trefis.com/env/prd/logos/DRS.png",
+        "source": "Trefis",
+        "category_within_source": "General",
+        "source_domain": "Trefis",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.828971"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.926389"
+          }
+        ],
+        "overall_sentiment_score": -0.180916,
+        "overall_sentiment_label": "Somewhat-Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "DRS",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.238153",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.646769",
+            "ticker_sentiment_score": "-0.134770",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "SAP posts solid earnings results to shrug off latest software stock slaughter",
+        "url": "https://siliconangle.com/2026/04/23/sap-posts-solid-earnings-results-shrug-off-latest-software-stock-slaughter/",
+        "time_published": "20260424T013947",
+        "authors": [
+          "Mike Wheatley"
+        ],
+        "summary": "SAP SE reported strong first-quarter earnings, beating analyst expectations with €1.72 per share on €9.55 billion in revenue, driven largely by a 19% increase in its cloud business. Despite the positive results, which led to a 6% gain in after-hours trading, SAP's stock is still down over 33% year-to-date due to broader software industry concerns related to AI. The company also reiterated its annual cloud revenue forecast and plans to acquire Reltio Inc. to enhance its AI capabilities.",
+        "banner_image": "https://s3.us-west-2.amazonaws.com/cube365-prod/related-content/e810e50d-1091-4ce3-9cc2-0232848a8d60.png",
+        "source": "SiliconANGLE",
+        "category_within_source": "General",
+        "source_domain": "SiliconANGLE",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.945918"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.829262"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.722135"
+          },
+          {
+            "topic": "mergers_and_acquisitions",
+            "relevance_score": "0.647970"
+          }
+        ],
+        "overall_sentiment_score": -0.168622,
+        "overall_sentiment_label": "Somewhat-Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "SAP",
+            "relevance_score": "0.304642",
+            "ticker_sentiment_score": "0.017673",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.611944",
+            "ticker_sentiment_score": "-0.340351",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "HubSpot director Brian Halligan sells $1.91m in common stock",
+        "url": "https://www.investing.com/news/insider-trading-news/hubspot-director-brian-halligan-sells-191m-in-common-stock-93CH-4634142",
+        "time_published": "20260423T213904",
+        "authors": [
+          "Investing.com"
+        ],
+        "summary": "HubSpot director Brian Halligan sold 8,292 shares of the company's common stock for approximately $1.91 million on April 21, 2026, under a pre-arranged trading plan. Despite recent stock declines and broader software sector challenges affecting companies like ServiceNow and IBM, HubSpot is considered undervalued by InvestingPro analysis, maintaining strong gross profit margins and a healthy cash-to-debt ratio. Several analyst firms have reiterated positive ratings for HubSpot, citing its AI product adoption, platform updates, and new strategic offerings.",
+        "banner_image": "https://i-invdn-com.investing.com/news/World_News_8_800x533_L_1420026210.jpg",
+        "source": "Investing.com",
+        "category_within_source": "General",
+        "source_domain": "Investing.com",
+        "topics": [
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.917556"
+          },
+          {
+            "topic": "earnings",
+            "relevance_score": "0.811456"
+          },
+          {
+            "topic": "finance",
+            "relevance_score": "0.721412"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.724042"
+          }
+        ],
+        "overall_sentiment_score": -0.241416,
+        "overall_sentiment_label": "Somewhat-Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "HUBS",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.142883",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "NOW",
+            "relevance_score": "0.621212",
+            "ticker_sentiment_score": "-0.306412",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.597979",
+            "ticker_sentiment_score": "-0.223274",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Why a risk management framework is critical for AI initiatives",
+        "url": "https://www.techtarget.com/searchdisasterrecovery/tip/Why-a-risk-management-framework-is-critical-for-AI-initiatives",
+        "time_published": "20260423T204000",
+        "authors": [
+          "Paul Kirvan"
+        ],
+        "summary": "An AI risk management framework is essential for optimizing the planning, deployment, and use of artificial intelligence by identifying, assessing, and mitigating potential risks. These frameworks help align AI initiatives with ethical standards, regulatory requirements, and organizational goals, delivering benefits to senior management, technology professionals, and business leaders. Key activities include risk identification, governance, continuous monitoring, and ensuring compliance, protecting brand reputation, reducing financial losses, and improving security and operational resilience.",
+        "banner_image": "https://www.techtarget.com/rms/onlineimages/ai_a377464305_searchsitetablet_520X173.jpg",
+        "source": "TechTarget",
+        "category_within_source": "General",
+        "source_domain": "TechTarget",
+        "topics": [
+          {
+            "topic": "technology",
+            "relevance_score": "0.839140"
+          }
+        ],
+        "overall_sentiment_score": 0.27204,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "TTGT",
+            "relevance_score": "0.620793",
+            "ticker_sentiment_score": "0.270335",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "MSFT",
+            "relevance_score": "0.634269",
+            "ticker_sentiment_score": "0.282894",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "GOOGL",
+            "relevance_score": "0.622505",
+            "ticker_sentiment_score": "0.254964",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.602421",
+            "ticker_sentiment_score": "0.278525",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          },
+          {
+            "ticker": "ACN",
+            "relevance_score": "0.639044",
+            "ticker_sentiment_score": "0.267871",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "RingCentral, Five9, and DocuSign Shares Are Falling, What You Need To Know",
+        "url": "https://www.tradingview.com/news/stockstory:c671da9d5094b:0-ringcentral-five9-and-docusign-shares-are-falling-what-you-need-to-know/",
+        "time_published": "20260423T200835",
+        "authors": [],
+        "summary": "Shares of RingCentral, Five9, and DocuSign experienced significant drops after IBM and ServiceNow reported earnings that raised concerns about AI's impact on the software sector and existing license models. IBM's slower Q1 revenue growth and ServiceNow's delayed deals and AI investment impacts led to a sector-wide sell-off, affecting other software companies despite their unrelated financials. RingCentral, despite a strong year-to-date performance, saw its shares fall, reflecting market volatility and an ongoing debate about software demand in the era of AI.",
+        "banner_image": "https://s3.tradingview.com/news/image/stockstory:c671da9d5094b-38533eac083d60061b0fb1be3398279c-resized.webp",
+        "source": "TradingView",
+        "category_within_source": "General",
+        "source_domain": "TradingView",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.838912"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.903086"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.808863"
+          }
+        ],
+        "overall_sentiment_score": -0.286818,
+        "overall_sentiment_label": "Somewhat-Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "FIVN",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.235860",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.636554",
+            "ticker_sentiment_score": "-0.326900",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "NOW",
+            "relevance_score": "0.638121",
+            "ticker_sentiment_score": "-0.296793",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Modine Manufacturing Rose 6% This Week. Here’s Where the Stock Could Go in 2026",
+        "url": "https://www.tikr.com/blog/modine-manufacturing-rose-6-this-week-heres-where-the-stock-could-go-in-2026",
+        "time_published": "20260423T190943",
+        "authors": [
+          "Nikko Henson"
+        ],
+        "summary": "Modine Manufacturing (MOD) stock rose 6% this week, driven by strong earnings momentum and increasing demand for data center cooling systems, especially for AI-related infrastructure. The company reported significant growth in Climate Solutions revenue and data center sales, raising its full-year adjusted EBITDA outlook. Institutional investors showed a mixed but overall high confidence in Modine's long-term growth, with the stock appearing close to fully valued based on current models, implying future returns will depend on continued strong execution.",
+        "banner_image": "https://res.cloudinary.com/tikr/images/f_auto,q_auto,w_800/v1776971733/images/@Daniel-Constantinescus-Images-via-Canva/@Daniel-Constantinescus-Images-via-Canva",
+        "source": "TIKR.com",
+        "category_within_source": "General",
+        "source_domain": "TIKR.com",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.908808"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.828272"
+          },
+          {
+            "topic": "manufacturing",
+            "relevance_score": "0.731858"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.647733"
+          }
+        ],
+        "overall_sentiment_score": 0.282795,
+        "overall_sentiment_label": "Somewhat-Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "MOD",
+            "relevance_score": "0.970029",
+            "ticker_sentiment_score": "0.486691",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "VRTX",
+            "relevance_score": "0.614595",
+            "ticker_sentiment_score": "0.149494",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.576584",
+            "ticker_sentiment_score": "0.200961",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Barclays (DJP) offers $1.063M buffered autocallable notes linked to NFLX/CRWD/IBM",
+        "url": "https://www.stocktitan.net/sec-filings/DJP/424b2-barclays-bank-plc-prospectus-supplement-639ca5503854.html",
+        "time_published": "20260423T173939",
+        "authors": [],
+        "summary": "Barclays Bank PLC has priced $1.063 million in Buffered Autocallable Fixed Coupon Notes, maturing April 26, 2029, linked to the performance of Netflix (NFLX), CrowdStrike (CRWD), and IBM (IBM). These notes offer a fixed 10.55% annual coupon, include a 20.00% buffer against losses, and feature automatic call options starting after approximately one year. Investing in these notes carries risks, including potential loss of principal if the least-performing asset falls below the buffer, and the notes are subject to Barclays' credit risk and potential U.K. Bail-in Power.",
+        "banner_image": null,
+        "source": "Stock Titan",
+        "category_within_source": "General",
+        "source_domain": "Stock Titan",
+        "topics": [
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.922076"
+          },
+          {
+            "topic": "finance",
+            "relevance_score": "0.827107"
+          }
+        ],
+        "overall_sentiment_score": 0.006956,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "JJS",
+            "relevance_score": "0.308862",
+            "ticker_sentiment_score": "0.041956",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "NFLX",
+            "relevance_score": "0.879541",
+            "ticker_sentiment_score": "0.009880",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "CRWD",
+            "relevance_score": "0.877656",
+            "ticker_sentiment_score": "0.018075",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.872522",
+            "ticker_sentiment_score": "0.011716",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Stocks making the biggest moves midday: Texas Instruments, United Rentals, Wex, Penn Entertainment & more",
+        "url": "https://www.cnbc.com/2026/04/23/stocks-making-the-biggest-moves-midday-txn-uri-wex-penn.html",
+        "time_published": "20260423T173830",
+        "authors": [
+          "Fred Imbert"
+        ],
+        "summary": "This article details the biggest stock movements midday, featuring companies like Texas Instruments, which soared on strong forecasts, and Wex, which tumbled due to an activist investor's efforts. Other notable movers include United Rentals, Penn Entertainment, American Airlines, and Lululemon, reacting to earnings, guidance, leadership changes, or investor actions.",
+        "banner_image": "https://image.cnbcfm.com/api/v1/image/107148248-1667938600296-fred_IMG_3044.jpg?v=1667938658&w=60&h=60&ffmt=webp",
+        "source": "CNBC",
+        "category_within_source": "General",
+        "source_domain": "CNBC",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.948205"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.824268"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.748614"
+          },
+          {
+            "topic": "retail_wholesale",
+            "relevance_score": "0.645018"
+          },
+          {
+            "topic": "manufacturing",
+            "relevance_score": "0.613390"
+          }
+        ],
+        "overall_sentiment_score": 0.064544,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "TXN",
+            "relevance_score": "0.921038",
+            "ticker_sentiment_score": "0.716386",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "URI",
+            "relevance_score": "0.721323",
+            "ticker_sentiment_score": "0.797845",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "NOW",
+            "relevance_score": "0.703015",
+            "ticker_sentiment_score": "-0.410831",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "LULU",
+            "relevance_score": "0.689894",
+            "ticker_sentiment_score": "-0.404731",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.627335",
+            "ticker_sentiment_score": "-0.416916",
+            "ticker_sentiment_label": "Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Rapid7, nCino, and Qualys Shares Plummet, What You Need To Know",
+        "url": "https://www.tradingview.com/news/stockstory:acc3061a0094b:0-rapid7-ncino-and-qualys-shares-plummet-what-you-need-to-know/",
+        "time_published": "20260423T171026",
+        "authors": [],
+        "summary": "Shares of Rapid7, nCino, and Qualys plummeted following quarterly results from IBM and ServiceNow, which raised concerns about AI's impact on the software sector and weighed on investor sentiment. IBM reported slower Q1 revenue growth in its software business, and ServiceNow indicated that delayed deals and AI investments would affect its margins. This led to a broader market reaction, particularly affecting software companies, as investors debated whether AI tools could reduce demand for traditional software offerings.",
+        "banner_image": "https://s3.tradingview.com/news/image/stockstory:acc3061a0094b-a2833a194993942c2627bcbb1f56e310-resized.webp",
+        "source": "TradingView",
+        "category_within_source": "General",
+        "source_domain": "TradingView",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.947195"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.911651"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.816049"
+          }
+        ],
+        "overall_sentiment_score": -0.30717,
+        "overall_sentiment_label": "Somewhat-Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "NCNO",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.254921",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.641691",
+            "ticker_sentiment_score": "-0.327045",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "NOW",
+            "relevance_score": "0.634687",
+            "ticker_sentiment_score": "-0.345409",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Why Upland Software (UPLD) Stock Is Falling Today",
+        "url": "https://stockstory.org/us/stocks/nasdaq/upld/news/why-up-down/why-upland-software-upld-stock-is-falling-today",
+        "time_published": "20260423T171009",
+        "authors": [
+          "Anthony Lee"
+        ],
+        "summary": "Shares of Upland Software (UPLD) fell 7.1% today after weaker-than-expected quarterly results from IBM and ServiceNow raised concerns about AI's impact on the software sector. IBM reported slower revenue growth with software weakness, while ServiceNow experienced deal delays and expected AI investments to affect margins. This sector-wide reaction reflects investor debate on whether AI tools will reduce demand for traditional software, causing a thematic rather than fundamental contagion.",
+        "banner_image": "https://stockstory.org/stockstory/company-image/UPLD?size=1000x500",
+        "source": "StockStory",
+        "category_within_source": "General",
+        "source_domain": "StockStory",
+        "topics": [
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.911730"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.842689"
+          },
+          {
+            "topic": "earnings",
+            "relevance_score": "0.706050"
+          }
+        ],
+        "overall_sentiment_score": -0.469846,
+        "overall_sentiment_label": "Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "UPLD",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.609497",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "NOW",
+            "relevance_score": "0.742586",
+            "ticker_sentiment_score": "-0.405153",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.632240",
+            "ticker_sentiment_score": "-0.442135",
+            "ticker_sentiment_label": "Bearish"
+          }
+        ]
+      },
+      {
+        "title": "PubMatic, PagerDuty, and Sprinklr Shares Plummet, What You Need To Know",
+        "url": "https://www.tradingview.com/news/stockstory:e1ffbd0dc094b:0-pubmatic-pagerduty-and-sprinklr-shares-plummet-what-you-need-to-know/",
+        "time_published": "20260423T170951",
+        "authors": [],
+        "summary": "Shares of PubMatic, PagerDuty, and Sprinklr fell significantly after IBM reported slower Q1 revenue growth and ServiceNow indicated delayed deals and AI investment impacts. The market reaction reflects ongoing investor debate about AI's effect on traditional software and concerns about the \"safe SaaS\" case. PagerDuty, in particular, has seen high volatility and a substantial year-to-date decline.",
+        "banner_image": "https://s3.tradingview.com/news/image/stockstory:e1ffbd0dc094b-2a07e1ffd682070ce0b308492019d84e-resized.webp",
+        "source": "TradingView",
+        "category_within_source": "General",
+        "source_domain": "TradingView",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.940963"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.806070"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.743266"
+          },
+          {
+            "topic": "economy_macro",
+            "relevance_score": "0.637593"
+          }
+        ],
+        "overall_sentiment_score": -0.32254,
+        "overall_sentiment_label": "Somewhat-Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "PD",
+            "relevance_score": "0.984215",
+            "ticker_sentiment_score": "-0.269265",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.736946",
+            "ticker_sentiment_score": "-0.421868",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "NOW",
+            "relevance_score": "0.617244",
+            "ticker_sentiment_score": "-0.302580",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Why Procore Technologies (PCOR) Shares Are Falling Today",
+        "url": "https://www.tradingview.com/news/stockstory:353a38536094b:0-why-procore-technologies-pcor-shares-are-falling-today/",
+        "time_published": "20260423T163837",
+        "authors": [],
+        "summary": "Shares of Procore Technologies (PCOR) fell 7.2% after quarterly results from IBM and ServiceNow raised concerns about AI's impact on the software sector and existing license models. Although Procore did not report earnings, the market interpreted the broader sector weakness as significant, especially given ServiceNow's perceived AI-resilience was challenged. Procore's stock is down 24.9% year-to-date and 34% below its 52-week high.",
+        "banner_image": "https://s3.tradingview.com/news/image/stockstory:353a38536094b-c1bedd28d4e2203a95f3ec54e1fa42e1-resized.webp",
+        "source": "TradingView",
+        "category_within_source": "General",
+        "source_domain": "TradingView",
+        "topics": [
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.913009"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.834334"
+          },
+          {
+            "topic": "earnings",
+            "relevance_score": "0.742808"
+          }
+        ],
+        "overall_sentiment_score": -0.257171,
+        "overall_sentiment_label": "Somewhat-Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "PCOR",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.428921",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.712570",
+            "ticker_sentiment_score": "-0.422355",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "NOW",
+            "relevance_score": "0.736979",
+            "ticker_sentiment_score": "-0.424992",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "UBER",
+            "relevance_score": "0.607156",
+            "ticker_sentiment_score": "0.306655",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "Form 10-Q MOLINA HEALTHCARE, INC. For: Mar 31",
+        "url": "https://www.streetinsider.com/SEC+Filings/Form+10-Q+MOLINA+HEALTHCARE%2C+INC.+For%3A+Mar+31/26356602.html",
+        "time_published": "20260423T143809",
+        "authors": [],
+        "summary": "Molina Healthcare, Inc. (MOH) has filed its Form 10-Q for the quarter ended March 31, 2026, reporting a significant decrease in net income to $14 million or $0.27 per diluted share, compared to $298 million ($5.45 per diluted share) in the same period last year. This decline is largely attributed to lower premium revenue and an increased medical care ratio (MCR), compounded by a $93 million impairment charge related to the company's strategic exit from the MAPD product in 2027. The report details financial statements, segment performance, and outlines legislative and regulatory developments impacting the Medicaid and Marketplace programs.",
+        "banner_image": "https://www.streetinsider.com/images/silogo-new.png",
+        "source": "StreetInsider",
+        "category_within_source": "General",
+        "source_domain": "StreetInsider",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.905655"
+          },
+          {
+            "topic": "finance",
+            "relevance_score": "0.810488"
+          },
+          {
+            "topic": "life_sciences",
+            "relevance_score": "0.713464"
+          },
+          {
+            "topic": "economy_macro",
+            "relevance_score": "0.642837"
+          }
+        ],
+        "overall_sentiment_score": -0.13708,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "MOH",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.047990",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "NOW",
+            "relevance_score": "0.687938",
+            "ticker_sentiment_score": "-0.216840",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.623814",
+            "ticker_sentiment_score": "-0.242279",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "TSLA",
+            "relevance_score": "0.590834",
+            "ticker_sentiment_score": "0.042272",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "AI Anxiety Returns: ServiceNow, IBM Earnings Drag Software Shares Down",
+        "url": "https://www.benzinga.com/trading-ideas/movers/26/04/51997572/ai-anxiety-returns-servicenow-ibm-earnings-drag-software-shares-down",
+        "time_published": "20260423T131548",
+        "authors": [
+          "Kaustubh Bagalkote"
+        ],
+        "summary": "Software shares, particularly those of ServiceNow and IBM, experienced a premarket decline due to concerns that AI is disrupting the traditional software-as-a-service (SaaS) business model. Despite both companies beating analyst estimates, their cautious outlooks and decelerating growth, coupled with geopolitical tensions affecting deals, sparked investor anxiety. This sentiment suggests that companies might opt for building proprietary AI tools rather than paying high subscription fees for standard software, potentially compressing industry margins.",
+        "banner_image": "https://cdn.benzinga.com/files/images/story/2025/07/24/article-header-background-image.png?quality=85&auto=webp&width=1300",
+        "source": "Benzinga",
+        "category_within_source": "General",
+        "source_domain": "Benzinga",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.930336"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.827302"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.923640"
+          }
+        ],
+        "overall_sentiment_score": -0.361641,
+        "overall_sentiment_label": "Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.465427",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "NOW",
+            "relevance_score": "0.919952",
+            "ticker_sentiment_score": "-0.474873",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "ADBE",
+            "relevance_score": "0.730378",
+            "ticker_sentiment_score": "-0.314860",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "CRM",
+            "relevance_score": "0.714974",
+            "ticker_sentiment_score": "-0.337107",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "MSFT",
+            "relevance_score": "0.630204",
+            "ticker_sentiment_score": "-0.260259",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Software stocks plunge on ServiceNow, IBM results as AI fears escalate",
+        "url": "https://www.cnbc.com/2026/04/23/software-stocks-plunge-on-servicenow-ibm-results-ai-fears-escalate.html",
+        "time_published": "20260423T130400",
+        "authors": [
+          "Lola Murti"
+        ],
+        "summary": "Software stocks, including ServiceNow, IBM, Salesforce, and Workday, experienced a significant decline on Thursday following disappointing earnings reports from ServiceNow and IBM. The plunge is attributed to escalating fears that artificial intelligence (AI) tools will disrupt the traditional cloud subscription model and displace existing software businesses. ServiceNow also cited the U.S.-Iran war as a contributing factor to its revenue headwinds.",
+        "banner_image": "https://image.cnbcfm.com/api/v1/image/108296263-1776957170320-1776957039-45459456029-hd.jpg?v=1776957171&w=750&h=422&vtcrop=y",
+        "source": "CNBC",
+        "category_within_source": "General",
+        "source_domain": "CNBC",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.924319"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.844367"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.735261"
+          },
+          {
+            "topic": "economy_macro",
+            "relevance_score": "0.615790"
+          }
+        ],
+        "overall_sentiment_score": -0.646601,
+        "overall_sentiment_label": "Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "NOW",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.614098",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.806658",
+            "ticker_sentiment_score": "-0.629487",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "CRM",
+            "relevance_score": "0.700162",
+            "ticker_sentiment_score": "-0.605220",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "ADBE",
+            "relevance_score": "0.612271",
+            "ticker_sentiment_score": "-0.620749",
+            "ticker_sentiment_label": "Bearish"
+          },
+          {
+            "ticker": "ORCL",
+            "relevance_score": "0.610418",
+            "ticker_sentiment_score": "-0.620655",
+            "ticker_sentiment_label": "Bearish"
+          }
+        ]
+      },
+      {
+        "title": "SEI Investments Company (NASDAQ:SEIC) Q1 2026 Earnings Call Transcript",
+        "url": "https://www.insidermonkey.com/blog/sei-investments-company-nasdaqseic-q1-2026-earnings-call-transcript-1744781/",
+        "time_published": "20260423T120905",
+        "authors": [],
+        "summary": "SEI Investments Company (NASDAQ:SEIC) reported a strong Q1 2026, with adjusted EPS increasing over 20% year-over-year, driven by top-line growth and margin expansion. The company saw exceptional net sales events, particularly from its Investment Manager Services, including significant deals with large alternative managers. SEI also highlighted progress in reimagining asset management, achieving enterprise excellence, boosting international returns, and strategically allocating capital, while addressing the positive impact and opportunities of AI across its businesses.",
+        "banner_image": "https://d2w7kw43nye0pi.cloudfront.net/oo8XF3ZOgwk6hzLuokr8ZRudVim9GOqTsq2hbcT2A_U/resize:fit:480:269:0/plain/https://imonkeyblog.s3.us-east-1.amazonaws.com/blog/wp-content/uploads/2023/10/15171959/SEIC-insidermonkey-1697404797050.jpg",
+        "source": "Insider Monkey",
+        "category_within_source": "General",
+        "source_domain": "Insider Monkey",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.900157"
+          },
+          {
+            "topic": "finance",
+            "relevance_score": "0.813298"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.601773"
+          },
+          {
+            "topic": "economy_macro",
+            "relevance_score": "0.606730"
+          }
+        ],
+        "overall_sentiment_score": 0.628194,
+        "overall_sentiment_label": "Bullish",
+        "ticker_sentiment": [
+          {
+            "ticker": "SEIC",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "0.881266",
+            "ticker_sentiment_label": "Bullish"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.568246",
+            "ticker_sentiment_score": "0.323439",
+            "ticker_sentiment_label": "Somewhat-Bullish"
+          }
+        ]
+      },
+      {
+        "title": "IBM's Software and Infrastructure Segments Drive Q1 Revenue Surge",
+        "url": "https://mlq.ai/news/ibms-software-and-infrastructure-segments-drive-q1-revenue-surge/",
+        "time_published": "20260423T104248",
+        "authors": [
+          "MLQ Agent"
+        ],
+        "summary": "IBM reported strong Q1 2026 results, with revenue reaching $15.9 billion, a 9% year-over-year increase, driven by significant growth in its software and infrastructure segments. Software revenues rose 11% to $7.1 billion, and infrastructure revenues increased 15% to $3.3 billion, largely due to demand for AI and hybrid cloud solutions, and strong IBM Z mainframe sales. Despite beating analyst expectations, IBM's shares dropped about 6% after the announcement due to flat full-year guidance.",
+        "banner_image": "https://mlq.ai/media/news_images/ibm-q1-2026.png",
+        "source": "MLQ.ai",
+        "category_within_source": "General",
+        "source_domain": "MLQ.ai",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.904766"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.822324"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.618677"
+          },
+          {
+            "topic": "economy_macro",
+            "relevance_score": "0.643412"
+          }
+        ],
+        "overall_sentiment_score": -0.233775,
+        "overall_sentiment_label": "Somewhat-Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.225601",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Tesla, ServiceNow Show Risks of Relying on Big Tech Earnings. Here’s the Silver Lining.",
+        "url": "https://www.barrons.com/articles/tesla-servicenow-big-tech-earnings-things-to-know-today-f9da40b4",
+        "time_published": "20260423T103811",
+        "authors": [],
+        "summary": "The article discusses the risks associated with relying heavily on Big Tech earnings, highlighted by reactions to Tesla's spending plans and ServiceNow's margin guidance. It suggests that while impressive results are needed for the market rally to continue, these companies' recent announcements remind investors of potential hazards.",
+        "banner_image": "https://images.barrons.com/im-71337403?width=700&height=466",
+        "source": "Barron's",
+        "category_within_source": "General",
+        "source_domain": "Barron's",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.917980"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.844493"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.725173"
+          }
+        ],
+        "overall_sentiment_score": -0.140712,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "NOW",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.282508",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "TSLA",
+            "relevance_score": "0.990104",
+            "ticker_sentiment_score": "-0.269454",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          },
+          {
+            "ticker": "NFLX",
+            "relevance_score": "0.634119",
+            "ticker_sentiment_score": "0.046506",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "FICO",
+            "relevance_score": "0.636613",
+            "ticker_sentiment_score": "0.025184",
+            "ticker_sentiment_label": "Neutral"
+          },
+          {
+            "ticker": "IBM",
+            "relevance_score": "0.570040",
+            "ticker_sentiment_score": "0.009862",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      },
+      {
+        "title": "Goldman Sachs Adjusts PT on International Business Machines to $335 From $365, Maintains Buy Rating",
+        "url": "https://www.moomoo.com/news/post/68751608/goldman-sachs-adjusts-pt-on-international-business-machines-to-335",
+        "time_published": "20260423T093752",
+        "authors": [],
+        "summary": "Goldman Sachs has adjusted its price target for International Business Machines (IBM) to $335, down from $365, while reiterating a Buy rating on the stock. This revision reflects a change in their valuation outlook for the company.",
+        "banner_image": null,
+        "source": "Moomoo",
+        "category_within_source": "General",
+        "source_domain": "Moomoo",
+        "topics": [
+          {
+            "topic": "finance",
+            "relevance_score": "0.919268"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.801849"
+          }
+        ],
+        "overall_sentiment_score": -0.294243,
+        "overall_sentiment_label": "Somewhat-Bearish",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.272228",
+            "ticker_sentiment_label": "Somewhat-Bearish"
+          }
+        ]
+      },
+      {
+        "title": "Jefferies Sees International Business Machines Corporation (IBM) Upside, Trims Price Target on Valuation Ahead of Earnings",
+        "url": "https://www.insidermonkey.com/blog/jefferies-sees-international-business-machines-corporation-ibm-upside-trims-price-target-on-valuation-ahead-of-earnings-1744281/",
+        "time_published": "20260423T044000",
+        "authors": [
+          "Laiba Immad"
+        ],
+        "summary": "Jefferies maintained a Buy rating on International Business Machines Corporation (IBM) but lowered its price target from $370 to $320 due to valuation, anticipating strong first-quarter performance with approximately 11% year-over-year software growth. Separately, IBM recently settled a False Claims Act case with the U.S. Department of Justice for over $17 million regarding anti-discrimination obligations tied to federal contracts, without admitting liability. The company, a global technology leader in hybrid cloud, AI, and quantum computing, is considered an undervalued Dow stock.",
+        "banner_image": "https://d2w7kw43nye0pi.cloudfront.net/gHTzdfd1hmviaSOvrpx6UXOy4ZqtyljU2JgzOSO9Jew/resize:fit:480:269:0/plain/https://imonkeyblog.s3.us-east-1.amazonaws.com/blog/wp-content/uploads/2023/09/23142039/IBM-insidermonkey-1695493236268.jpg",
+        "source": "Insider Monkey",
+        "category_within_source": "General",
+        "source_domain": "Insider Monkey",
+        "topics": [
+          {
+            "topic": "earnings",
+            "relevance_score": "0.937586"
+          },
+          {
+            "topic": "financial_markets",
+            "relevance_score": "0.810225"
+          },
+          {
+            "topic": "technology",
+            "relevance_score": "0.704971"
+          },
+          {
+            "topic": "economy_fiscal",
+            "relevance_score": "0.641436"
+          }
+        ],
+        "overall_sentiment_score": -0.114987,
+        "overall_sentiment_label": "Neutral",
+        "ticker_sentiment": [
+          {
+            "ticker": "IBM",
+            "relevance_score": "1.000000",
+            "ticker_sentiment_score": "-0.143223",
+            "ticker_sentiment_label": "Neutral"
+          }
+        ]
+      }
+    ]
+  }
+}
