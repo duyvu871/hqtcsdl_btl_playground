@@ -1,0 +1,6 @@
+# Stage 4 — Sentiment Analysis
+transformers>=4.30.0
+torch>=2.0.0
+pymongo>=4.0.0
+python-dotenv>=1.0.0
+tqdm>=4.60.0
