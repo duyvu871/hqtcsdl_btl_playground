@@ -50,9 +50,22 @@ Lưu kết quả điểm số vào Redis để các module tiếp theo (như **S
 }
 ```
 
+## Cơ sở Lý thuyết (Theoretical Foundation)
+
+Mô hình chấm điểm uy tín của hệ thống được xây dựng dựa trên 3 nền tảng lý thuyết chính trong Phân tích Dữ liệu lớn (Big Data Analytics) và Tài chính Hành vi (Behavioral Finance):
+
+1. **Phân phối Lũy thừa trong Mạng xã hội (Power-Law Distribution):**
+   Trong môi trường mạng xã hội Crypto, lượng người theo dõi (Followers) không phân bố đồng đều theo hàm tuyến tính mà tuân theo quy luật lũy thừa (số ít tài khoản nắm giữ lượng tương tác khổng lồ). Nếu sử dụng hàm tuyến tính thông thường, các tài khoản lớn sẽ làm biến dạng toàn bộ thang điểm và áp đảo hoàn toàn các tài khoản khác. Hàm Logarit cơ số 10 (`log10`) được áp dụng để "bình chuẩn hóa" (normalize) độ lệch này, giúp thu hẹp khoảng cách dữ liệu mà vẫn giữ được tính thứ bậc.
+
+2. **Quy luật Weber-Fechner (Độ nhạy biên giảm dần):**
+   Lý thuyết này chỉ ra rằng: Sự khác biệt giữa 10 followers và 1,000 followers là cực kỳ lớn và mang tính đột biến. Nhưng sự khác biệt giữa 1,000,000 followers và 1,001,000 followers lại không mang nhiều ý nghĩa về mặt tăng trưởng sức ảnh hưởng. Hàm Logarit mô phỏng chính xác sự "giảm dần giá trị biên" này của tâm lý học hành vi.
+
+3. **Mô hình Tương tác kép (Dual-Metric Validation):**
+   Để hạn chế tối đa vấn đề tài khoản ảo (Bot/Shill) mua followers giả lập tương tác, mô hình bắt buộc phải tích hợp đồng thời cả số lượng người theo dõi và tương tác thực tế (`Total_Engagement`). Một tài khoản có hàng triệu followers nhưng các bài viết không có lượt tương tác (Likes, Retweets) sẽ bị thuật toán dìm điểm do vế tương tác tiến về 0. Ngược lại, hệ thống ghi nhận và cộng điểm thưởng cho các tài khoản chính chủ đã được xác thực danh tính (`is_verified`).
+
 ## Giải thích Thuật toán (Log-Log Model)
 
-Công thức tính điểm tuyến tính thông thường sẽ làm chìm các tài khoản nhỏ và làm bóp méo dữ liệu từ các tài khoản khổng lồ. Do đó, hệ thống áp dụng hàm Logarit cơ số 10 để bình chuẩn hóa dữ liệu:
+Hệ thống áp dụng hàm Logarit cơ số 10 dựa trên cơ sở lý thuyết phía trên để chuẩn hóa dữ liệu đầu vào:
 
 **Công thức lõi:**
 ```text
@@ -61,7 +74,7 @@ Score = log10(Followers + 1) * log10(Total_Engagement + 1) * Bonus
 
 **Trong đó:**
 - `Total_Engagement` = Likes + Retweets + Replies
-- `Bonus` = 1.5 (Nếu tài khoản có tick xanh / is_verified), ngược lại là 1.0.
+- `Bonus` = 1.5 (Nếu tài khoản có tick xanh / `is_verified` là `true`), ngược lại là 1.0.
 
 **Thang điểm đánh giá nội bộ:**
 - `Score > 30`: 🐳 Mega-Whale (Siêu cá voi)
