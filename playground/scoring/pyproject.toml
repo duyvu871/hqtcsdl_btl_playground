@@ -1,0 +1,9 @@
+[project]
+name = "crypto-scoring"
+version = "0.1.0"
+description = "Pipeline Stage 6 — Proprietary Scoring & Divergence Signals (Rule-based MVP)"
+requires-python = ">=3.10"
+dependencies = [
+    "polars>=0.20.0",
+    "rich>=13.7.0",
+]
