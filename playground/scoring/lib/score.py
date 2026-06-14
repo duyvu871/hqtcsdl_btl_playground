@@ -1,35 +1,33 @@
-"""Tính toán Galaxy Score (Thang điểm 0 - 100)."""
+"""Cấu trúc khởi tạo chỉ số hiển thị song song (Dual-Score)."""
 
-from __future__ import annotations
+import polars as pl
 
-def calculate_galaxy_score(
-    sentiment_score: float, 
-    vol_change_pct: float, 
-    signal_action: str
-) -> float:
+def calculate_dual_scores(df: pl.DataFrame, w1: float=0.4, w2: float=0.4, w3: float=0.2) -> pl.DataFrame:
     """
-    Công thức MVP (Giả định):
-    - Base score: 50
-    - Sentiment (-1 đến 1) đóng góp tối đa ±25 điểm
-    - Social Volume bùng nổ đóng góp tối đa +15 điểm
-    - Tín hiệu BUY từ Divergence thưởng +10 điểm, SELL trừ -10 điểm
+    H_t = w1*Z_momentum + w2*Z_sentiment + w3*Z_impact
+    Alpha Score = 100 * Sigmoid(H_t)
+    Safety Score = Alpha Score * CARA Penalty
     """
-    score = 50.0
+    # 1. Tính điểm sức khỏe cơ sở (H_t)
+    df = df.with_columns(
+        (
+            w1 * pl.col("Z_momentum_ortho") + 
+            w2 * pl.col("sentiment_score_zscore") + 
+            w3 * pl.col("Z_impact")
+        ).alias("H_t")
+    )
     
-    # 1. Trọng số Cảm xúc
-    score += (sentiment_score * 25.0)
+    # 2. Galaxy Alpha Score (Hàm Sigmoid Nén)
+    df = df.with_columns(
+        (100.0 / (1.0 + (-pl.col("H_t")).exp())).alias("galaxy_alpha_score")
+    )
     
-    # 2. Trọng số Khối lượng thảo luận (Social Volume)
-    # Nếu volume tăng 50% (0.5), cộng 7.5 điểm. Tối đa cộng 15.
-    vol_bonus = min(vol_change_pct * 15.0, 15.0)
-    if vol_bonus > 0:
-        score += vol_bonus
-        
-    # 3. Điểm thưởng/phạt từ Tín hiệu Phân kỳ
-    if signal_action == "BUY":
-        score += 10.0
-    elif signal_action == "SELL":
-        score -= 10.0
-        
-    # Chuẩn hóa về thang 0-100
-    return max(0.0, min(100.0, score))
+    # 3. Galaxy Safety Score (Tích hợp hàm phạt CARA)
+    # Lọc Null để tránh lỗi toán học, thay CARA bằng 1 nếu thiếu
+    cara = pl.when(pl.col("cara_penalty").is_not_null()).then(pl.col("cara_penalty")).otherwise(1.0)
+    
+    df = df.with_columns(
+        (pl.col("galaxy_alpha_score") * cara).alias("galaxy_safety_score")
+    )
+    
+    return df
