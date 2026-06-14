@@ -42,7 +42,11 @@ async def upsert_stage(
     doc: dict[str, Any],
     unique_keys: list[str],
 ) -> None:
-    """Idempotent upsert by unique key fields (shared by all pipeline stages)."""
+    """Upsert idempotent theo unique index — dùng chung mọi pipeline stage.
+
+    unique_keys phải khớp compound unique index (vd. influence_aggregates:
+    ["coin_id", "timeframe", "window_start"] → index uq_agg_window).
+    """
     missing = [k for k in unique_keys if k not in doc]
     if missing:
         raise ValueError(f"Document missing unique keys: {missing}")
