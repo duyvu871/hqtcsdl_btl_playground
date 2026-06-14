@@ -37,6 +37,11 @@ async def redis_ping() -> bool:
     return bool(await client.ping())
 
 
+def stream_entry_id(entry_id: str | bytes) -> str:
+    """Chuẩn hóa ID từ XADD — stub redis trả bytes|str, client dùng decode_responses=True."""
+    return entry_id if isinstance(entry_id, str) else entry_id.decode()
+
+
 async def xadd(
     stream: str,
     fields: dict[str, Any],
@@ -50,4 +55,4 @@ async def xadd(
     if maxlen is not None:
         kwargs["maxlen"] = maxlen
         kwargs["approximate"] = approximate
-    return await client.xadd(stream, fields, **kwargs)
+    return stream_entry_id(await client.xadd(stream, fields, **kwargs))

@@ -1,0 +1,50 @@
+"""MongoDB insert helpers — dedup qua DuplicateKeyError (pattern playground).
+
+Dùng insert_one + catch DuplicateKeyError thay vì upsert:
+  - raw_events: dedup theo (source, external_id) — TC-09
+  - clean_events: dedup theo event_id
+"""
+
+from __future__ import annotations
+
+import logging
+from typing import Literal
+
+from pymongo.errors import DuplicateKeyError
+
+from src.common.mongo_client import get_db
+
+logger = logging.getLogger(__name__)
+
+InsertResult = Literal["inserted", "skipped"]
+
+
+async def insert_raw_event(doc: dict) -> InsertResult:
+    """Ghi raw_events; skip nếu trùng (source, external_id) — TC-09."""
+    db = await get_db()
+    try:
+        await db.raw_events.insert_one(doc)
+        return "inserted"
+    except DuplicateKeyError:
+        logger.debug("raw_events duplicate: %s/%s", doc.get("source"), doc.get("external_id"))
+        return "skipped"
+
+
+async def insert_clean_event(doc: dict) -> InsertResult:
+    """Ghi clean_events; skip nếu trùng event_id."""
+    db = await get_db()
+    try:
+        await db.clean_events.insert_one(doc)
+        return "inserted"
+    except DuplicateKeyError:
+        return "skipped"
+
+
+async def insert_dropped_event(doc: dict) -> InsertResult:
+    """Ghi dropped_events audit trail."""
+    db = await get_db()
+    try:
+        await db.dropped_events.insert_one(doc)
+        return "inserted"
+    except DuplicateKeyError:
+        return "skipped"

@@ -8,6 +8,7 @@ from typing import Any
 
 import redis.asyncio as aioredis
 
+from src.common.redis_client import stream_entry_id
 from src.pipeline._runtime.keys import CTL_MAXLEN, ctl_stream
 
 
@@ -24,7 +25,7 @@ async def emit(
     job_id: str = "",
 ) -> str:
     """XADD control event — Orchestrator/WS đọc stream này để cập nhật UI."""
-    return await redis.xadd(
+    entry_id = await redis.xadd(
         ctl_stream(session_id),
         {
             "event_type": event_type,
@@ -36,3 +37,4 @@ async def emit(
         maxlen=CTL_MAXLEN,
         approximate=True,
     )
+    return stream_entry_id(entry_id)

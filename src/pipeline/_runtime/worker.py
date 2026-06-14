@@ -11,12 +11,13 @@ import logging
 import os
 import socket
 from collections.abc import Awaitable, Callable
-from typing import Any
+from typing import Any, cast
 
 import redis.asyncio as aioredis
 from redis.exceptions import ResponseError
 
 from src.common.config import settings
+from src.common.redis_client import stream_entry_id
 from src.pipeline._runtime.emit import emit, utcnow_iso
 from src.pipeline._runtime.keys import (
     MAXLEN,
@@ -28,6 +29,21 @@ from src.pipeline._runtime.keys import (
 )
 
 logger = logging.getLogger(__name__)
+
+# Redis stream fields — stub redis dùng FieldT/EncodableT, thực tế là str values
+StreamFields = dict[str, Any]
+
+
+async def _stream_xadd(
+    redis: aioredis.Redis,
+    stream: str,
+    fields: StreamFields,
+    *,
+    maxlen: int = MAXLEN,
+) -> None:
+    """XADD wrapper — cast fields để tương thích stub redis-py (FieldT invariant)."""
+    await redis.xadd(stream, cast(Any, fields), maxlen=maxlen, approximate=True)
+
 
 # processor(payload_dict, raw_fields) → output doc(s)
 ProcessorFn = Callable[[dict[str, Any], dict[str, str]], Awaitable[list[dict[str, Any]] | dict[str, Any]]]
@@ -48,8 +64,10 @@ def build_entry(
     trace_id: str,
     produced_by: str,
     retry_count: int = 0,
-) -> dict[str, str]:
+) -> StreamFields:
     """Tạo flat string fields cho transport entry (§5.3)."""
+    # Bỏ _id MongoDB — không serializable qua JSON stream
+    safe = {k: v for k, v in payload.items() if k != "_id"}
     return {
         "session_id": session_id,
         "job_id": job_id,
@@ -57,7 +75,7 @@ def build_entry(
         "produced_by": produced_by,
         "produced_at": utcnow_iso(),
         "schema_version": "v1",
-        "payload": json.dumps(payload),
+        "payload": json.dumps(safe),
         "retry_count": str(retry_count),
     }
 
@@ -93,11 +111,13 @@ async def publish_entry(
         produced_by=produced_by,
         retry_count=retry_count,
     )
-    return await redis.xadd(
-        in_stream(stage),
-        fields,
-        maxlen=MAXLEN,
-        approximate=True,
+    return stream_entry_id(
+        await redis.xadd(
+            in_stream(stage),
+            cast(Any, fields),
+            maxlen=MAXLEN,
+            approximate=True,
+        )
     )
 
 
@@ -137,8 +157,8 @@ async def _handle_failure(
 
     deliveries = await _delivery_count(redis, stream, grp, entry_id)
     if deliveries >= settings.STREAM_MAX_RETRY:
-        dlq_fields = {**fields, "error": str(exc), "retry_count": str(deliveries)}
-        await redis.xadd(dlq_stream(stage), dlq_fields, maxlen=MAXLEN, approximate=True)
+        dlq_fields: StreamFields = {**fields, "error": str(exc), "retry_count": str(deliveries)}
+        await _stream_xadd(redis, dlq_stream(stage), dlq_fields)
         await redis.xack(stream, grp, entry_id)
         logger.warning("Entry %s moved to DLQ after %d deliveries", entry_id, deliveries)
 
@@ -175,7 +195,8 @@ async def process_entry(
         next_stream = downstream if downstream is not None else NEXT_STREAM.get(stage)
         if next_stream:
             for doc in outputs:
-                await redis.xadd(
+                await _stream_xadd(
+                    redis,
                     next_stream,
                     build_entry(
                         doc,
@@ -184,8 +205,6 @@ async def process_entry(
                         trace_id=trace_id,
                         produced_by=f"stage:{stage}",
                     ),
-                    maxlen=MAXLEN,
-                    approximate=True,
                 )
 
         await redis.xack(stream, grp, entry_id)
@@ -225,7 +244,7 @@ async def read_batch(
     messages: list[tuple[str, dict[str, str]]] = []
     if batches:
         for _stream_name, entries in batches:
-            messages.extend(entries)
+            messages.extend(cast(list[tuple[str, dict[str, str]]], entries))
     return messages
 
 

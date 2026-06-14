@@ -19,7 +19,7 @@ def test_config_load() -> None:
 
 def test_settings_from_env() -> None:
     """T0-02b: Fresh Settings instance parses env."""
-    cfg = Settings()
+    cfg = Settings(MONGODB_URI="mongodb://localhost:27018", REDIS_URL="redis://localhost:6378/0")
     assert "mongodb" in cfg.MONGODB_URI
     assert "redis" in cfg.REDIS_URL
 

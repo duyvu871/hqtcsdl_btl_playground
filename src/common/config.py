@@ -12,9 +12,10 @@ _REPO_ROOT = Path(__file__).resolve().parents[2]
 class Settings(BaseSettings):
     """Load from .env at repo root; MONGODB_URI and REDIS_URL are required."""
 
-    MONGODB_URI: str
+    # Default khớp .env.example / docker-compose — env var vẫn override khi có
+    MONGODB_URI: str = "mongodb://localhost:27018"
     MONGODB_DB: str = "crypto_mvp"
-    REDIS_URL: str
+    REDIS_URL: str = "redis://localhost:6378/0"
 
     RAPIDAPI_KEY: str = ""
     ALPHA_VANTAGE_API_KEY: str = ""
