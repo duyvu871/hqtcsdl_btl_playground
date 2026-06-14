@@ -8,3 +8,16 @@ __pycache__/
 *.pywz
 *.pyzw
 *.pyzwz
+
+# Environment
+.env
+.venv/
+venv/
+
+# Test / tooling
+.pytest_cache/
+.ruff_cache/
+uv.lock
+
+# IDE
+.vscode/
