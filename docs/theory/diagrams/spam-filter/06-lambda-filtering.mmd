@@ -1,0 +1,17 @@
+flowchart TB
+    RAW[("Raw event stream\n(retention)")]
+    
+    subgraph speed["Speed Layer — realtime"]
+        HRT["L1 heuristic\n+ dedup nhanh"]
+    end
+
+    subgraph batch["Batch Layer — cửa sổ dài"]
+        MLB["ML nặng hơn\nre-label, tune threshold"]
+        REAGG["Tính lại metric\nsau khi lọc sâu"]
+    end
+
+    CLEAN[("Clean events")]
+
+    RAW --> HRT --> CLEAN
+    RAW --> MLB --> REAGG
+    CLEAN --> REAGG

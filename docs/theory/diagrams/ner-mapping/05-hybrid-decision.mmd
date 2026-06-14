@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Clean event"])
+    R["Rules extract mentions"]
+    EMPTY{"0 mention?"}
+    CRYPTO{"Text crypto-related?"}
+    AMB{"Ambiguous?"}
+    LLM["Gọi LLM"]
+    RULES_OK["Dùng rules only"]
+    FAN["Fan-out"]
+    SKIP["Bỏ qua / unmapped"]
+
+    START --> R --> EMPTY
+    EMPTY -->|Không| FAN
+    EMPTY -->|Có| CRYPTO
+    CRYPTO -->|Không| SKIP
+    CRYPTO -->|Có| LLM
+    R --> AMB
+    AMB -->|Có| LLM
+    AMB -->|Không| RULES_OK
+    LLM --> FAN
+    RULES_OK --> FAN

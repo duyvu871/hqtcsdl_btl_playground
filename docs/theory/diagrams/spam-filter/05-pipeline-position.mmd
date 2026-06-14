@@ -1,0 +1,11 @@
+flowchart TB
+    ING["Data Ingestion\n(raw event)"]
+    FIL["Spam / Noise Filter"]
+    CLN["Clean event store"]
+    NER["NER / map thực thể"]
+    SEN["Sentiment Analysis"]
+    AGG["Tổng hợp / Scoring"]
+
+    ING --> FIL
+    FIL -->|PASS| CLN --> NER --> SEN --> AGG
+    FIL -->|DROP| DROP[("Dropped log\n(tuỳ chọn)")]

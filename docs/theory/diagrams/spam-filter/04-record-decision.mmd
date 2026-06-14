@@ -1,0 +1,18 @@
+flowchart TD
+    START(["Với mỗi raw event"])
+    H["L1: text, likes, regex,\nauthor cap, engagement ratio"]
+    HOK{"PASS L1?"}
+    S["L2: SimHash fingerprint\nHamming ≤ ngưỡng?"]
+    SOK{"PASS L2?"}
+    M["L3: FastText predict\nspam vs human"]
+    MOK{"PASS L3?"}
+    CLEAN["Ghi clean event"]
+    DROP["Ghi dropped / skip"]
+
+    START --> H --> HOK
+    HOK -->|Không| DROP
+    HOK -->|Có| S --> SOK
+    SOK -->|Không| DROP
+    SOK -->|Có| M --> MOK
+    MOK -->|Không| DROP
+    MOK -->|Có| CLEAN

@@ -1,0 +1,13 @@
+flowchart TD
+    START(["Với mỗi item từ nguồn S"])
+    NORM["event ← normalize(S, item)"]
+    VOK{"event hợp lệ?"}
+    DUP{"Đã tồn tại\n(source, external_id)?"}
+    WRITE["Ghi vào kho raw event"]
+    DROP["Bỏ qua"]
+
+    START --> NORM --> VOK
+    VOK -->|Không| DROP
+    VOK -->|Có| DUP
+    DUP -->|Có| DROP
+    DUP -->|Không| WRITE

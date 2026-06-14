@@ -1,0 +1,10 @@
+flowchart LR
+    ORCH["Orchestrator\n(điều phối nguồn, lịch, credentials)"]
+    COL["Collector\n(thu thập)"]
+    ADP["Adapter\n(chuẩn hóa)"]
+    VAL["Validator\n(kiểm tra)"]
+    DED["Dedup layer\n(chống trùng)"]
+    PER["Persistence\n(lưu trữ)"]
+
+    ORCH --> COL
+    COL --> ADP --> VAL --> DED --> PER

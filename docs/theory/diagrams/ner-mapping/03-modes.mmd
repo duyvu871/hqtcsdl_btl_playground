@@ -1,0 +1,18 @@
+flowchart TB
+    subgraph hybrid["Hybrid"]
+        H1["Rules first"]
+        H2["LLM if ambiguous\nor crypto text, 0 mention"]
+    end
+
+    subgraph validator["Validator"]
+        V1["Rules propose"]
+        V2["LLM always confirm"]
+    end
+
+    subgraph full["Full LLM"]
+        F1["LLM only"]
+    end
+
+    hybrid --> OUT["Mapped events"]
+    validator --> OUT
+    full --> OUT

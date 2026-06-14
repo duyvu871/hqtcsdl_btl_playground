@@ -2,6 +2,8 @@
 
 Thu thập raw social events từ **nhiều nguồn** và lưu **MongoDB Atlas** theo schema Stage 1 trong [`docs/pipeline-overview.md`](../../docs/pipeline-overview.md).
 
+**Cơ sở lý thuyết:** [`docs/theory/ingest.md`](../../docs/theory/ingest.md)
+
 ## Nguồn hỗ trợ
 
 | Lệnh | `source` | API / thư viện | API key |

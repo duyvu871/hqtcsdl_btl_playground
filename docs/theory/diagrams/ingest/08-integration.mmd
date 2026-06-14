@@ -1,0 +1,21 @@
+flowchart LR
+    subgraph ingest_box["Data Ingestion"]
+        ING3["Producer\n(collector + adapter)"]
+    end
+
+    subgraph storage["Lưu trữ / vận chuyển"]
+        DB[("Document DB\n(MVP / batch)")]
+        BUS["Message broker\n(stream)"]
+    end
+
+    subgraph consumers["Consumer downstream"]
+        CLN2["Module làm sạch"]
+        MON["Giám sát / metrics"]
+    end
+
+    CFG["Secret / Config\n(API keys)"] --> ING3
+    ING3 --> DB
+    ING3 --> BUS
+    DB --> CLN2
+    BUS --> CLN2
+    ING3 --> MON

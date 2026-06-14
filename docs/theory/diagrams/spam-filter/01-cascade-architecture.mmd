@@ -1,0 +1,15 @@
+flowchart LR
+    RAW["Raw event"]
+    L1["L1 Heuristic\n(rule-based)"]
+    L2["L2 SimHash\n(near-duplicate)"]
+    L3["L3 FastText\n(spam / human)"]
+    CLEAN["Clean event\n(PASS)"]
+    DROP["Dropped\n(DROP)"]
+
+    RAW --> L1
+    L1 -->|PASS| L2
+    L1 -->|DROP| DROP
+    L2 -->|PASS| L3
+    L2 -->|DROP| DROP
+    L3 -->|PASS| CLEAN
+    L3 -->|DROP| DROP

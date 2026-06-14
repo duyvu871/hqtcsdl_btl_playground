@@ -1,0 +1,16 @@
+flowchart TB
+    SRC["Nguồn dữ liệu"]
+    ING2["Data Ingestion\n(raw event log)"]
+    STORE[("Kho raw event\n(retention)")]
+
+    subgraph speed["Speed Layer — gần real-time"]
+        VEL["Đếm tốc độ post / spike"]
+    end
+
+    subgraph batch["Batch Layer — cửa sổ dài"]
+        REAGG["Tính lại chỉ số\n(replay, retrain)"]
+    end
+
+    SRC --> ING2 --> STORE
+    STORE --> VEL
+    STORE --> REAGG

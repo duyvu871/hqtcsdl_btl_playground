@@ -1,0 +1,13 @@
+flowchart TB
+    IN["Clean event"]
+    REG["Coin registry"]
+    RULE["Rule extractor\ncashtag · alias · metadata"]
+    LLM["LLM resolver\n(tuỳ mode)"]
+    FAN["Fan-out mapper"]
+    OUT["Mapped events\n(1 row / coin_id)"]
+
+    IN --> RULE
+    REG --> RULE
+    RULE --> LLM
+    LLM --> FAN
+    FAN --> OUT

@@ -1,0 +1,10 @@
+flowchart TB
+    ING["Data Ingestion"]
+    FIL["Spam Filter"]
+    CLN["Clean events"]
+    NER["NER / Coin Mapping"]
+    MAP["Mapped events"]
+    SEN["Sentiment Analysis"]
+    AGG["Tổng hợp / Scoring"]
+
+    ING --> FIL --> CLN --> NER --> MAP --> SEN --> AGG

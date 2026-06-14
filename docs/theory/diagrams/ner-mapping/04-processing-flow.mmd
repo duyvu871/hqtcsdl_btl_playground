@@ -1,0 +1,18 @@
+flowchart TD
+    START(["Clean event"])
+    RULE["Extract mentions\nrules + registry"]
+    HAS{"Có mention?"}
+    MODE{"Mode?"}
+    LLM["LLM resolve / validate"]
+    FAN["Fan-out\n1 row × coin_id"]
+    SKIP["Unmapped / skip"]
+    OUT["Ghi mapped events"]
+
+    START --> RULE --> HAS
+    HAS -->|Không| MODE
+    HAS -->|Có| FAN
+    MODE -->|Hybrid: cần LLM| LLM
+    MODE -->|Hybrid: không| SKIP
+    MODE -->|Validator / Full| LLM
+    LLM --> FAN
+    FAN --> OUT

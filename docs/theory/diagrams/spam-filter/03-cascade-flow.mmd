@@ -1,0 +1,15 @@
+flowchart TD
+    START(["Raw event"])
+    L1{"L1 Heuristic\nrác rõ ràng?"}
+    L2{"L2 SimHash\ntrùng gần?"}
+    L3{"L3 ML\nP(spam) ≥ ngưỡng?"}
+    PASS["Clean event\nis_spam: false"]
+    DROP["Dropped log\n+ drop_reason"]
+
+    START --> L1
+    L1 -->|Có| DROP
+    L1 -->|Không| L2
+    L2 -->|Có| DROP
+    L2 -->|Không| L3
+    L3 -->|Có| DROP
+    L3 -->|Không| PASS
