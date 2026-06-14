@@ -1,0 +1,18 @@
+flowchart TB
+    subgraph organic["Organic buzz — PASS"]
+        O1["Nội dung đa dạng"]
+        O2["Engagement hợp lý"]
+        O3["Thảo luận / tin tức"]
+    end
+
+    subgraph bot["Bot hype — DROP"]
+        B1["Copy-paste / pump regex"]
+        B2["Engagement bất thường"]
+        B3["Campaign coordinated"]
+    end
+
+    FILTER["Spam / Noise Filter"]
+    organic --> FILTER
+    bot --> FILTER
+    FILTER --> OUT1["Clean event"]
+    FILTER --> OUT2["Dropped log"]

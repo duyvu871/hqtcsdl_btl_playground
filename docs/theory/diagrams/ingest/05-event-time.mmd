@@ -1,0 +1,11 @@
+flowchart LR
+    PUB["Nội dung xuất bản\n(trên nguồn)"]
+    TS["timestamp\nevent time"]
+    ING["Hệ thống ghi nhận"]
+    IA["ingested_at\nprocessing time"]
+
+    PUB --> TS
+    ING --> IA
+
+    TS -.->|"Dùng cho aggregate,\ncorrelation, cửa sổ thời gian"| ANALYSIS["Phân tích downstream"]
+    IA -.->|"Dùng cho giám sát lag,\ndebug vận hành"| OPS["Giám sát vận hành"]

@@ -97,47 +97,142 @@
 
 ## 2. Cơ sở lý thuyết
 
-> Nền tảng kiến thức và công nghệ dùng để thực hiện đề tài.
+> Nền tảng kiến thức và công nghệ dùng để thực hiện đề tài.  
+> **Khung trình bày chuẩn:** [`docs/pipeline-theory-form.md`](pipeline-theory-form.md) · **Nội dung chi tiết theo stage:** [`docs/theory/`](theory/)
 
-### 2.1. Tổng quan về lĩnh vực nghiên cứu
+Mỗi công nghệ / stage pipeline viết theo **cùng một cấu trúc 5 mục**:
 
-[Kiến thức nền tảng liên quan đến bài toán. Có thể chia thành các mục nhỏ.]
+| Mục | Nội dung |
+| --- | --- |
+| **2.x.1** | Tổng quan — *Khái niệm* · *Vai trò* |
+| **2.x.2** | Kiến trúc và các thành phần cốt lõi |
+| **2.x.3** | Cơ chế hoạt động và vai trò trong Pipeline — nguyên lý · vị trí · tích hợp |
+| **2.x.4** | Ưu điểm và Hạn chế |
+| **2.x.5** | Lý do lựa chọn |
 
-#### 2.1.1. [Chủ đề nền tảng 1 — ví dụ: Phân tích sentiment trong tài chính]
+**Lưu ý:** Chỉ giữ lý thuyết phục vụ trực tiếp câu hỏi nghiên cứu; trích dẫn nguồn theo quy định trường (APA/Harvard).
 
-- [Định nghĩa, vai trò của sentiment trong dự báo giá]
-- [Leading indicator vs lagging indicator]
-- [Thách thức: sarcasm, bot, bias ngôn ngữ]
+---
 
-#### 2.1.2. [Chủ đề nền tảng 2 — ví dụ: Kiến trúc xử lý dữ liệu lớn real-time]
+### 2.1. Data Ingestion — Thu thập dữ liệu thô
 
-- [Lambda Architecture / Event-Driven Architecture]
-- [Speed layer vs batch layer]
-- [Information diffusion trên mạng xã hội]
+> Nội dung đầy đủ (thành phần độc lập, không gắn sản phẩm cụ thể): [`docs/theory/ingest.md`](theory/ingest.md)
 
-#### 2.1.3. [Chủ đề nền tảng 3 — ví dụ: An toàn và chất lượng dữ liệu]
+#### 2.1.1. Tổng quan về Data Ingestion
 
-- [Noise reduction, deduplication]
-- [Influence weighting / authority score]
-- [Divergence logic (giá vs sentiment)]
+**Khái niệm:** [Giai đoạn đưa dữ liệu API/scrape vào hệ thống dưới dạng raw event có schema thống nhất, bất biến sau khi ghi.]
 
-### 2.2. Công nghệ sử dụng
+**Vai trò:** [Giải quyết bài toán đa nguồn — một schema; bảo toàn nội dung và metadata tương tác cho các bước phân tích phía sau.]
 
-[Giới thiệu ngắn gọn từng công nghệ: bản chất, lý do chọn, vai trò trong hệ thống.]
+#### 2.1.2. Kiến trúc và các thành phần cốt lõi
 
-| Công nghệ | Phiên bản | Vai trò trong đề tài |
-| --- | --- | --- |
-| Python | [x.x] | [Data pipeline, ML inference] |
-| [Framework/API] | [x.x] | [Mô tả ngắn] |
-| MongoDB | [x.x] | [Lưu events: raw, clean, mapped, sentiment] |
-| [Message broker] | [x.x] | [Luân chuyển event giữa workers] |
-| Docker | [x.x] | [Đóng gói và triển khai dịch vụ] |
-| [Công cụ khác] | [x.x] | [Mô tả ngắn] |
+[Collector · Adapter · Validator · Dedup layer · Persistence · Orchestrator — xem `theory/ingest.md`.]
 
-**Lý do lựa chọn công nghệ**
+#### 2.1.3. Cơ chế hoạt động và vai trò trong Pipeline
 
-- [So sánh ngắn với phương án thay thế — ví dụ: MongoDB vs PostgreSQL cho event schema linh hoạt]
-- [Phù hợp với yêu cầu phi chức năng: throughput, độ trễ, chi phí vận hành]
+**Nguyên lý hoạt động:** [Thu thập → chuẩn hóa → kiểm tra → chống trùng → lưu trữ.]
+
+**Vị trí trong Pipeline:** [Đầu nhánh dữ liệu social/news; dữ liệu thị trường thường thu song song.]
+
+**Khả năng tích hợp:** [Document database (MVP) hoặc message broker (stream); consumer làm sạch/phân tích đọc contract raw event.]
+
+#### 2.1.4. Ưu điểm và Hạn chế
+
+**Ưu điểm:** [Schema thống nhất, replay, ghi idempotent, mở rộng nguồn.]
+
+**Hạn chế:** [Batch vs stream, metrics không đồng đều giữa nguồn, phụ thuộc API bên thứ ba.]
+
+#### 2.1.5. Lý do lựa chọn
+
+[Adapter + raw event bất biến; so sánh với gọi API trực tiếp từng module và ETL một lần.]
+
+---
+
+### 2.2. Spam / Noise Filtering — Lọc spam và nhiễu
+
+> Nội dung đầy đủ: [`docs/theory/spam-filter.md`](theory/spam-filter.md)
+
+#### 2.2.1. Tổng quan về Spam / Noise Filtering
+
+**Khái niệm:** [Giai đoạn phân loại raw event — PASS (clean) hoặc DROP (spam/nhiễu) trước NLP.]
+
+**Vai trò:** [Giải quyết signal-to-noise; giữ organic buzz, loại bot hype — tránh bias sentiment.]
+
+#### 2.2.2. Kiến trúc và các thành phần cốt lõi
+
+[Cascade L1 heuristic → L2 SimHash → L3 FastText; orchestrator; output mapper — xem `theory/spam-filter.md`.]
+
+#### 2.2.3. Cơ chế hoạt động và vai trò trong Pipeline
+
+**Nguyên lý hoạt động:** [L1 → L2 → L3 tuần tự; DROP sớm; ngưỡng ML P(spam).]
+
+**Vị trí trong Pipeline:** [Sau Data Ingestion, trước NER / Sentiment.]
+
+**Khả năng tích hợp:** [Đọc raw event; ghi clean event / dropped log; model FastText artifact.]
+
+#### 2.2.4. Ưu điểm và Hạn chế
+
+**Ưu điểm:** [Cascade tiết kiệm CPU, giảm bias, phát hiện duplicate, audit được.]
+
+**Hạn chế:** [False pos/neg, domain shift, news vs social — xem bảng trong tài liệu.]
+
+#### 2.2.5. Lý do lựa chọn
+
+[Cascade FastText + SimHash; không dùng BERT cho hot path spam; so sánh lọc sau sentiment.]
+
+---
+
+### 2.3. NER và Coin Mapping — Nhận diện thực thể và gán mã coin
+
+> Nội dung đầy đủ: [`docs/theory/ner-mapping.md`](theory/ner-mapping.md)
+
+#### 2.3.1. Tổng quan về NER / Coin Mapping
+
+**Khái niệm:** [Nhận diện mention crypto trong text, gán `coin_id` từ registry; fan-out 1 post → N mapped event.]
+
+**Vai trò:** [Multi-entity attribution — sentiment và scoring tính per-coin.]
+
+#### 2.3.2. Kiến trúc và các thành phần cốt lõi
+
+[Coin registry · Rule extractor · LLM resolver · Fan-out mapper — xem `theory/ner-mapping.md`.]
+
+#### 2.3.3. Cơ chế hoạt động và vai trò trong Pipeline
+
+**Nguyên lý hoạt động:** [Rules → (hybrid/validator/full LLM) → fan-out theo coin_id.]
+
+**Vị trí trong Pipeline:** [Sau Spam Filter, trước Sentiment.]
+
+**Khả năng tích hợp:** [Clean events in; mapped events out; LLM API tuỳ chọn.]
+
+#### 2.3.4. Ưu điểm và Hạn chế
+
+**Ưu điểm:** [Fan-out đúng mô hình, hybrid tiết kiệm cost, registry kiểm soát vocabulary.]
+
+**Hạn chế:** [Ambiguity, phụ thuộc LLM, registry stale — xem bảng trong tài liệu.]
+
+#### 2.3.5. Lý do lựa chọn
+
+[Registry + rules + hybrid LLM; so với keyword-only và NER general-purpose.]
+
+---
+
+### 2.4. – 2.6. [Stage 4 Sentiment · Stage 5 Influence · Stage 6 Scoring]
+
+[Lặp cùng cấu trúc 5 mục cho từng stage. Gợi ý module: `ner`, `sentiment`, `influence`, `scoring`.]
+
+---
+
+### 2.7. Tổng hợp công nghệ stack
+
+| Công nghệ | Phiên bản | Stage | Vai trò trong đề tài |
+| --- | --- | --- | --- |
+| Python | [x.x] | Toàn pipeline | Data workers, ML inference |
+| MongoDB | [x.x] | 1–4 | Event store MVP |
+| [Message broker] | [x.x] | 1, 2, … | Luân chuyển event (target) |
+| FastText | [x.x] | 2 | Spam classifier L3 |
+| FinBERT / CryptoBERT | — | 4 | Sentiment inference |
+| Redis | [x.x] | 5, 6 | Cache authority, feature realtime |
+| Docker | [x.x] | Infra | Container hóa dịch vụ |
 
 ---
 

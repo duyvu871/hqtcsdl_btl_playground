@@ -2,6 +2,8 @@
 
 Playground triển khai **Bước 2** trong pipeline crypto MVP: đọc raw social events từ MongoDB (`playground/ingest`), lọc nhiễu qua cascade **L1 heuristic → L2 SimHash → L3 FastText**, ghi kết quả sạch vào `clean_events`.
 
+**Cơ sở lý thuyết:** [`docs/theory/spam-filter.md`](../../docs/theory/spam-filter.md)
+
 **Tham chiếu:** [`docs/pipeline-overview.md`](../../docs/pipeline-overview.md) § Bước 2 · [`docs/lunacrush-data-flow.md`](../../docs/lunacrush-data-flow.md) § Bước 2 · [`playground/ingest/README.md`](../ingest/README.md) (Stage 1)
 
 ---

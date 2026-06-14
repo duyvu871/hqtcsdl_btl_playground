@@ -1,0 +1,11 @@
+flowchart TD
+    S1["① Thu thập\nGọi API / scrape theo nguồn"]
+    S2["② Chuẩn hóa\nAdapter → raw event"]
+    S3["③ Kiểm tra\nText hợp lệ, timestamp UTC"]
+    S4{"④ Chống trùng\n(source, external_id)\nđã tồn tại?"}
+    S5["⑤ Lưu trữ\nDatabase hoặc message bus"]
+    SKIP["Bỏ qua bản ghi"]
+
+    S1 --> S2 --> S3 --> S4
+    S4 -->|Chưa có| S5
+    S4 -->|Đã có| SKIP

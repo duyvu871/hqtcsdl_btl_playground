@@ -1,0 +1,24 @@
+flowchart LR
+    subgraph upstream["Upstream"]
+        ING["Data Ingestion"]
+    end
+
+    subgraph filter_box["Spam / Noise Filter"]
+        CAS["Cascade\nL1 → L2 → L3"]
+        MODEL["ML model\n(FastText)"]
+        MODEL --> CAS
+    end
+
+    subgraph storage["Lưu trữ"]
+        RAW[("Raw events")]
+        CLEAN[("Clean events")]
+        DROP[("Dropped log")]
+    end
+
+    subgraph downstream["Downstream"]
+        NLP["NER / Sentiment"]
+    end
+
+    ING --> RAW --> CAS
+    CAS --> CLEAN --> NLP
+    CAS --> DROP

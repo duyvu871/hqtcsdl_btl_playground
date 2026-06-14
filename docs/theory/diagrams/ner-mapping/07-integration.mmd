@@ -1,0 +1,23 @@
+flowchart LR
+    subgraph upstream["Upstream"]
+        FIL["Spam Filter"]
+    end
+
+    subgraph ner_box["NER Mapping"]
+        REG["Coin registry"]
+        ENG["Rule + LLM engine"]
+        REG --> ENG
+    end
+
+    subgraph storage["Lưu trữ"]
+        CLEAN[("Clean events")]
+        MAPPED[("Mapped events")]
+    end
+
+    subgraph downstream["Downstream"]
+        SEN["Sentiment\n(per coin_id)"]
+    end
+
+    LLM["LLM API\n(tuỳ chọn)"] --> ENG
+    FIL --> CLEAN --> ENG
+    ENG --> MAPPED --> SEN

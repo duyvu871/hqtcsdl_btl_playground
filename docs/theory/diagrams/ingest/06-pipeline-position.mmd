@@ -1,0 +1,19 @@
+flowchart TB
+    subgraph external["Nguồn ngoài"]
+        SOC["Mạng xã hội"]
+        NEWS["Tin tức"]
+        FORUM["Diễn đàn"]
+        MKT["Dữ liệu thị trường\n(giá, khối lượng)"]
+    end
+
+    ING["Data Ingestion\n(raw event)"]
+    CLN["Làm sạch dữ liệu"]
+    MAP["Gán nhãn / map thực thể"]
+    ANA["Phân tích"]
+    AGG["Tổng hợp / Báo cáo"]
+
+    SOC --> ING
+    NEWS --> ING
+    FORUM --> ING
+    ING --> CLN --> MAP --> ANA --> AGG
+    MKT -.->|"Thu song song\nHội tụ tại tổng hợp"| AGG

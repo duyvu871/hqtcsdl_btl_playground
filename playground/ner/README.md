@@ -2,6 +2,8 @@
 
 Gán **`coin_id`** cho social/news events và **fan-out** 1 post → N message (mỗi coin một bản ghi). Đọc từ `clean_events` (hoặc `raw_events` khi dev) → ghi `mapped_events`.
 
+**Cơ sở lý thuyết:** [`docs/theory/ner-mapping.md`](../../docs/theory/ner-mapping.md)
+
 **3 chế độ** qua OpenRouter LLM + rules:
 
 | Mode | Luồng |

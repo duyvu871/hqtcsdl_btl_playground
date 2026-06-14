@@ -1,0 +1,20 @@
+flowchart TB
+    subgraph sources["Nguồn dữ liệu ngoài"]
+        API["REST API"]
+        WH["Webhook"]
+        SCR["Scrape / RSS"]
+    end
+
+    subgraph ingest["Data Ingestion"]
+        COL2["Collector"]
+        ADP2["Adapter"]
+        VAL2["Validator"]
+        DED2["Dedup"]
+        STO["Persistence"]
+    end
+
+    ORCH2["Orchestrator"] --> COL2
+    API --> COL2
+    WH --> COL2
+    SCR --> COL2
+    COL2 --> ADP2 --> VAL2 --> DED2 --> STO
