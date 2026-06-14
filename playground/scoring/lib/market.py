@@ -1,30 +1,30 @@
-"""Lấy dữ liệu thị trường (OHLCV) từ sàn giao dịch bằng CCXT."""
-
-from __future__ import annotations
+"""Adapter kéo nến Binance an toàn."""
 import ccxt
-from datetime import datetime, timezone
 
-def fetch_binance_ohlcv(symbol: str = 'BTC/USDT', timeframe: str = '1h', limit: int = 10) -> list[dict]:
-    """
-    Kéo dữ liệu nến từ Binance. 
-    Trả về list dict tương thích với Polars Data Prep.
-    """
-    exchange = ccxt.binance({
-        'enableRateLimit': True,
-    })
-    
-    # Kéo nến
-    ohlcv = exchange.fetch_ohlcv(symbol, timeframe, limit=limit)
-    
-    records = []
-    for candle in ohlcv:
-        # candle format: [timestamp, open, high, low, close, volume]
-        dt = datetime.fromtimestamp(candle[0] / 1000.0, tz=timezone.utc)
-        records.append({
-            "timestamp": dt.isoformat(),
-            "coin_id": symbol.split('/')[0],
-            "close": float(candle[4]),
-            "volume": float(candle[5])
-        })
+def fetch_market_ohlcv(symbol: str = "BTC/USDT", timeframe: str = "1h", limit: int = 48) -> list[dict]:
+    """Lấy dữ liệu nến đóng cửa lịch sử từ Binance kèm cơ chế chống lỗi dữ liệu rỗng."""
+    try:
+        exchange = ccxt.binance({"enableRateLimit": True})
+        ohlcv = exchange.fetch_ohlcv(symbol, timeframe, limit=limit)
         
-    return records
+        market_data = []
+        for candle in ohlcv:
+            # Kiểm tra an toàn (Safe Check): Bỏ qua các nến bị lỗi API trả về None
+            if len(candle) >= 6 and candle[4] is not None and candle[5] is not None:
+                market_data.append({
+                    "timestamp": candle[0] / 1000.0, # Convert miliseconds to seconds
+                    "close": float(candle[4]),
+                    "volume": float(candle[5])
+                })
+                
+        return market_data
+        
+    except ccxt.NetworkError as e:
+        print(f"⚠️ Lỗi mạng khi kết nối Binance API: Lỗi đường truyền hoặc bị chặn IP.")
+        return []
+    except ccxt.ExchangeError as e:
+        print(f"⚠️ Lỗi từ phía sàn Binance (Có thể sai Symbol hoặc tham số): {e}")
+        return []
+    except Exception as e:
+        print(f"⚠️ Lỗi hệ thống không xác định trong market.py: {e}")
+        return []

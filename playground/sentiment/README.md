@@ -1,273 +1,93 @@
-# Stage 4 — Sentiment Analysis
+# 🌌 Galaxy Score™: Hệ thống Đánh giá Định lượng & Phân tích Phân kỳ Tài sản Crypto
 
-Module phân tích cảm xúc (sentiment) cho hệ thống crypto social prediction pipeline.
+Một hệ thống phát sinh tín hiệu giao dịch và đánh giá tài sản định lượng tiên tiến, hiệu suất cao dành riêng cho thị trường tiền mã hóa. Ứng dụng mô hình kiến trúc **MVC (Model-View-Controller)** và được xây dựng trên thư viện xử lý dữ liệu siêu tốc **Polars**, hệ thống này xử lý các tập dữ liệu thay thế đa phương thức (tâm lý mạng xã hội, khối lượng tương tác) kết hợp với các chỉ số thị trường truyền thống (biến thiên giá) nhằm phát hiện các điểm phân kỳ bất thường mang lại lợi thế giao dịch.
 
-## Mục đích
+---
 
-Biến dữ liệu text đã clean và đã map coin (từ Stage 2 + Stage 3) thành điểm cảm xúc dạng số:
+## 📊 1. Tổng quan Dự án & Cấu trúc Thư mục
 
-```
-mapped_events (coin_id + clean_text)
-  → NLP model (FinBERT / CryptoBERT)
-  → sentiment_score [-1, +1]
-  → sentiment_label: positive / neutral / negative
-  → sentiment_events (MongoDB)
-  → aggregate theo coin_id + timeframe
-```
+Hệ thống **Galaxy Score™** giải quyết một thách thức lớn trong tài chính định lượng hiện đại: sự đồng bộ hóa và tổng hợp các dữ liệu thay thế đa chiều, không đồng bộ với dữ liệu giá thị trường tần suất cao. Bằng cách chuyển đổi dữ liệu mạng xã hội và tín hiệu giá thô thành một không gian vectơ chuẩn hóa thông qua các phép đo thống kê cuộn (rolling statistics), hệ thống tính toán một thước đo phân kỳ/hội tụ tổng hợp để cô lập các điểm kém hiệu quả của thị trường.
 
-## Pipeline Stage
+### Chi tiết các Module:
+* **`lib/prep.py` [Model - Tiền xử lý Dữ liệu]:** Xử lý việc căn chỉnh chuỗi thời gian thông qua phép kết nối (inner joins) tối ưu trên các chiều `timestamp` và `coin_id`. Tính toán tỷ suất lợi nhuận giá liên tục thông qua kỹ thuật độ trễ (lag-shifting).
+* **`lib/score.py` [Model - Logic Toán học]:** Thực thi các phép chuẩn hóa vectơ cuộn và đóng gói hệ thống tổng hợp hàm sigmoid phi tuyến tính độc quyền.
+* **`lib/rules.py` [Controller - Quy tắc Giao dịch]:** Triển khai một hệ thống ánh xạ ranh giới nghiêm ngặt để kiểm tra các đặc tính toán học so với các vùng đuôi thống kê cực đoan nhằm phát cảnh báo hành động.
+* **`main.py` [View / Điều phối Hệ thống]:** Đóng vai trò là bối cảnh thực thi hệ thống và thành phần hiển thị bảng điều khiển ở cấp độ dòng lệnh (terminal).
+* **`config.py` & `connectors.py`:** Quản lý biến môi trường và thiết lập luồng kết nối luân chuyển dữ liệu thực tế (Kafka/Redpanda, TimescaleDB, MongoDB).
 
-```
-Stage 1: Raw Collection      → raw_events
-Stage 2: Spam / Noise Filter → clean_events
-Stage 3: NER / Coin Mapping  → mapped_events
-Stage 4: Sentiment Analysis  → sentiment_events  ← MODULE NÀY
-Stage 5: Influence Weighting
-Stage 6: Scoring / Prediction
-```
+---
 
-## Input
+## 🎓 2. Cơ sở Lý luận & Khung Toán học
 
-**Collection**: `mapped_events` (ưu tiên) hoặc `clean_events` (fallback)
+Điểm khác biệt cốt lõi của **Galaxy Score™** so với các bộ dao động (oscillators) thông thường là toàn bộ luồng tính toán đều được tham chiếu từ các mô hình kinh tế lượng tài chính đã được chứng minh. Hệ thống vận hành qua 3 giai đoạn toán học chính:
 
-```json
-{
-  "event_id": "uuid",
-  "mapped_id": "uuid",
-  "parent_event_id": "uuid",
-  "source": "twitter",
-  "coin_id": "BTC",
-  "clean_text": "Buy BTC now to the moon",
-  "author_id": "user_123",
-  "metrics": {
-    "followers": 15000,
-    "likes": 200,
-    "retweets": 35,
-    "replies": 12
-  },
-  "timestamp": 1716110997
-}
-```
+### Giai đoạn 1: Chuẩn hóa Vectơ Cuộn (Z-Score Normalization)
+**Vấn đề:** Khối lượng mạng xã hội (`social_volume`) có giá trị hàng chục nghìn, trong khi lợi nhuận giá (`price_change_pct`) chỉ ở mức phần trăm nhỏ ($0.01$). Không thể cộng trừ trực tiếp các giá trị khác biệt về mặt thứ nguyên này.
+**Cơ sở học thuật:** Theo nghiên cứu của **Tetlock (2007)** [[DOI: 10.1111/j.1540-6261.2007.01232.x](https://doi.org/10.1111/j.1540-6261.2007.01232.x)], để cô lập tín hiệu thực sự khỏi "nhiễu trắng" (white noise) của thị trường, các chỉ số đo lường tâm lý cần được chuẩn hóa so với trung bình lịch sử gần nhất của chính nó.
 
-## Output
+Hệ thống áp dụng công thức Z-score cuộn (rolling Z-score) để đưa tất cả luồng dữ liệu về cùng một phân phối chuẩn hóa (Standardized Distribution):
 
-**Collection**: `sentiment_events`
+$$Z(X_t) = \frac{X_t - \mu_{\tau}(X_t)}{\sigma_{\tau}(X_t)}$$
 
-```json
-{
-  "sentiment_id": "uuid",
-  "mapped_id": "uuid",
-  "event_id": "uuid",
-  "parent_event_id": "uuid",
-  "coin_id": "BTC",
-  "source": "twitter",
-  "clean_text": "Buy BTC now to the moon",
-  "author_id": "user_123",
-  "metrics": { "followers": 15000, "likes": 200 },
-  "timestamp": 1716110997,
+**Chú giải biến số:**
+* $X_t$: Giá trị quan sát thô của luồng dữ liệu tại thời điểm $t$ (ví dụ: điểm sentiment, volume).
+* $\tau$: Kích thước cửa sổ thời gian cuộn (rolling window size), dùng để đánh giá tính lịch sử cục bộ (trong hệ thống đang thiết lập mặc định $\tau = 24$ giờ).
+* $\mu_{\tau}(X_t)$: Giá trị trung bình mẫu (Rolling Mean) của chuỗi dữ liệu $X$ được tính trong khoảng thời gian $\tau$ ngay trước thời điểm $t$.
+* $\sigma_{\tau}(X_t)$: Độ lệch chuẩn mẫu (Rolling Standard Deviation) của chuỗi $X$ được tính trong khoảng thời gian $\tau$.
+* $Z(X_t)$: Giá trị đã được chuẩn hóa (Z-score) tại thời điểm $t$, thể hiện khoảng cách từ giá trị hiện tại đến mức trung bình tính bằng số lần độ lệch chuẩn. Giá trị này không có thứ nguyên (dimensionless).
 
-  "sentiment_score": 0.85,
-  "sentiment_label": "positive",
-  "sentiment_confidence": 0.91,
-  "probabilities": {
-    "positive": 0.91,
-    "neutral": 0.06,
-    "negative": 0.03
-  },
-  "sentiment_model": "ProsusAI/finbert",
-  "scored_at": "2026-06-11T00:00:00Z"
-}
-```
+---
 
-**Collection**: `sentiment_aggregates` (khi chạy `--aggregate`)
+### Giai đoạn 2: Trích xuất Hệ số Phân kỳ ($C_t$)
+**Vấn đề:** Làm sao để định lượng được sự chênh lệch khi mạng xã hội đang "FOMO" (tích cực) nhưng giá lại đang giảm?
+**Cơ sở học thuật:** Dựa trên nền tảng của **Bollen et al. (2011)** [[DOI: 10.1016/j.jocs.2010.12.002](https://doi.org/10.1016/j.jocs.2010.12.002)] chứng minh mạng xã hội là "chỉ báo dẫn dắt" đi trước giá, và mô hình đánh giá tổng hợp F-Score của **Piotroski (2000)** [[DOI: 10.2307/2672906](https://doi.org/10.2307/2672906)], hệ thống tính toán một hệ số hội tụ/phân kỳ tổng hợp bằng cách gán trọng số có hướng. Điểm mấu chốt là **trừ đi** vectơ giá trị lợi nhuận.
 
-```json
-{
-  "coin_id": "BTC",
-  "timeframe": "1h",
-  "window_start": "2026-06-11T10:00:00Z",
-  "window_end": "2026-06-11T11:00:00Z",
-  "event_count": 245,
-  "avg_sentiment": 0.37,
-  "weighted_sentiment": 0.42,
-  "positive_count": 160,
-  "neutral_count": 50,
-  "negative_count": 35,
-  "updated_at": "2026-06-11T11:00:02Z"
-}
-```
+$$C_t = w_1 Z_{\text{sentiment}} + w_2 Z_{\text{volume}} - w_3 Z_{\text{price\_return}}$$
 
-## Cài đặt
+**Chú giải biến số:**
+* $C_t$: Hệ số phân kỳ (Divergence Coefficient) cốt lõi tại thời điểm $t$.
+* $w_1, w_2, w_3$: Các siêu tham số trọng số (Hyperparameter weights) được gán để kiểm soát mức độ đóng góp của từng chỉ báo vào điểm tổng hợp (hệ thống thiết lập mặc định $w_1=1.0, w_2=0.5, w_3=1.0$).
+* $Z_{\text{sentiment}}$: Biến thiên chuẩn hóa của cường độ tâm lý người dùng.
+* $Z_{\text{volume}}$: Biến thiên chuẩn hóa của khối lượng thảo luận xã hội.
+* $Z_{\text{price\_return}}$: Biến thiên chuẩn hóa của tỷ suất lợi nhuận giá trị tài sản. 
+*(Lưu ý dấu trừ trước $w_3$: Khi $Z_{\text{sentiment}}$ dương mạnh nhưng $Z_{\text{price\_return}}$ âm mạnh, phép trừ biến thành cộng, làm $C_t$ bùng nổ vọt lên, định lượng chính xác được sự "phân kỳ").*
 
-```bash
-cd playground/sentiment
+---
 
-# Cài dependencies
-pip install -r requirements.txt
+### Giai đoạn 3: Ánh xạ Sigmoid (Non-linear Mapping) & Hành động
+**Vấn đề:** $C_t$ nằm trong khoảng $(-\infty, +\infty)$, khó để con người diễn giải trên các bảng điều khiển (Dashboard) và khó làm đầu vào cho các mô hình AI sau này.
+**Cơ sở học thuật:** Để chuẩn bị dữ liệu đầu vào cho các kiến trúc học sâu dự báo chuỗi thời gian như Temporal Fusion Transformers theo **Lim et al. (2021)** [[DOI: 10.1016/j.ijforecast.2021.03.012](https://doi.org/10.1016/j.ijforecast.2021.03.012)], dữ liệu cần được đưa về một không gian xác suất bị chặn. 
 
-# Tạo file .env từ template
-cp .env.example .env
-# Sửa MONGODB_URI nếu cần
-```
+Hệ thống sử dụng hàm kích hoạt Logistic (Sigmoid Curve) để nén các biến động thông thường ở vùng trung tâm và kéo giãn các biến động cực đại ở hai đầu biên, ép miền giá trị về thang chuẩn $0 \dots 100$:
 
-## Cấu hình `.env`
+$$\text{Galaxy Score™} = \frac{100.0}{1.0 + e^{-C_t}}$$
 
-```env
-# MongoDB (mặc định đọc từ playground/ingest/.env)
-# MONGODB_URI=mongodb://localhost:27017
-# MONGODB_DB=crypto_mvp
+**Chú giải biến số:**
+* $\text{Galaxy Score™}$: Điểm số cuối cùng, đại diện cho sức mạnh xu hướng/phân kỳ của tài sản, nằm gọn trong tập $[0, 100]$.
+* $100.0$: Hệ số nhân đồ thị (Scaling factor) để chuyển đổi vùng $[0, 1]$ của hàm Sigmoid gốc sang thang điểm phần trăm trực quan.
+* $e$: Hằng số Euler (cơ số của logarit tự nhiên, $e \approx 2.71828$).
+* $C_t$: Hệ số phân kỳ tổng hợp lấy từ Giai đoạn 2.
 
-# Model (mặc định ProsusAI/finbert)
-SENTIMENT_MODEL=ProsusAI/finbert
-SENTIMENT_BATCH_SIZE=100
-SENTIMENT_MAX_LENGTH=256
-SENTIMENT_USE_RULE_FALLBACK=true
-```
+Tại `lib/rules.py`, các ngưỡng giới hạn (Thresholds) được thiết lập tại vùng đuôi phân phối (extreme tails) của $\text{Galaxy Score™}$ để phát tín hiệu:
+* **$\text{Score} \ge 80.0$:** Bullish Divergence $\rightarrow$ **BUY** (Tâm lý xã hội cực tốt áp đảo đà giảm giá).
+* **$\text{Score} \le 20.0$:** Bearish Divergence $\rightarrow$ **SELL** (FUD lan rộng bất chấp giá đang giữ vững).
+* **$20.0 < \text{Score} < 80.0$:** Định nghĩa trạng thái cân bằng $\rightarrow$ **HOLD**.
 
-### Model hỗ trợ
+---
 
-| Model | Mô tả | Khi nào dùng |
-|---|---|---|
-| `ProsusAI/finbert` | FinBERT — financial sentiment | **Mặc định**, phù hợp news/financial text |
-| `ElKulako/cryptobert` | CryptoBERT — crypto-specific | Twitter/Reddit crypto slang |
-| `wonrax/phobert-base-vietnamese-sentiment` | PhoBERT — tiếng Việt | Nếu event là tiếng Việt |
+## 📂 3. Hiện thực hóa bằng Mã nguồn (Data Prep & Score Core)
 
-## Cách chạy
+Sự kết hợp giữa công thức kinh tế lượng và kỹ thuật lập trình hiệu năng cao được thể hiện rõ qua lõi Polars. Thay vì tính toán từng hàng (row-by-row), toàn bộ khung toán học trên được thực thi bằng biểu thức song song (Vectorized Expressions):
 
-### Batch scoring
-
-```bash
-# Score 100 events đầu tiên
-python -m playground.sentiment.run --limit 100
-
-# Score 1000 events từ Twitter
-python -m playground.sentiment.run --limit 1000 --source twitter
-
-# Dry run (không ghi MongoDB)
-python -m playground.sentiment.run --limit 50 --dry-run
-```
-
-### Aggregate theo timeframe
-
-```bash
-# Aggregate 1 giờ
-python -m playground.sentiment.run --aggregate --timeframe 1h
-
-# Aggregate 15 phút, chỉ coin BTC
-python -m playground.sentiment.run --aggregate-only --timeframe 15m --coin BTC
-
-# Score + aggregate cùng lúc
-python -m playground.sentiment.run --limit 500 --aggregate --timeframe 1h
-```
-
-### Chạy tests
-
-```bash
-cd playground/sentiment
-python tests/test_scorer.py
-```
-
-## Output mong muốn khi chạy
-
-```
-[INFO] Connected to MongoDB: crypto_mvp
-[INFO] Input collection: mapped_events (245 events)
-[INFO] Output collection: sentiment_events
-[INFO] Loading sentiment model: ProsusAI/finbert
-Processing: 100%|██████████████████| 245/245
-[INFO] processed=232 skipped=10 errors=3 inserted=232
-```
-
-## Giải thích sentiment_score
-
-```
-Score     Label       Ý nghĩa
-─────     ─────       ───────
-+0.8..+1  positive    Rất tích cực (bullish, moon, pump)
-+0.15..+0.8 positive  Tích cực
--0.15..+0.15 neutral  Trung tính
--0.8..-0.15 negative  Tiêu cực
--1..-0.8  negative    Rất tiêu cực (crash, rekt, scam)
-```
-
-### Cách tính
-
-**Ưu tiên 1**: Alpha Vantage score có sẵn (nếu event có `extra.ticker_sentiment`)
-
-**Ưu tiên 2**: NLP model (FinBERT/CryptoBERT)
+### 3.1. Xử lý Dữ liệu thô (`lib/prep.py`)
 ```python
-sentiment_score = positive_probability - negative_probability  # [-1, +1]
-```
-
-**Ưu tiên 3**: Rule-based fallback (crypto slang: moon, rekt, bullish, bearish...)
-
-### Weighted aggregate
-
-```python
-influence = 1 + log1p(followers) + 0.1 * likes + 0.3 * retweets + 0.2 * replies
-weighted_sentiment = Σ(score_i × influence_i) / Σ(influence_i)
-```
-
-## Cấu trúc module
-
-```
-playground/sentiment/
-├── README.md            ← Hướng dẫn này
-├── run.py               ← CLI worker chính
-├── requirements.txt     ← Dependencies
-├── .env.example         ← Template config
-├── lib/
-│   ├── __init__.py
-│   ├── config.py        ← Đọc .env config
-│   ├── mongo.py         ← MongoDB CRUD + indexes
-│   ├── scorer.py        ← HuggingFace NLP scorer + AV fallback
-│   ├── rule_based.py    ← Fallback rule-based crypto slang
-│   ├── schema.py        ← Document builder
-│   ├── aggregate.py     ← Aggregate coin + timeframe
-│   └── utils.py         ← Logging setup
-└── tests/
-    ├── __init__.py
-    └── test_scorer.py   ← Unit tests
-```
-
-## Chống duplicate
-
-Module sử dụng unique index trên MongoDB để chạy lại nhiều lần không bị insert trùng:
-
-```python
-# Index 1: mapped_id + coin_id (unique, sparse)
-# Index 2: event_id + coin_id (unique, sparse)
-```
-
-Mỗi event được check `already_scored()` trước khi gọi model. Nếu đã có → skip.
-
-## Hướng mở rộng
-
-### Phase 2: FastAPI Sentiment Service
-
-```
-playground/sentiment_api/
-├── main.py              ← FastAPI app
-├── model.py             ← Shared scorer
-└── requirements.txt
-```
-
-Endpoint:
-```http
-POST /score
-Content-Type: application/json
-
-{"text": "BTC to the moon", "source": "twitter", "coin_id": "BTC"}
-```
-
-### Phase 3: Streaming
-
-- **Redpanda/Kafka consumer**: Đọc topic `mapped_events`, ghi topic `sentiment_events`
-- **Redis cache**: Cache score cho text trùng lặp
-- **TimescaleDB**: Thay MongoDB cho time-series aggregate
-
-### Phase 4: Multi-model
-
-- Ensemble nhiều model (FinBERT + CryptoBERT + rule-based)
-- Fine-tune model trên crypto-specific dataset
-- Language detection tự động → chọn model phù hợp
+def prepare_scoring_data(market_data: list[dict], social_data: list[dict]) -> pl.DataFrame:
+    df_market = pl.DataFrame(market_data).with_columns(pl.col("timestamp").str.to_datetime())
+    df_social = pl.DataFrame(social_data).with_columns(pl.col("timestamp").str.to_datetime())
+    
+    df = df_market.join(df_social, on=["timestamp", "coin_id"], how="inner").sort("timestamp")
+    
+    df = df.with_columns(
+        price_change_pct=(pl.col("close") - pl.col("close").shift(1)) / pl.col("close").shift(1)
+    )
+    return df.drop_nulls()
