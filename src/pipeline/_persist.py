@@ -48,3 +48,29 @@ async def insert_dropped_event(doc: dict) -> InsertResult:
         return "inserted"
     except DuplicateKeyError:
         return "skipped"
+
+
+async def insert_mapped_event(doc: dict) -> InsertResult:
+    """Ghi mapped_events; skip nếu trùng (parent_event_id, coin_id) — T4-02."""
+    db = await get_db()
+    try:
+        await db.mapped_events.insert_one(doc)
+        return "inserted"
+    except DuplicateKeyError:
+        logger.debug(
+            "mapped_events duplicate: %s/%s",
+            doc.get("parent_event_id"),
+            doc.get("coin_id"),
+        )
+        return "skipped"
+
+
+async def insert_sentiment_event(doc: dict) -> InsertResult:
+    """Ghi sentiment_events; skip nếu trùng sentiment_id."""
+    db = await get_db()
+    try:
+        await db.sentiment_events.insert_one(doc)
+        return "inserted"
+    except DuplicateKeyError:
+        logger.debug("sentiment_events duplicate: %s", doc.get("sentiment_id"))
+        return "skipped"

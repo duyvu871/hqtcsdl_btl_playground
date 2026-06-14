@@ -10,6 +10,8 @@ import os
 import sys
 from pathlib import Path
 
+import pytest
+
 # Repo root on sys.path (belt-and-suspenders alongside pyproject pythonpath).
 _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
@@ -20,3 +22,28 @@ if str(_REPO_ROOT) not in sys.path:
 os.environ.setdefault("MONGODB_URI", "mongodb://localhost:27018")
 os.environ.setdefault("REDIS_URL", "redis://localhost:6378/0")
 os.environ.setdefault("MONGODB_DB", "crypto_mvp")
+
+
+def pytest_addoption(parser) -> None:
+    parser.addoption(
+        "--finbert",
+        action="store_true",
+        default=False,
+        help="Chạy test sentiment dùng FinBERT (cần uv sync --extra pipeline, chậm)",
+    )
+
+
+def pytest_configure(config) -> None:
+    config.addinivalue_line(
+        "markers",
+        "finbert: sentiment tests với ProsusAI/finbert — cần pytest --finbert",
+    )
+
+
+def pytest_collection_modifyitems(config, items) -> None:
+    if config.getoption("--finbert"):
+        return
+    skip_finbert = pytest.mark.skip(reason="Bỏ qua FinBERT — chạy: pytest --finbert")
+    for item in items:
+        if "finbert" in item.keywords:
+            item.add_marker(skip_finbert)

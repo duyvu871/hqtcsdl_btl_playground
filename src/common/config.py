@@ -21,6 +21,10 @@ class Settings(BaseSettings):
     ALPHA_VANTAGE_API_KEY: str = ""
     OPENROUTER_API_KEY: str = ""
     OPENROUTER_INSIGHT_MODEL: str = "anthropic/claude-3.5-sonnet"
+    OPENROUTER_MODEL: str = ""
+
+    NER_MODE: str = "hybrid"
+    SENTIMENT_MODEL: str = "ProsusAI/finbert"
 
     REDDIT_CLIENT_ID: str = ""
     REDDIT_CLIENT_SECRET: str = ""
@@ -59,6 +63,10 @@ class Settings(BaseSettings):
     @property
     def insight_prompt_path(self) -> Path:
         return self.config_dir / "prompts" / "insight_v1.txt"
+
+    @property
+    def openrouter_model_resolved(self) -> str:
+        return self.OPENROUTER_MODEL or self.OPENROUTER_INSIGHT_MODEL
 
     @property
     def fasttext_model_path_resolved(self) -> Path:
