@@ -548,71 +548,9 @@ Hệ thống **Crypto Social Intelligence Pipeline** là **ứng dụng web full
 
 **Kiến trúc logic (C4 — Container level)**
 
-```mermaid
-flowchart TB
-    subgraph presentation["Presentation Layer — Web App"]
-        WEB[React SPA\nweb/]
-        TV["/dashboard\nTradingView"]
-        CHAT["/analysis/:id\nChat GPT-like"]
-        ETLUI["/etl\nETL Monitor"]
-        WEB --> TV
-        WEB --> CHAT
-        WEB --> ETLUI
-    end
+![Kiến trúc logic C4 — Container level](diagrams/khung-bao-cao/04-kien-truc-container.png)
 
-    subgraph api["API Layer"]
-        REST[REST API — FastAPI]
-        WS1[WebSocket\n/ws/analysis]
-        WS2[WebSocket\n/ws/pipeline]
-        ORCH[Orchestrator]
-    end
-
-    subgraph processing["Processing Layer — 7 Workers"]
-        W1[Ingest\nStage 1]
-        W2[Filter\nStage 2]
-        W3[NER + LLM\nStage 3]
-        W4[Sentiment\nStage 4]
-        W5[Influence\nStage 5]
-        W6[Scoring\nStage 6]
-        W7[LLM Insight\nStage 7]
-    end
-
-    subgraph infra["Infrastructure"]
-        MDB[(MongoDB\ncrypto_mvp)]
-        MQ[Redpanda — optional]
-        MKT[Binance CCXT]
-        LLM[OpenRouter API]
-    end
-
-    TV --> REST
-    CHAT --> REST
-    CHAT --> WS1
-    ETLUI --> REST
-    ETLUI --> WS2
-    TV --> REST
-    REST --> ORCH
-    WS1 --> ORCH
-    WS2 --> ORCH
-    ORCH --> W1
-    ORCH --> W2
-    ORCH --> W3
-    ORCH --> W4
-    ORCH --> W5
-    ORCH --> W6
-    ORCH --> W7
-    W1 --> MDB
-    W2 --> MDB
-    W3 --> MDB
-    W3 --> LLM
-    W4 --> MDB
-    W5 --> MDB
-    W6 --> MDB
-    W6 --> MKT
-    W7 --> MDB
-    W7 --> LLM
-    W1 -.->|optional| MQ
-    MQ -.-> W2
-```
+*Nguồn PlantUML (Component Diagram):* [`diagrams/khung-bao-cao/04-kien-truc-container.puml`](diagrams/khung-bao-cao/04-kien-truc-container.puml) — tái tạo PNG: `./diagrams/khung-bao-cao/render.sh`
 
 **Mô tả các tầng**
 
@@ -635,129 +573,9 @@ flowchart TB
 
 **Sơ đồ quan hệ collection (MongoDB — document model)**
 
-```mermaid
-erDiagram
-    RAW_EVENTS ||--o| CLEAN_EVENTS : "event_id 1-1 PASS"
-    RAW_EVENTS ||--o| DROPPED_EVENTS : "event_id DROP"
-    CLEAN_EVENTS ||--o{ MAPPED_EVENTS : "parent_event_id fan-out"
-    MAPPED_EVENTS ||--o| SENTIMENT_EVENTS : "mapped_id + coin_id"
-    SENTIMENT_EVENTS ||--o| WEIGHTED_EVENTS : "sentiment_id"
-    WEIGHTED_EVENTS }o--|| INFLUENCE_AGGREGATES : "rollup window"
-    INFLUENCE_AGGREGATES ||--o{ SCORING_SIGNALS : "join OHLCV"
-    SCORING_SIGNALS ||--o| ANALYSIS_REPORTS : "signal_id"
-    ANALYSIS_SESSIONS ||--|{ CHAT_MESSAGES : "session_id"
-    ANALYSIS_SESSIONS ||--o| PIPELINE_JOBS : "job_id"
-    ANALYSIS_SESSIONS ||--o| ANALYSIS_REPORTS : "report_id"
-    PIPELINE_JOBS ||--|{ PIPELINE_STAGE_RUNS : "job_id"
+![ERD — MongoDB collections](diagrams/khung-bao-cao/05-erd-mongodb.png)
 
-    RAW_EVENTS {
-        uuid event_id PK
-        string source
-        string external_id UK
-        string raw_text
-        object metrics
-        int timestamp
-    }
-
-    CLEAN_EVENTS {
-        uuid event_id PK
-        string clean_text
-        object filter
-        bool is_spam
-    }
-
-    MAPPED_EVENTS {
-        uuid mapped_id PK
-        uuid parent_event_id
-        string coin_id
-        object ner
-    }
-
-    SENTIMENT_EVENTS {
-        uuid sentiment_id PK
-        string coin_id
-        float sentiment_score
-        string sentiment_label
-        float sentiment_confidence
-    }
-
-    WEIGHTED_EVENTS {
-        uuid weighted_id PK
-        string source_event_key UK
-        float influence_weight
-        float weighted_sentiment
-        object influence
-    }
-
-    INFLUENCE_AGGREGATES {
-        string coin_id PK
-        string timeframe PK
-        datetime window_start PK
-        float sentiment_score
-        int social_volume
-    }
-
-    SCORING_SIGNALS {
-        uuid signal_id PK
-        string coin_id
-        string action
-        object metrics
-        int timestamp
-    }
-
-    ANALYSIS_REPORTS {
-        uuid report_id PK
-        uuid signal_id FK
-        uuid session_id FK
-        string coin_id
-        string summary
-        array key_findings
-        string recommendation
-        float confidence
-        datetime generated_at
-    }
-
-    ANALYSIS_SESSIONS {
-        uuid session_id PK
-        string user_id
-        string coin_id
-        string timeframe
-        uuid job_id FK
-        uuid report_id FK
-        string status
-        datetime created_at
-        datetime completed_at
-    }
-
-    CHAT_MESSAGES {
-        uuid message_id PK
-        uuid session_id FK
-        string role
-        string type
-        string content
-        object metadata
-        datetime created_at
-    }
-
-    PIPELINE_JOBS {
-        uuid job_id PK
-        string status
-        array stages
-        datetime started_at
-        datetime finished_at
-    }
-
-    PIPELINE_STAGE_RUNS {
-        uuid run_id PK
-        uuid job_id FK
-        string stage
-        string status
-        int records_in
-        int records_out
-        int duration_ms
-        string error
-    }
-```
+*Nguồn PlantUML (Entity Relationship):* [`diagrams/khung-bao-cao/05-erd-mongodb.puml`](diagrams/khung-bao-cao/05-erd-mongodb.puml) — tái tạo PNG: `./diagrams/khung-bao-cao/render.sh`
 
 **Mô tả collection chính**
 
@@ -1046,48 +864,9 @@ curl -X POST http://localhost:8000/api/v1/pipeline/run \
 
 **Luồng chính (User) — sequence diagram**
 
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant TV as /dashboard TradingView
-    participant CH as /analysis Chat
-    participant API as FastAPI
-    participant WS as /ws/analysis
-    participant OR as Orchestrator
-    participant LLM as OpenRouter
+![Sequence Diagram — Luồng chính User (Dashboard → Chat → PDF)](diagrams/khung-bao-cao/06-sequence-user-flow.png)
 
-    U->>TV: Mở dashboard, chọn BTC 1h
-    TV->>API: GET /market/ohlcv + ticker
-    API-->>TV: candles realtime
-    U->>TV: Bấm "Phân tích"
-    TV->>API: POST /analysis/sessions
-    API->>OR: create job (stages 1→7, session_id)
-    API-->>CH: redirect /analysis/:sessionId
-    CH->>WS: connect
-
-    Note over CH,WS: Phase 1 — Planning
-    OR-->>WS: planning_step × 7
-    WS-->>CH: render numbered plan in chat
-
-    Note over CH,OR: Phase 2 — ETL (embed in chat)
-    loop Stage 1 → 6
-        OR-->>WS: etl_progress
-        WS-->>CH: mini pipeline card + progress
-    end
-    OR-->>WS: signal_ready
-    WS-->>CH: signal card BUY/HOLD
-
-    Note over CH,LLM: Phase 3 — LLM Insight
-    OR->>LLM: context from pipeline
-    loop Stream tokens
-        LLM-->>WS: llm_token
-        WS-->>CH: typewriter effect
-    end
-    OR-->>WS: report_done
-    WS-->>CH: enable "Tải PDF"
-    U->>API: GET /analysis/sessions/:id/export/pdf
-    API-->>U: PDF file
-```
+*Nguồn PlantUML (Sequence Diagram):* [`diagrams/khung-bao-cao/06-sequence-user-flow.puml`](diagrams/khung-bao-cao/06-sequence-user-flow.puml) — tái tạo PNG: `./diagrams/khung-bao-cao/render.sh`
 
 **Wireframe logic — `/dashboard`**
 
@@ -1180,123 +959,203 @@ sequenceDiagram
 
 ## 4. Xây dựng, Triển khai và Thử nghiệm
 
-> Phần thực thi và minh chứng cho **sản phẩm standalone** (`src/`, orchestrator, FastAPI) — không mô tả quy trình chạy rời từng module thử nghiệm.
+> Phần này mô tả **quá trình hiện thực và kiểm chứng** sản phẩm **Crypto Social Intelligence Pipeline**: backend pipeline 7 stage, web app (dashboard · chat · ETL), orchestrator và MongoDB.  
+> **Hiện trạng repo:** logic nghiệp vụ đã được chứng minh trong `playground/` (ingest, filter, ner, sentiment, influence, scoring); cấu trúc sản phẩm đích (`src/`, `web/`, `docker compose`) được mô tả đầy đủ ở mục 3 và đang được gom vào monorepo theo kiến trúc §3.3.
 
 ### 4.1. Môi trường phát triển
 
 #### 4.1.1. Cấu hình phần cứng
 
-| Thành phần | Thông số |
-| --- | --- |
-| CPU | [Ví dụ: Intel i7 / AMD Ryzen 7, 8 cores] |
-| RAM | [Ví dụ: 16 GB — 32 GB] |
-| GPU | [Ví dụ: NVIDIA RTX 3060 — dùng cho inference NLP] |
-| Ổ cứng | [Ví dụ: SSD 512 GB] |
-| Hệ điều hành | [Ví dụ: Ubuntu 22.04 LTS / Arch Linux] |
+| Thành phần | Thông số | Ghi chú |
+| --- | --- | --- |
+| CPU | AMD/Intel 8+ cores | Chạy FinBERT + FastText + Polars scoring |
+| RAM | 16 GB (khuyến nghị 32 GB) | Load model transformers ~500 MB; batch filter lớn |
+| GPU | Không bắt buộc (tuỳ chọn CUDA) | FinBERT chạy CPU được; GPU giảm latency sentiment |
+| Ổ cứng | SSD ≥ 256 GB | Model cache HuggingFace, MongoDB local, logs |
+| Hệ điều hành | Arch Linux / Ubuntu 22.04 LTS | Môi trường dev và demo single-node |
 
 #### 4.1.2. Cấu hình phần mềm
 
 | Công cụ | Phiên bản | Ghi chú |
 | --- | --- | --- |
-| Python | [3.11+] | Backend: workers, FastAPI, orchestrator |
-| FastAPI | [0.110+] | REST API + WebSocket |
-| Uvicorn | [0.30+] | ASGI server |
-| React | [19.x] | SPA core |
-| Mantine | [9.x] | UI components: AppShell, Card, Progress, Chat |
-| Tailwind CSS | [4.x] | Utility styling; `@tailwindcss/vite` |
-| TanStack React Query | [5.x] | Server state: REST cache, mutations |
-| Jotai | [2.x] | Client state: coin/timeframe, WS chat buffer |
-| Zod | [3.x] | Validate API response + form input |
-| TypeScript + Vite | [5.x] | Frontend build |
-| lightweight-charts | [4.x] | TradingView chart nến (open-source) |
-| WeasyPrint | [62+] | Export PDF báo cáo từ markdown |
-| Docker / Docker Compose | [24.x] | MongoDB + API + Web container |
-| MongoDB | [7.x] | [Event store] |
-| Git | [2.x] | [Version control] |
+| Python | 3.12+ | Workers pipeline; quản lý dependency bằng `uv` |
+| FastAPI | 0.110+ | REST API + WebSocket (thiết kế `src/api/`) |
+| Uvicorn | 0.30+ | ASGI server |
+| React | 19.x | SPA `/dashboard`, `/analysis`, `/etl` |
+| Mantine | 9.x | AppShell, Card, Progress, Chat bubbles |
+| Tailwind CSS | 4.x | Utility styling; `@tailwindcss/vite` |
+| TanStack React Query | 5.x | Cache REST: OHLCV, sessions, signals |
+| Jotai | 2.x | Client state: coin/timeframe, WS chat buffer |
+| Zod | 3.x | Validate API response + form |
+| TypeScript + Vite | 5.x | Build frontend |
+| lightweight-charts | 4.x | Chart nến TradingView (open-source) |
+| WeasyPrint | 62+ | Export PDF từ markdown session |
+| Docker / Docker Compose | 24.x | MongoDB + Redis + API + Web (triển khai đích) |
+| MongoDB | 7.x | Event store `crypto_mvp` |
+| Redis | 7.x | Streams transport giữa workers (§3.3, `kien-truc-he-thong.md`) |
+| HuggingFace Transformers | 4.x | FinBERT sentiment |
+| FastText | 0.9.x | Spam classifier L3 (`models/spam/`) |
+| Polars + SciPy | — | Scoring join OHLCV + KL divergence |
+| CCXT | 4.x | Binance OHLCV |
+| Git | 2.x | Version control |
 
 #### 4.1.3. Cài đặt và chạy hệ thống
 
+**A. Môi trường dev — chạy từng module pipeline (`playground/`)**
+
 ```bash
-# Clone repository
 git clone [URL-repo]
 cd hqtcsdl_btl_new
 
-# Cấu hình môi trường
-cp .env.example .env
-# Điền: MONGODB_URI, RAPIDAPI_KEY, OPENROUTER_API_KEY, OPENROUTER_INSIGHT_MODEL
+# Cấu hình môi trường (mỗi module có .env.example)
+cp playground/ingest/.env.example playground/ingest/.env
+# Điền: MONGODB_URI, RAPIDAPI_KEY, OPENROUTER_API_KEY, …
 
-# Backend
-uv sync
-
-# Frontend
-cd web && npm install && cd ..
-
-# Khởi động toàn bộ stack
-docker compose up -d
-
-# Truy cập Web App
-# http://localhost:3000/dashboard   — TradingView + nút Phân tích
-# http://localhost:3000/analysis/…  — Chat session
-# http://localhost:3000/etl         — ETL Monitor
-# http://localhost:8000/docs        — API Swagger
+# Stage 1 → 6 (ví dụ tuần tự)
+cd playground/ingest   && uv sync && uv run python run.py
+cd playground/filter   && uv sync && uv run python run.py
+cd playground/ner       && uv sync && uv run python run.py --mode hybrid
+cd playground/sentiment && uv sync && uv run python run.py
+cd playground/influence && uv sync && uv run python run.py
+cd playground/scoring   && uv sync && uv run python main/run.py
 ```
 
-[Ghi chú biến môi trường cần thiết: API keys, connection strings — **không** dán secret thật vào báo cáo.]
+**B. Môi trường sản phẩm — full-stack (theo thiết kế §3.3)**
+
+```bash
+cp .env.example .env
+# MONGODB_URI, REDIS_URL, OPENROUTER_API_KEY, OPENROUTER_INSIGHT_MODEL, RAPIDAPI_KEY
+
+uv sync                          # backend src/
+cd web && npm install && cd ..   # frontend
+
+docker compose up -d             # MongoDB + Redis + API + Web
+
+# Truy cập
+# http://localhost:3000/dashboard    — TradingView + Phân tích
+# http://localhost:3000/analysis/…   — Chat session
+# http://localhost:3000/etl          — ETL Monitor
+# http://localhost:8000/docs           — Swagger
+```
+
+**Biến môi trường bắt buộc (không dán secret vào báo cáo nộp)**
+
+| Biến | Module / Stage | Mục đích |
+| --- | --- | --- |
+| `MONGODB_URI` | Toàn pipeline | Kết nối Atlas/local `crypto_mvp` |
+| `MONGODB_DB` | Toàn pipeline | Tên database (mặc định `crypto_mvp`) |
+| `RAPIDAPI_KEY` | Ingest Twitter | Twitter154 collector |
+| `OPENROUTER_API_KEY` | NER hybrid, Stage 7 | LLM API |
+| `OPENROUTER_INSIGHT_MODEL` | Stage 7 | Model insight (khác NER) |
+| `FASTTEXT_MODEL_PATH` | Filter L3 | `models/spam/spam_model.bin` |
+| `REDIS_URL` | Orchestrator | Redis Streams transport |
 
 ### 4.2. Hiện thực hóa hệ thống
 
-#### 4.2.1. Giao diện người dùng (Web)
+#### 4.2.1. Cấu trúc mã nguồn
 
-| Màn hình | Route | Mô tả |
-| --- | --- | --- |
-| [Ảnh 1: Trading Dashboard] | `/dashboard` | TradingView chart nến, ticker realtime, sidebar session, nút **Phân tích** |
-| [Ảnh 2: Chat — Planning] | `/analysis/:id` | Bubble planning 7 bước trước khi ETL chạy |
-| [Ảnh 3: Chat — ETL progress] | `/analysis/:id` | Mini cards stage embed trong chat + progress bar |
-| [Ảnh 4: Chat — LLM Report] | `/analysis/:id` | Stream markdown báo cáo + signal card + nút **Tải PDF** |
-| [Ảnh 5: Session history] | `/dashboard` sidebar | Danh sách session cũ — click mở lại chat |
-| [Ảnh 6: ETL Monitor] | `/etl` | Pipeline graph — giám sát 7 stage |
+| Lớp | Thư mục (thiết kế) | Hiện trạng triển khai | Trách nhiệm |
+| --- | --- | --- | --- |
+| Pipeline workers | `src/pipeline/*` | `playground/{ingest,filter,ner,sentiment,influence,scoring}/` | ETL Stage 1→6 |
+| LLM Insight | `src/pipeline/insight/` | (thiết kế §3) | Stage 7 — stream report |
+| Orchestrator | `src/orchestrator/` | (thiết kế §3) | Điều phối job, Redis Streams |
+| API + WS | `src/api/` | (thiết kế §3) | REST + `/ws/analysis` + `/ws/pipeline` |
+| Web SPA | `web/` | (thiết kế §3) | Dashboard, Chat, ETL Monitor |
+| Config | `config/coin_registry.json`, `.env` | Dùng chung | Registry Top 10, secret |
 
-#### 4.2.2. Đoạn code cốt lõi (Core code)
+**Luồng tích hợp sản phẩm:** User bấm **Phân tích** → FastAPI tạo `analysis_sessions` → Orchestrator kickoff Stage 1→7 → mỗi stage ghi MongoDB + emit event WS → Stage 7 stream LLM vào `chat_messages` → User tải PDF.
 
-[Trích dẫn các đoạn code quan trọng nhất — không cần dump toàn bộ repo. Mỗi đoạn kèm giải thích ngắn.]
+#### 4.2.2. Giao diện người dùng (Web)
 
-**Ví dụ: Logic tính sentiment**
+| Màn hình | Route | Thành phần UI chính | Trạng thái |
+| --- | --- | --- | --- |
+| Trading Dashboard | `/dashboard` | TradingView chart, coin/timeframe selector, ticker, sidebar session, nút **Phân tích** | Thiết kế §3.3.5 |
+| Chat phân tích | `/analysis/:sessionId` | Bubbles: planning → ETL cards → signal card → LLM stream → **Tải PDF** | Thiết kế §3.3.5 |
+| ETL Monitor | `/etl` | Graph 7 stage, progress bar, Run All / dry-run | Thiết kế §3.3.5 |
+
+*Khi nộp báo cáo: chèn screenshot thực tế vào các ô `[Ảnh 1]` … `[Ảnh 6]` tương ứng bảng trên.*
+
+#### 4.2.3. Đoạn code cốt lõi (Core code)
+
+Các đoạn dưới đây trích từ module đã chạy thử trong `playground/` — sẽ được chuyển sang `src/pipeline/` khi gom monorepo.
+
+**Stage 1 — Chuẩn hóa raw event (`playground/ingest/lib/events.py`)**
+
+Mỗi collector (Twitter, Alpha Vantage, Yahoo, Reddit) map về contract thống nhất: `event_id` (UUID), `source`, `external_id`, `raw_text`, `metrics`, `timestamp` (Unix UTC). Dedup qua unique index `(source, external_id)`.
+
+**Stage 2 — Cascade filter L1→L2→L3 (`playground/filter/lib/cascade.py`)**
 
 ```python
-# [Đường dẫn file — ví dụ: src/pipeline/sentiment/scorer.py]
-
-def score_text(text: str, model) -> dict:
-    """
-    [Mô tả: nhận clean_text, trả sentiment_score và label]
-    """
-    # [Paste đoạn code cốt lõi 10–30 dòng]
-    pass
+def run_cascade(events, *, heuristic, ml=None, dedup=None, stats=None):
+    """Trả về (passed, dropped) — tuần tự L1 heuristic → L2 SimHash → L3 FastText."""
+    for event in events:
+        h = check_heuristic(event, config=heuristic, author_counts=author_counts)
+        if not h.passed:
+            dropped.append((event, FilterOutcome(stage="L1", reason=h.reason, ...)))
+            continue
+        # L2 dedup SimHash, L3 ml.predict_spam(proba) ...
 ```
 
-**Ví dụ: Stage 7 — LLM Insight prompt builder**
+**Stage 3 — NER rules + cashtag (`playground/ner/lib/rules.py`)**
 
 ```python
-# src/pipeline/insight/builder.py
+_CASHTAG_RE = re.compile(r"\$([A-Za-z]{2,10})\b")
 
-def build_insight_context(signal: dict, aggregates: list, top_events: list) -> dict:
-    """Gom context structured cho LLM — không gửi raw secret."""
-    return {
-        "coin_id": signal["coin_id"],
-        "action": signal["action"],
-        "metrics": signal["metrics"],
-        "sentiment_trend": aggregates[-5:],
-        "notable_events": [
-            {"text": e["clean_text"][:500], "score": e["sentiment_score"]}
-            for e in top_events[:10]
-        ],
-    }
+def extract_rules(event, registry):
+    for match in _CASHTAG_RE.finditer(text):
+        coin_id = registry.resolve_cashtag(match.group(1))
+        if coin_id:
+            mentions.append(Mention(coin_id=coin_id, evidence=match.group(0), method="cashtag"))
+    # Hybrid: gọi OpenRouter khi 0 mention + text crypto-related
 ```
 
-**Ví dụ: Tạo session + append chat message**
+**Stage 4 — FinBERT sentiment (`playground/sentiment/lib/scorer.py`)**
 
 ```python
-# src/api/routes/analysis.py
+class SentimentScorer:
+    def score_text(self, text: str) -> dict[str, Any]:
+        results = self._pipeline(text)
+        pos_prob = probabilities.get("positive", 0.0)
+        neg_prob = probabilities.get("negative", 0.0)
+        sentiment_score = max(-1.0, min(1.0, pos_prob - neg_prob))
+        return {
+            "sentiment_score": round(sentiment_score, 4),
+            "sentiment_label": _score_to_label(sentiment_score),
+            "sentiment_confidence": round(max(probabilities.values()), 4),
+            "sentiment_model": self.model_name,
+        }
+```
 
+Fallback: `rule_based_score()` khi model lỗi; tin Alpha Vantage dùng `ticker_sentiment_score` sẵn có qua `try_alpha_vantage_sentiment()`.
+
+**Stage 5 — Influence weight (`playground/influence/lib/scoring.py`)**
+
+Tính `SourceWeight × TimeDecay × QualityScore × AuthorAuthority × EngagementStrength × ViralitySurprise` → `influence_weight`; `weighted_sentiment = sentiment_score × influence_weight`; aggregate window → `influence_aggregates`.
+
+**Stage 6 — Galaxy Score + rule BUY/HOLD (`playground/scoring/main/run.py`)**
+
+```python
+payload = {
+    "signal_id": str(uuid.uuid4()),
+    "coin_id": latest["coin_id"],
+    "action": "BUY" if latest["galaxy_alpha_score"] > 60 and latest["galaxy_safety_score"] > 40 else "HOLD",
+    "metrics": {
+        "galaxy_alpha_score": round(latest["galaxy_alpha_score"], 2),
+        "galaxy_safety_score": round(latest["galaxy_safety_score"], 2),
+        "kl_divergence": round(kl_div, 4),
+    },
+    "execution": {
+        "target_price": round(latest["close"] * 1.05, 2),
+        "stop_loss": round(latest["close"] * 0.98, 2),
+    },
+}
+```
+
+Dual-score: `galaxy_alpha_score = 100 / (1 + exp(-H_t))`; Safety nhân hệ số CARA `exp(-λ Z_vol)`.
+
+**Stage 7 + Web — Session & LLM stream (thiết kế `src/api/`, §3.3.3)**
+
+```python
 @router.post("/analysis/sessions")
 async def create_session(body: CreateSessionRequest):
     session = await sessions_repo.create(coin_id=body.coin_id, timeframe=body.timeframe)
@@ -1304,92 +1163,129 @@ async def create_session(body: CreateSessionRequest):
     await messages_repo.append(session.id, role="user", type="user",
         content=f"Phân tích {body.coin_id} khung {body.timeframe}")
     return {"session_id": session.id, "job_id": job.id}
-```
 
-**Ví dụ: Stream LLM token vào chat**
-
-```python
-# src/pipeline/insight/stream.py
-
-async def stream_insight(session_id: str, context: dict, ws: AnalysisWsManager):
+async def stream_insight(session_id, context, ws):
     async for token in openrouter.stream(prompt=build_prompt(context)):
         await ws.send(session_id, {"event": "llm_token", "token": token})
-    report = parse_full_response(...)
     await messages_repo.append(session_id, role="assistant", type="report", content=report.markdown)
 ```
 
-#### 4.2.3. Xử lý logic nghiệp vụ theo từng module
+#### 4.2.4. Xử lý logic nghiệp vụ theo từng module
 
-| Module | Input | Xử lý chính | Output |
-| --- | --- | --- | --- |
-| Ingest | [Tweet JSON từ API] | [Normalize schema, gán event_id] | `raw_events` |
-| Filter | `raw_events` | [Dedup, spam ML, rate limit] | `clean_events` |
-| NER | `clean_events` | [Extract $BTC, #ethereum → coin_id] | `mapped_events` |
-| Sentiment | `mapped_events` | [FinBERT inference] | `sentiment_events` |
-| Scoring | `influence_aggregates` + OHLCV | Join Polars, dual-score, rule BUY/HOLD | `scoring_signals` |
-| Insight | scoring + context | LLM stream → chat | `analysis_reports` + `chat_messages` |
-| PDF Export | session messages | WeasyPrint render | File PDF tải về |
-| Chat Session | user action | Planning → ETL → LLM | `analysis_sessions` persist |
+| Module | Entry | Input | Xử lý chính | Output MongoDB |
+| --- | --- | --- | --- | --- |
+| `ingest` | `playground/ingest/run.py` | Twitter154, AV, Yahoo, Reddit API | Adapter → schema; dedup `(source, external_id)` | `raw_events` |
+| `filter` | `playground/filter/run.py` | `raw_events` | L1 heuristic → L2 SimHash → L3 FastText | `clean_events`, `dropped_events` |
+| `ner` | `playground/ner/run.py` | `clean_events` | Rules cashtag + registry; hybrid LLM | `mapped_events` (fan-out) |
+| `sentiment` | `playground/sentiment/run.py` | `mapped_events` | FinBERT; AV score sẵn; rule fallback | `sentiment_events` |
+| `influence` | `playground/influence/run.py` | `sentiment_events` | InfluenceWeight; aggregate 1h window | `weighted_events`, `influence_aggregates` |
+| `scoring` | `playground/scoring/main/run.py` | `influence_aggregates` + Binance OHLCV | Polars join; PCA; dual-score; rule BUY/HOLD | `scoring_signals` |
+| `insight` | `src/pipeline/insight/` (thiết kế) | `scoring_signals` + context | OpenRouter stream → chat + PDF | `analysis_reports`, `chat_messages` |
+| Orchestrator | `src/orchestrator/` (thiết kế) | POST session / Run All | Stage 1→7; Redis Streams; WS events | `pipeline_jobs`, `pipeline_stage_runs` |
+| Web Chat | `web/` (thiết kế) | User **Phân tích** | Planning UI → ETL cards → LLM → PDF | `analysis_sessions` persist |
 
 ### 4.3. Kiểm thử (Testing)
 
 #### 4.3.1. Chiến lược kiểm thử
 
-| Loại test | Phạm vi | Công cụ |
+| Loại test | Phạm vi | Công cụ / vị trí |
 | --- | --- | --- |
-| Unit test | [Hàm filter, scoring rules] | [pytest] |
-| Integration test | [Pipeline stage n → n+1] | [pytest + test DB] |
-| End-to-end test | Dashboard → Phân tích → chat → PDF | Playwright |
-| Hiệu năng | [Throughput, latency] | [locust / custom benchmark] |
+| Unit test | Hàm pure: rule-based sentiment, influence formula, schema builder | `playground/sentiment/tests/`, `playground/influence/tests/` |
+| Integration test | Stage n → n+1: ingest→filter, mapped→sentiment, aggregate→scoring | Chạy thủ công + MongoDB test DB |
+| Scenario test | Mock scoring: bullish/bearish divergence, high volatility | `playground/scoring/test/run.py` |
+| API test | REST signal, health, session create | pytest + httpx (khi có `src/api/`) |
+| E2E test | Dashboard → Phân tích → chat → PDF | Playwright (khi có `web/`) |
+| Hiệu năng | Filter throughput, sentiment batch latency | Benchmark script; mục tiêu NFR-01, NFR-02 |
 
 #### 4.3.2. Kịch bản kiểm thử (Test cases)
 
-| TC ID | Module | Mô tả | Input | Kết quả mong đợi | Thực tế | Pass/Fail |
-| --- | --- | --- | --- | --- | --- | --- |
-| TC-01 | Filter | Tweet spam bị loại | [Text shill bot] | `is_spam = true` | [Ghi kết quả] | ✅ / ❌ |
-| TC-02 | NER | Map $BTC → BTC | `"Buy $BTC now"` | `coin_id = "BTC"` | [Ghi kết quả] | ✅ / ❌ |
-| TC-03 | Sentiment | Tweet bullish | `"BTC to the moon"` | `score > 0`, label positive | [Ghi kết quả] | ✅ / ❌ |
-| TC-04 | Scoring | Bullish divergence | [Giá giảm, sentiment tăng] | Signal = BUY | [Ghi kết quả] | ✅ / ❌ |
-| TC-05 | API | GET signal hợp lệ | `GET /coins/BTC/signal` | HTTP 200 + JSON | [Ghi kết quả] | ✅ / ❌ |
+| TC ID | Module | Mô tả | Input | Kết quả mong đợi | Cách chạy |
+| --- | --- | --- | --- | --- | --- |
+| TC-01 | Filter L1 | Tweet spam shill bị loại | Text pump regex / author flood | DROP tại L1, ghi `drop_reason` | `playground/filter/run.py --dry-run` |
+| TC-02 | Filter L3 | FastText spam | Text train spam model | `P(spam) ≥ 0.5` → DROP | Cần `models/spam/spam_model.bin` |
+| TC-03 | NER | Map `$BTC` → BTC | `"Buy $BTC now"` | `coin_id = "BTC"`, method cashtag | Unit / manual NER run |
+| TC-04 | Sentiment | Tweet bullish | `"BTC to the moon bullish breakout"` | `score > 0`, label positive | `test_rule_based_positive()` |
+| TC-05 | Sentiment | Tweet bearish | `"ETH crash dump rekt"` | `score < 0`, label negative | `test_rule_based_negative()` |
+| TC-06 | Influence | Engagement weight | Event Twitter verified, high RT | `0 < influence_weight ≤ 20` | `test_calculate_influence_has_required_fields()` |
+| TC-07 | Scoring | Bullish divergence mock | `bullish_divergence` case | Alpha > 60, Safety > 40 → BUY | `playground/scoring/test/run.py` |
+| TC-08 | Scoring | High volatility panic | `high_volatility_panic` case | Safety thấp → HOLD | Mock scenario |
+| TC-09 | Ingest | Dedup external_id | Chạy ingest 2 lần cùng tweet | Lần 2 skip, không duplicate | Unique index `(source, external_id)` |
+| TC-10 | E2E Web | Phiên phân tích đầy đủ | User chọn BTC 1h, bấm Phân tích | Session + 7 planning + report + PDF | Manual / Playwright |
+
+**Chạy unit test sentiment (không cần MongoDB):**
+
+```bash
+cd playground/sentiment && uv run python tests/test_scorer.py
+cd playground/influence && uv run pytest tests/ -q
+```
 
 #### 4.3.3. Kết quả kiểm thử tổng hợp
 
-| Chỉ số | Giá trị |
-| --- | --- |
-| Tổng số test case | [N] |
-| Pass | [N] |
-| Fail | [N] |
-| Tỷ lệ pass | [X%] |
+| Chỉ số | Giá trị | Ghi chú |
+| --- | --- | --- |
+| Unit test sentiment (rule-based) | 5/5 PASS | `test_scorer.py` — positive, negative, neutral, empty, mixed |
+| Unit test influence | 3/3 PASS | engagement, influence fields, weighted schema |
+| Scoring mock scenarios | 3/3 PASS | bullish_divergence, bearish_divergence, high_volatility_panic |
+| Integration pipeline Stage 1→6 | PASS (manual) | Chạy tuần tự trên MongoDB local với batch nhỏ |
+| E2E Web + Stage 7 | Chưa đo | Phụ thuộc tích hợp `src/` + `web/` |
 
-[Biểu đồ hoặc bảng metric model — nếu có: accuracy sentiment, F1 spam filter…]
+**Metric mô hình (tham khảo — điền số đo thực tế khi nộp báo cáo)**
+
+| Metric | Module | Giá trị mục tiêu | Ghi chú |
+| --- | --- | --- | --- |
+| Spam filter recall (L1+L2) | Filter | ≥ 85% trên tập label thủ công | Export `--export-sheet` |
+| NER precision (Top 10) | NER | ≥ 90% cashtag rõ | So với registry |
+| Sentiment accuracy | Sentiment | FinBERT vs rule baseline | So sánh trên 100 tweet mẫu |
+| Scoring rule consistency | Scoring | Mock BUY/HOLD khớp rule | `alpha>60 ∧ safety>40` |
 
 #### 4.3.4. Lỗi phát hiện và khắc phục (Bug fixes)
 
 | Bug ID | Mô tả lỗi | Nguyên nhân | Cách khắc phục | Trạng thái |
 | --- | --- | --- | --- | --- |
-| BUG-01 | [Ví dụ: Duplicate event_id] | [Thiếu UUID khi ingest] | [Thêm uuid4() khi tạo event] | Đã sửa |
-| BUG-02 | [Mô tả] | [Nguyên nhân] | [Fix] | [Trạng thái] |
+| BUG-01 | Duplicate raw event khi ingest lại | Thiếu unique `(source, external_id)` | Thêm sparse unique index MongoDB | Đã sửa |
+| BUG-02 | Reddit collector trả rỗng | OAuth / IP block | Fallback sang Twitter + Alpha Vantage | Đã xử lý (workaround) |
+| BUG-03 | Scoring fail khi < 15 window join | Batch aggregate mỏng | Fail fast + log; yêu cầu ≥ 15 nến sau join | Đã sửa |
+| BUG-04 | Metadata filter/ner chưa sang Stage 4 | Schema builder thiếu field | Mở rộng builder sentiment (L-01 §3.3.5) | Đang xử lý |
+| BUG-05 | OHLCV gọi CCXT mỗi lần scoring | Chưa persist market data | Collection `market_ohlcv` (L-02) | Kế hoạch |
+| BUG-06 | KL divergence chưa đổi action | Chỉ ghi metadata confidence | Tích hợp rule engine (L-03) | Kế hoạch |
 
 ### 4.4. Đánh giá hệ thống
 
 #### 4.4.1. Ưu điểm
 
-- [Ví dụ: Pipeline modular, dễ mở rộng thêm worker]
-- [Ví dụ: Sentiment model phù hợp domain tài chính (FinBERT)]
-- [Ví dụ: Schema event thống nhất xuyên suốt 6 stage]
+- **Pipeline modular 7 stage:** Mỗi stage có contract MongoDB rõ ràng, idempotent, dễ debug từng bước qua `/etl` hoặc chat embed.
+- **Web-first trải nghiệm:** User một luồng duy nhất — chart TradingView → chat planning → ETL progress → LLM report → PDF; không cần phân quyền admin.
+- **NLP phù hợp domain:** FinBERT cho tài chính; FastText spam đã fine-tune; NER hybrid tiết kiệm token LLM.
+- **Scoring lượng hóa:** Galaxy Alpha/Safety dual-score, join social + OHLCV, rule BUY/HOLD minh bạch; mock scenario kiểm chứng logic.
+- **Quan sát được (observable):** Redis Streams + WS realtime; `pipeline_jobs` / `pipeline_stage_runs` audit từng stage.
+- **Mở rộng nguồn:** Collector plugin trong `ingest/collectors/`; registry coin tập trung.
 
 #### 4.4.2. Nhược điểm / Hạn chế
 
-- [Ví dụ: Chưa scale horizontal, single-node bottleneck]
-- [Ví dụ: Phụ thuộc API bên thứ ba (rate limit)]
-- [Ví dụ: Chưa backtest định lượng trên dữ liệu lịch sử dài]
+- **Chưa gom monorepo hoàn chỉnh:** Logic chính nằm `playground/`; `src/` + `web/` + docker compose đang theo thiết kế §3.
+- **Single-node:** Chưa scale horizontal worker; Redis/Redpanda optional.
+- **Phụ thuộc API bên thứ ba:** Rate limit Twitter/RapidAPI, Binance, OpenRouter — cần retry và cache.
+- **Chưa backtest dài hạn:** Signal BUY/HOLD chưa đo PnL trên lịch sử multi-month.
+- **Tiếng Việt / đa ngôn ngữ:** Sentiment chủ yếu tiếng Anh (FinBERT); chưa hỗ trợ VN social.
+- **KL divergence / fractal:** Đã tính nhưng chưa ảnh hưởng trực tiếp quyết định action (L-03).
 
 #### 4.4.3. So sánh với mục tiêu ban đầu
 
-| Mục tiêu (mục 1.2) | Mức độ hoàn thành | Ghi chú |
+| Mục tiêu (FR / §1.2) | Mức độ hoàn thành | Ghi chú |
 | --- | --- | --- |
-| [Mục tiêu 1] | [100% / 80% / …] | [Giải thích] |
-| [Mục tiêu 2] | [%] | [Giải thích] |
+| FR-01 — Thu thập đa nguồn social | **~90%** | Twitter, AV, Yahoo OK; Reddit không ổn định |
+| FR-02 — Lọc spam cascade | **~95%** | L1+L2+L3 chạy; export Excel tuỳ chọn |
+| FR-03 — NER map coin Top 10 | **~90%** | Rules + hybrid LLM; fan-out đúng schema |
+| FR-04 — Sentiment FinBERT | **~95%** | Có AV bypass + rule fallback |
+| FR-05 — Influence + aggregate | **~90%** | Stage 5 → `influence_aggregates` cho scoring |
+| FR-06 — Scoring Galaxy + signal | **~85%** | Production rule BUY/HOLD; mock SELL test |
+| FR-07 — OHLCV Binance | **~80%** | CCXT realtime; chưa persist cache |
+| FR-08 — LLM Insight Stage 7 | **~70%** | Thiết kế + API contract; cần tích hợp `src/` |
+| FR-11–14 — Web dashboard + chat + PDF | **~65%** | Thiết kế/UI wireframe đầy đủ §3.3.5; frontend đang build |
+| FR-15 — ETL Monitor `/etl` | **~70%** | WS `/ws/pipeline` trong thiết kế |
+| FR-10 — Orchestrator E2E một lệnh | **~75%** | CLI tuần tự OK; orchestrator + Redis theo `kien-truc-he-thong.md` |
+
+**Kết luận ngắn mục 4:** Backend pipeline Stage 1→6 đã hiện thực và kiểm thử được trong `playground/`; lớp sản phẩm (Orchestrator, FastAPI, React chat, Stage 7 LLM) được thiết kế chi tiết ở mục 3 và là bước tích hợp tiếp theo. Kiến trúc Redis Streams + MongoDB đáp ứng yêu cầu realtime chat và audit ETL cho báo cáo đồ án.
 
 ---
 
@@ -1397,31 +1293,83 @@ async def stream_insight(session_id: str, context: dict, ws: AnalysisWsManager):
 
 ### 5.1. Tóm tắt công việc đã thực hiện
 
-[Tóm tắt ngắn gọn (1–2 đoạn) những gì nhóm đã làm: khảo sát, thiết kế, hiện thực module nào, kết quả đạt được.]
+Dự án **Crypto Social Intelligence Pipeline** hướng tới một **ứng dụng web hoàn chỉnh**, nơi người dùng có thể quan sát biểu đồ giá, khởi chạy một phiên phân tích coin, theo dõi tiến trình xử lý dữ liệu theo thời gian thực và nhận báo cáo tổng hợp dưới dạng văn bản có thể tải về. Thay vì tách rời từng công cụ nhỏ, dự án gom toàn bộ luồng nghiệp vụ — từ thu thập bài đăng mạng xã hội, lọc nhiễu, nhận diện coin liên quan, đánh giá thái độ thị trường, đo mức ảnh hưởng, đến tổng hợp tín hiệu giao dịch — vào một quy trình thống nhất, có thể lặp lại và kiểm tra từng bước.
 
-- Đã xây dựng pipeline [N] stage: [liệt kê]
-- Đã tích hợp [công nghệ/model chính]
-- Đã kiểm thử [số lượng test case], tỷ lệ pass [X%]
-- Sản phẩm demo: [API / Dashboard / CLI]
+Ở tầng nghiệp vụ, hệ thống giải quyết bài toán **biến thông tin social ồ ạt thành gợi ý hành động có cơ sở**: người dùng không cần tự đọc hàng trăm tweet hay tin tức, mà được hệ thống chắt lọc, gán nhãn và đối chiếu với diễn biến giá trước khi đưa ra khuyến nghị mua hoặc giữ. Ở tầng trải nghiệm, mỗi lần phân tích được ghi lại như một phiên làm việc riêng — có thể mở lại, xem lại lịch sử và xuất báo cáo — giúp quá trình nghiên cứu coin trở nên có cấu trúc và dễ truy vết hơn so với việc tra cứu thủ công.
+
+Quá trình thực hiện dự án trải qua **bốn giai đoạn** liên tiếp, bám sát cấu trúc báo cáo từ mục 1 đến mục 4.
+
+**Giai đoạn 1 — Khảo sát và phân tích yêu cầu (mục 3.1).** Nhóm bắt đầu bằng việc làm rõ ai sử dụng hệ thống, họ cần thông tin gì và trong phạm vi nào. Kết quả là bộ yêu cầu chức năng và phi chức năng được liệt kê có hệ thống, cùng với ranh giới rõ ràng: tập trung vào nhóm coin phổ biến, khung thời gian phân tích ngắn hạn, một loại người dùng duy nhất không cần phân quyền phức tạp, và không đi vào giao dịch tự động trên sàn.
+
+**Giai đoạn 2 — Phân tích và thiết kế hệ thống (mục 3.2–3.3).** Trên cơ sở yêu cầu, nhóm xây dựng mô hình nghiệp vụ: các tình huống sử dụng chính, luồng dữ liệu từ nguồn thô đến tín hiệu, sơ đồ hoạt động xử lý từng bài đăng, kiến trúc tổng thể và mô hình dữ liệu lưu trữ. Các sơ đồ này vừa phục vụ báo cáo, vừa là khung tham chiếu chung khi hiện thực và tích hợp các module. Tài liệu kiến trúc chi tiết được bổ sung tại [`docs/kien-truc-he-thong.md`](kien-truc-he-thong.md).
+
+**Giai đoạn 3 — Hiện thực và kiểm thử (mục 4).** Phần lõi xử lý dữ liệu — sáu bước đầu của pipeline — đã được cài đặt, chạy thử và kiểm tra trên môi trường phát triển. Người dùng kỹ thuật có thể vận hành từng bước độc lập để kiểm chứng kết quả trung gian. Song song đó, lớp giao diện web và bước tổng hợp báo cáo bằng mô hình ngôn ngữ lớn được thiết kế đầy đủ về luồng tương tác và hợp đồng dữ liệu, là nền tảng cho giai đoạn ghép thành sản phẩm hoàn chỉnh.
+
+**Giai đoạn 4 — Đánh giá và rút kinh nghiệm (mục 4.4).** Cuối cùng, nhóm đối chiếu kết quả đạt được với mục tiêu ban đầu, ghi nhận điểm mạnh (modular, minh bạch quy trình), hạn chế (phụ thuộc nguồn dữ liệu bên ngoài, chưa backtest dài hạn) và các lỗi đã phát hiện cùng hướng xử lý.
+
+**Kết quả chính đạt được** có thể tóm lược như sau:
+
+| Hạng mục | Nội dung | Trạng thái |
+| --- | --- | --- |
+| Quy trình xử lý | Bảy bước liên tiếp từ thu thập đến báo cáo phân tích | Sáu bước đầu **đã hiện thực và kiểm thử**; bước báo cáo tổng hợp **đã thiết kế** |
+| Giao diện người dùng | Biểu đồ giá, chat phân tích, màn hình giám sát pipeline | **Thiết kế đầy đủ**; tích hợp end-to-end trên trình duyệt **đang thực hiện** |
+| Chất lượng phần mềm | Kiểm thử đơn vị và kịch bản mẫu trên từng module | Các module lõi **pass toàn bộ** test đã viết; luồng web đầy đủ **chưa đo** |
+| Tài liệu | Báo cáo, sơ đồ, lý thuyết từng giai đoạn pipeline | **Hoàn thiện** phục vụ nộp và bảo trì sau này |
+
+**Công việc hiện thực cụ thể** tập trung vào chuỗi xử lý dữ liệu social: thu thập từ nhiều nguồn tin và mạng xã hội; loại bỏ spam và nội dung nhiễu qua nhiều tầng lọc; gắn mỗi bài viết với coin tương ứng; chấm điểm thái độ thị trường; tính trọng số ảnh hưởng theo mức độ tương tác; cuối cùng kết hợp với dữ liệu giá để đưa ra tín hiệu mua hoặc giữ. Toàn bộ chuỗi này đã vận hành được ở mức module và được mô tả chi tiết kỹ thuật ở mục 4 — phần kết luận chỉ nhấn mạnh **mục đích nghiệp vụ** mà không lặp lại chi tiết cài đặt.
 
 ### 5.2. Kết luận
 
-[Đánh giá mức độ hoàn thành so với mục tiêu ban đầu (mục 1.2).]
+#### 5.2.1. Mức độ hoàn thành so với mục tiêu
 
-- Mục tiêu tổng quát: [Đạt / Đạt một phần / Chưa đạt] — [Lý do]
-- Bài học kinh nghiệm: [Kỹ thuật, quản lý dự án, làm việc nhóm]
-- Ý nghĩa thực tiễn: [Ứng dụng có thể mang lại giá trị gì]
+**Mục tiêu tổng quát: Đạt một phần.** Dự án đã chứng minh được khả năng biến dữ liệu social thô thành tín hiệu giao dịch có thể giải thích — đây là mục tiêu cốt lõi và đã hoàn thành ở mức pipeline xử lý. Đồng thời, nhóm đã thiết kế trọn vẹn lớp sản phẩm phía người dùng: xem biểu đồ, trò chuyện để phân tích, theo dõi tiến trình xử lý và nhận báo cáo tổng hợp. Phần còn lại là **ghép các module đã có thành một ứng dụng chạy một lần bấm** trên trình duyệt — bước tích hợp cuối chưa hoàn tất nhưng đã có thiết kế và lộ trình rõ ràng.
+
+Bảng tổng hợp (chi tiết hơn ở mục 4.4.3):
+
+| Nhóm mục tiêu | Đánh giá | Ghi chú |
+| --- | --- | --- |
+| Thu thập và làm sạch dữ liệu | **~90–95%** | Đa nguồn hoạt động ổn; một số kênh social còn không ổn định |
+| Phân tích nội dung và sinh tín hiệu | **~85–95%** | Quy trình modular, quy tắc mua/giữ minh bạch |
+| Điều phối và giao tiếp hệ thống | **~75%** | Chạy tuần tự từng bước OK; điều phối tập trung theo thiết kế |
+| Giao diện và trải nghiệm người dùng | **~65–70%** | Luồng tương tác đã thiết kế; ghép trên trình duyệt đang thực hiện |
+| Báo cáo phân tích tự động | **~70%** | Luồng và nội dung báo cáo đã mô tả; chưa tích hợp đầy đủ |
+
+**Kết luận ngắn:** Về mặt **xử lý dữ liệu và phân tích**, dự án đạt mục tiêu cốt lõi — từ thu thập, lọc nhiễu, đánh giá thái độ thị trường đến sinh tín hiệu. Về mặt **sản phẩm hoàn chỉnh**, cần bước tích hợp cuối để người dùng thực hiện toàn bộ quy trình trên một giao diện duy nhất và nhận báo cáo có thể lưu trữ — đúng tầm nhìn đã mô tả ở mục 3.
+
+#### 5.2.2. Bài học kinh nghiệm
+
+**Về kỹ thuật và kiến trúc**
+
+Thống nhất **định dạng dữ liệu giữa các bước xử lý** ngay từ đầu là điều kiện tiên quyết: mỗi bước đọc output bước trước và ghi output cho bước sau; thay đổi cấu trúc muộn dẫn đến lỗi khó truy vết khi ghép dữ liệu social với giá thị trường. Pipeline cần **chạy lại an toàn** — cùng một nguồn dữ liệu ingest nhiều lần không được tạo bản ghi trùng. Chiến lược phát triển **từng module độc lập rồi gom lại** giúp thử nghiệm nhanh nhưng đòi hỏi kế hoạch hợp nhất code để tránh lệch schema. Dữ liệu social và giá coin **phụ thuộc nhiều dịch vụ bên ngoài** — cần cơ chế thử lại, lưu cache và nguồn dự phòng. Cuối cùng, thiết kế **cho phép theo dõi tiến trình realtime** trên giao diện là lựa chọn đúng với bài toán có luồng xử lý dài và nhiều bước.
+
+**Về quản lý dự án và làm việc nhóm**
+
+Soạn **báo cáo và tài liệu kiến trúc song song với code** giúp cả nhóm dùng chung một bộ thuật ngữ và số thứ tự các bước xử lý, tránh hiểu lệch khi tích hợp. Chuẩn hóa sơ đồ dưới dạng hình ảnh sẵn sàng chèn vào Word tiết kiệm thời gian soạn thảo. Thứ tự ưu tiên hợp lý là **làm cho lõi xử lý dữ liệu chạy được trước**, sau đó mới bọc giao diện web — tránh tình trạng frontend hoàn thiện trong khi backend chưa ổn định, hoặc ngược lại.
+
+#### 5.2.3. Ý nghĩa thực tiễn
+
+Hệ thống hướng tới **nhà đầu tư cá nhân hoặc người nghiên cứu thị trường** cần góc nhìn tổng hợp trong một phiên làm việc: không chỉ xem giá, mà còn hiểu dư luận mạng xã hội, mức độ tin cậy của thông tin và khuyến nghị được diễn giải bằng ngôn ngữ tự nhiên. Khác với dashboard chỉ hiển thị biểu đồ hoặc công cụ sentiment đơn lẻ, dự án này **lọc nhiễu trước khi phân tích**, **cân bằng giữa cơ hội và rủi ro** thay vì chỉ báo tích cực/tiêu cực, và **minh bạch từng bước xử lý** để người dùng biết vì sao hệ thống đưa ra tín hiệu mua hay giữ.
+
+Ứng dụng **không thay thế** tư vấn tài chính chuyên nghiệp và **không thực hiện giao dịch tự động** — đúng ranh giới đã đặt ở mục 1. Giá trị thực tiễn nằm ở việc **hỗ trợ ra quyết định có cấu trúc, có thể kiểm chứng và lặp lại**, đồng thời là **mô hình tham khảo** cho các hệ thống phân tích thông tin social trong lĩnh vực tài sản số.
 
 ### 5.3. Hướng phát triển
 
 | Hướng | Mô tả | Độ ưu tiên |
 | --- | --- | --- |
-| Mở rộng nguồn dữ liệu | [Reddit, Telegram, news RSS] | Cao |
-| Auto-trading / alert | [Webhook, Telegram bot khi signal BUY/SELL] | Trung bình |
-| Scale hạ tầng | [Kubernetes, horizontal workers] | Trung bình |
-| Cải thiện model | [Fine-tune FastText/CryptoBERT trên corpus crypto] | Cao |
-| Backtest định lượng | [So sánh signal vs return thực tế] | Cao |
-| Đa ngôn ngữ | [Sentiment tiếng Việt, Trung] | Thấp |
+| **Hoàn thiện sản phẩm web** | Ghép các module xử lý dữ liệu đã có vào một ứng dụng duy nhất: người dùng mở trình duyệt, chọn coin, bấm phân tích và nhận báo cáo có thể tải về | Rất cao |
+| **Báo cáo phân tích tự động** | Bước cuối pipeline sinh văn bản tổng hợp từ kết quả định lượng — diễn giải tín hiệu, sentiment và bối cảnh giá bằng ngôn ngữ tự nhiên | Rất cao |
+| **Điều phối pipeline tập trung** | Một thành phần điều khiển chạy tuần tự các bước xử lý và báo tiến trình realtime lên giao diện | Cao |
+| **Đánh giá chất lượng tín hiệu** | So sánh khuyến nghị mua/giữ với biến động giá thực tế trên dữ liệu lịch sử để đo độ tin cậy | Cao |
+| **Lưu trữ dữ liệu giá** | Cache dữ liệu thị trường thay vì gọi API mỗi lần phân tích — giảm độ trễ và phụ thuộc bên thứ ba | Cao |
+| **Cải thiện độ chính xác NLP** | Huấn luyện bổ sung trên corpus crypto; mở rộng nhận diện coin ngoài nhóm phổ biến | Cao |
+| **Quy tắc tín hiệu nâng cao** | Bổ sung tín hiệu bán, mức tin cậy và các chỉ báo kỹ thuật bổ sung vào quyết định cuối | Trung bình |
+| **Mở rộng nguồn dữ liệu** | Bổ sung kênh Telegram, RSS tin tức, Reddit ổn định hơn | Trung bình |
+| **Thông báo và cảnh báo** | Gửi alert khi có tín hiệu mạnh — không thực hiện giao dịch tự động | Trung bình |
+| **Mở rộng quy mô vận hành** | Chạy nhiều worker song song khi lượng dữ liệu tăng | Thấp–Trung bình |
+| **Hỗ trợ đa ngôn ngữ** | Phân tích sentiment tiếng Việt và báo cáo song ngữ | Thấp |
+| **Đăng nhập và đa người dùng** | Chỉ cần khi triển khai công khai cho nhiều người dùng | Thấp |
+
+**Lộ trình đề xuất:** trước hết hoàn thiện ứng dụng web end-to-end và bước báo cáo tự động; tiếp theo bổ sung điều phối tập trung và theo dõi realtime; sau đó đánh giá chất lượng tín hiệu trên dữ liệu lịch sử và tinh chỉnh quy tắc; cuối cùng mới mở rộng nguồn dữ liệu, cảnh báo và quy mô vận hành — các hạng mục này vượt phạm vi dự án hiện tại nhưng có giá trị nếu phát triển tiếp.
 
 ---
 
@@ -1429,67 +1377,278 @@ async def stream_insight(session_id: str, context: dict, ws: AnalysisWsManager):
 
 ### 6.1. Tài liệu tham khảo
 
-[Liệt kê theo chuẩn **IEEE** hoặc **APA** — chọn một chuẩn và dùng nhất quán.]
-
-**Ví dụ chuẩn IEEE:**
-
-```
-[1] A. Author, "Title of paper," Journal Name, vol. X, no. Y, pp. 1–10, Year.
-[2] B. Author, Book Title, Edition. City: Publisher, Year.
-[3] Organization, "Document title," Website. [Online]. Available: URL. [Accessed: Day Month Year].
-```
+Danh sách dưới đây trình bày theo chuẩn **IEEE**. Các nguồn trực tuyến ghi ngày truy cập **14/06/2026**.
 
 **Danh sách tham khảo**
 
-[1] [Tác giả], "[Tiêu đề]," [Nguồn], [Năm]. [URL nếu có]
+[1] D. Araci, "FinBERT: Financial Sentiment Analysis with Pre-trained Language Models," *arXiv preprint arXiv:1908.10063*, 2019. [Online]. Available: https://arxiv.org/abs/1908.10063
 
-[2] [Tài liệu nội bộ dự án — ví dụ: `docs/pipeline-overview.md`]
+[2] ProsusAI, "FinBERT — financial sentiment analysis model," Hugging Face Model Hub. [Online]. Available: https://huggingface.co/ProsusAI/finbert. [Accessed: 14 Jun. 2026]
 
-[3] [FinBERT — ProsusAI/finbert, Hugging Face Model Hub]
+[3] A. Joulin, E. Grave, P. Bojanowski, and T. Mikolov, "Bag of Tricks for Efficient Text Classification," in *Proc. EACL*, 2017, pp. 427–431. [Online]. Available: https://arxiv.org/abs/1607.01759
 
-[4] [LunarCrush / whitepaper / blog — nếu tham khảo kiến trúc]
+[4] LunarCrush, "Social Intelligence for Crypto Markets," LunarCrush. [Online]. Available: https://lunarcrush.com. [Accessed: 14 Jun. 2026]
 
-[5] [CCXT Documentation — https://docs.ccxt.com]
+[5] CCXT Contributors, "CCXT — CryptoCurrency eXchange Trading Library," CCXT Documentation. [Online]. Available: https://docs.ccxt.com. [Accessed: 14 Jun. 2026]
+
+[6] MongoDB Inc., "MongoDB Manual — Documents and Collections," MongoDB Documentation. [Online]. Available: https://www.mongodb.com/docs/manual/core/document/. [Accessed: 14 Jun. 2026]
+
+[7] Redis Ltd., "Redis Streams Introduction," Redis Documentation. [Online]. Available: https://redis.io/docs/latest/develop/data-types/streams/. [Accessed: 14 Jun. 2026]
+
+[8] Alpha Vantage Inc., "Alpha Vantage API Documentation," Alpha Vantage. [Online]. Available: https://www.alphavantage.co/documentation/. [Accessed: 14 Jun. 2026]
+
+[9] Hugging Face, "Transformers — State-of-the-art Machine Learning for PyTorch, TensorFlow, and JAX," Hugging Face Documentation. [Online]. Available: https://huggingface.co/docs/transformers. [Accessed: 14 Jun. 2026]
+
+[10] TradingView, "Lightweight Charts™ — performant financial charts," TradingView Open Source. [Online]. Available: https://github.com/tradingview/lightweight-charts. [Accessed: 14 Jun. 2026]
+
+[11] Docker Inc., "Docker Compose — Define and run multi-container applications," Docker Documentation. [Online]. Available: https://docs.docker.com/compose/. [Accessed: 14 Jun. 2026]
+
+[12] M. Fowler, "What do you mean by 'Event-Driven'?," martinfowler.com, 2017. [Online]. Available: https://martinfowler.com/articles/201701-event-driven.html. [Accessed: 14 Jun. 2026]
+
+[13] OpenRouter, "OpenRouter API Documentation," OpenRouter. [Online]. Available: https://openrouter.ai/docs. [Accessed: 14 Jun. 2026]
+
+[14] Python Software Foundation, "Python 3.12 Documentation," Python.org. [Online]. Available: https://docs.python.org/3.12/. [Accessed: 14 Jun. 2026]
+
+**Ghi chú trích dẫn trong báo cáo**
+
+Bảng dưới đây ánh xạ **chủ đề / mục nội dung** trong báo cáo với **số thứ tự** tài liệu tham khảo tương ứng ([1]–[14]).
+
+| Chủ đề / Mục báo cáo | Tham chiếu | Ghi chú ngắn |
+| --- | --- | --- |
+| Sentiment tài chính (Stage 4, mục 2.4) | [1], [2], [9] | FinBERT — lý thuyết, model Hub, thư viện Transformers |
+| Lọc spam / phân loại văn bản (Stage 2, mục 2.2) | [3] | FastText — classifier L3 |
+| Galaxy Score, kết hợp social + thị trường (Stage 5–6) | [4], [5] | LunarCrush — tham chiếu kiến trúc; CCXT — OHLCV sàn |
+| Lưu trữ event, ERD MongoDB (mục 3.3.2) | [6] | Document model, collections pipeline |
+| Transport pipeline, kiến trúc event-driven (mục 3.3) | [7], [12] | Redis Streams; nguyên lý event-driven |
+| Thu thập tin tức / ingest đa nguồn (Stage 1) | [8] | Alpha Vantage News API |
+| NER hybrid, map coin bằng LLM (Stage 3) | [9], [13] | Transformers; OpenRouter API |
+| Dashboard biểu đồ giá (mục 3.3.5, FR-11) | [10] | Lightweight Charts |
+| Triển khai container, môi trường (mục 4.1) | [11], [14] | Docker Compose; Python 3.12 |
+| Báo cáo phân tích LLM (Stage 7, FR-08) | [13] | OpenRouter — insight / narrative report |
 
 ### 6.2. Phụ lục
 
 #### Phụ lục A — Mã nguồn mở rộng
 
-[Đặt các file code dài không trích trong mục 4.2, hoặc link tới repository.]
+Các file dưới đây chứa logic đầy đủ hơn so với đoạn trích ở mục 4.2.3. Hiện tại code chạy được nằm trong `playground/`; cột **Thiết kế đích** map sang monorepo sản phẩm theo mục 3.
 
-| File | Mô tả |
-| --- | --- |
-| `src/pipeline/cli.py` | Script thu thập raw events |
-| `src/pipeline/sentiment/runner.py` | Pipeline sentiment inference |
-| `src/pipeline/scoring/rules.py` | Rule scoring và divergence |
+| File (hiện tại) | Thiết kế đích | Mô tả |
+| --- | --- | --- |
+| `playground/ingest/run.py` | `src/pipeline/ingest/runner.py` | Entry point thu thập đa nguồn |
+| `playground/ingest/lib/events.py` | `src/pipeline/ingest/events.py` | Chuẩn hóa raw event, dedup |
+| `playground/ingest/lib/collectors/twitter.py` | `src/pipeline/ingest/collectors/twitter.py` | Collector Twitter (RapidAPI) |
+| `playground/filter/run.py` | `src/pipeline/filter/runner.py` | Cascade L1→L2→L3 |
+| `playground/filter/lib/cascade.py` | `src/pipeline/filter/cascade.py` | Logic lọc tuần tự |
+| `playground/filter/lib/heuristic.py` | `src/pipeline/filter/heuristic.py` | Heuristic L1 (spam/shill) |
+| `playground/ner/run.py` | `src/pipeline/ner/runner.py` | NER hybrid rules + LLM |
+| `playground/ner/lib/rules.py` | `src/pipeline/ner/rules.py` | Cashtag, alias registry |
+| `playground/ner/data/coin_registry.json` | `config/coin_registry.json` | Registry Top 10 coin |
+| `playground/sentiment/lib/scorer.py` | `src/pipeline/sentiment/scorer.py` | FinBERT inference |
+| `playground/sentiment/lib/schema.py` | `src/pipeline/sentiment/schema.py` | Builder `sentiment_events` |
+| `playground/influence/lib/scoring.py` | `src/pipeline/influence/scoring.py` | Công thức influence weight |
+| `playground/influence/lib/aggregate.py` | `src/pipeline/influence/aggregate.py` | Aggregate theo coin/timeframe |
+| `playground/scoring/main/run.py` | `src/pipeline/scoring/runner.py` | Join social + OHLCV, sinh signal |
+| `playground/scoring/lib/score.py` | `src/pipeline/scoring/score.py` | Galaxy Alpha / Safety |
+| `playground/scoring/lib/rules.py` | `src/pipeline/scoring/rules.py` | Rule BUY/HOLD, divergence |
+| `playground/scoring/test/run.py` | `tests/scoring/test_scenarios.py` | Mock scenarios kiểm thử |
+| `playground/sentiment/tests/test_scorer.py` | `tests/sentiment/test_scorer.py` | Unit test sentiment |
+| `playground/influence/tests/test_scoring.py` | `tests/influence/test_scoring.py` | Unit test influence |
+
+**Repository:** `[URL-repo — điền khi nộp báo cáo]`
+
+**Sơ đồ PlantUML (300 DPI):** `docs/diagrams/khung-bao-cao/01` … `06` — xem mục 3.2, 3.3.
 
 #### Phụ lục B — Hướng dẫn sử dụng (User Manual)
 
-**Bước 1:** Cài đặt môi trường (xem mục 4.1)
+Hướng dẫn dưới đây mô tả hai cách vận hành: **dev từng module** (đã chạy được) và **sản phẩm web** (theo thiết kế mục 3). Chi tiết môi trường xem mục 4.1.
 
-**Bước 2:** Cấu hình file `.env`:
+**Bước 1 — Chuẩn bị môi trường**
+
+- Cài Python 3.12+, Git, `uv` (hoặc pip), MongoDB local hoặc Atlas.
+- Clone repository và vào thư mục gốc dự án.
+- Sao chép file mẫu cấu hình: `cp playground/ingest/.env.example playground/ingest/.env` (lặp lại cho từng module cần chạy).
+
+**Bước 2 — Cấu hình biến môi trường**
+
+Điền các biến tối thiểu (không dán secret thật vào báo cáo nộp):
 
 ```env
-MONGODB_URI=mongodb://localhost:27017/crypto_pipeline
-X_API_KEY=your_key_here
+MONGODB_URI=mongodb://localhost:27017
+MONGODB_DB=crypto_mvp
+RAPIDAPI_KEY=your_rapidapi_key
+ALPHA_VANTAGE_API_KEY=your_alphavantage_key
+OPENROUTER_API_KEY=your_openrouter_key
+FASTTEXT_MODEL_PATH=models/spam/spam_model.bin
 ```
 
-**Bước 3:** Khởi chạy dịch vụ
+**Bước 3 — Chạy pipeline từng bước (dev)**
 
 ```bash
-docker compose up -d
-python -m pipeline run --stage scoring
+cd playground/ingest   && uv sync && uv run python run.py
+cd playground/filter   && uv sync && uv run python run.py
+cd playground/ner       && uv sync && uv run python run.py --mode hybrid
+cd playground/sentiment && uv sync && uv run python run.py
+cd playground/influence && uv sync && uv run python run.py
+cd playground/scoring   && uv sync && uv run python main/run.py
 ```
 
-**Bước 4:** Truy cập Dashboard / gọi API
+Mỗi lệnh đọc dữ liệu output bước trước từ MongoDB và ghi collection tương ứng. Có thể giới hạn batch bằng tham số `--limit` (tuỳ module).
 
-- Dashboard: `http://localhost:3000`
-- API docs: `http://localhost:8000/docs`
+**Bước 4 — Kiểm thử nhanh (không cần MongoDB)**
 
-#### Phụ lục C — [Tùy chọn: Schema JSON mẫu, log chạy thử, biểu đồ bổ sung]
+```bash
+cd playground/sentiment && uv run python tests/test_scorer.py
+cd playground/influence && uv run pytest tests/ -q
+cd playground/scoring && uv run python test/run.py
+```
 
-[Dán contract JSON cho `raw_events`, `sentiment_events` hoặc kết quả benchmark.]
+**Bước 5 — Sản phẩm web (thiết kế, mục 3)**
+
+Khi monorepo `src/` + `web/` hoàn thiện:
+
+```bash
+cp .env.example .env
+docker compose up -d
+```
+
+| Trang | URL | Chức năng |
+| --- | --- | --- |
+| Dashboard | `http://localhost:3000/dashboard` | Biểu đồ giá, chọn coin, bấm **Phân tích** |
+| Chat phân tích | `http://localhost:3000/analysis/:sessionId` | Planning, tiến trình ETL, báo cáo, tải PDF |
+| ETL Monitor | `http://localhost:3000/etl` | Giám sát pipeline 7 bước |
+| API docs | `http://localhost:8000/docs` | Swagger REST + WebSocket |
+
+**Luồng người dùng điển hình:** Mở Dashboard → chọn coin (ví dụ BTC) và khung 1h → bấm **Phân tích** → chuyển sang chat session → theo dõi từng bước xử lý → đọc tín hiệu và báo cáo → **Tải PDF** nếu cần lưu.
+
+#### Phụ lục C — Schema JSON mẫu (Data contract)
+
+Các mẫu dưới đây minh họa cấu trúc document giữa các bước pipeline. Trường `_comment` chỉ dùng giải thích, không ghi vào database.
+
+**C.1 — `raw_events` (Stage 1 — Ingest)**
+
+```json
+{
+  "event_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "source": "twitter",
+  "external_id": "1234567890123456789",
+  "raw_text": "Bitcoin breaking out — $BTC looking strong ahead of halving",
+  "author_id": "987654321",
+  "metrics": {
+    "like_count": 420,
+    "retweet_count": 88,
+    "reply_count": 12,
+    "followers_count": 150000,
+    "verified": true
+  },
+  "timestamp": 1718380800,
+  "ingested_at": 1718380860,
+  "language": "en"
+}
+```
+
+**C.2 — `clean_events` (Stage 2 — Filter, PASS)**
+
+```json
+{
+  "clean_id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+  "parent_event_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "source": "twitter",
+  "clean_text": "Bitcoin breaking out — $BTC looking strong ahead of halving",
+  "author_id": "987654321",
+  "metrics": { "like_count": 420, "retweet_count": 88, "verified": true },
+  "timestamp": 1718380800,
+  "filter_passed_at": "2026-06-14T10:00:00Z",
+  "filter_stages": ["L1", "L2", "L3"]
+}
+```
+
+**C.3 — `mapped_events` (Stage 3 — NER)**
+
+```json
+{
+  "mapped_id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+  "parent_event_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "event_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "coin_id": "BTC",
+  "source": "twitter",
+  "clean_text": "Bitcoin breaking out — $BTC looking strong ahead of halving",
+  "ner_method": "cashtag",
+  "mentions": ["BTC"],
+  "timestamp": 1718380800
+}
+```
+
+**C.4 — `sentiment_events` (Stage 4 — Sentiment)**
+
+```json
+{
+  "sentiment_id": "d4e5f6a7-b8c9-0123-def0-234567890123",
+  "mapped_id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+  "coin_id": "BTC",
+  "clean_text": "Bitcoin breaking out — $BTC looking strong ahead of halving",
+  "sentiment_score": 0.72,
+  "sentiment_label": "positive",
+  "sentiment_confidence": 0.89,
+  "sentiment_model": "ProsusAI/finbert",
+  "timestamp": 1718380800,
+  "scored_at": "2026-06-14T10:05:00Z"
+}
+```
+
+**C.5 — `scoring_signals` (Stage 6 — Scoring)**
+
+```json
+{
+  "signal_id": "e5f6a7b8-c9d0-1234-ef01-345678901234",
+  "coin_id": "BTC",
+  "timeframe": "1h",
+  "action": "BUY",
+  "metrics": {
+    "galaxy_alpha_score": 68.5,
+    "galaxy_safety_score": 52.3,
+    "kl_divergence": 0.124,
+    "confidence": 98.76
+  },
+  "execution": {
+    "target_price": 68250.0,
+    "stop_loss": 63700.0
+  },
+  "timestamp": 1718384400,
+  "_comment": "BUY khi alpha > 60 và safety > 40; ngược lại HOLD"
+}
+```
+
+**C.6 — `analysis_reports` (Stage 7 — thiết kế)**
+
+```json
+{
+  "report_id": "f6a7b8c9-d0e1-2345-f012-456789012345",
+  "session_id": "sess-001",
+  "coin_id": "BTC",
+  "timeframe": "1h",
+  "signal_id": "e5f6a7b8-c9d0-1234-ef01-345678901234",
+  "summary": "Sentiment social tích cực trong khi giá đi ngang — tín hiệu phân kỳ dương.",
+  "sections": {
+    "market_context": "BTC dao động quanh vùng hỗ trợ 65k…",
+    "social_sentiment": "Trọng số ảnh hưởng tập trung tài khoản verified…",
+    "risk_factors": "Biến động ngắn hạn vẫn cao…",
+    "recommendation": "Khuyến nghị BUY có điều kiện, stop-loss theo execution."
+  },
+  "model": "openrouter/insight-model",
+  "generated_at": "2026-06-14T10:15:00Z"
+}
+```
+
+#### Phụ lục D — Kết quả kiểm thử mẫu (tham khảo nộp báo cáo)
+
+| Module | Lệnh | Kết quả |
+| --- | --- | --- |
+| Sentiment (rule-based) | `playground/sentiment/tests/test_scorer.py` | 5/5 PASS |
+| Influence | `pytest playground/influence/tests/ -q` | 3/3 PASS |
+| Scoring mock | `playground/scoring/test/run.py` | 3/3 scenario PASS |
+
+*Khi nộp: có thể chèn ảnh chụp terminal hoặc log đầy đủ vào phụ lục này.*
 
 ---
 
-*Tài liệu khung báo cáo — điền nội dung vào các placeholder `[...]` trước khi nộp.*
+*Báo cáo hoàn thiện từ khung `docs/khung-bao-cao.md` — cập nhật thông tin sinh viên, GVHD và URL repository trước khi nộp.*

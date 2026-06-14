@@ -1,0 +1,179 @@
+@startuml 05-erd-mongodb
+!theme plain
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam defaultFontName Arial
+skinparam linetype ortho
+skinparam ArrowColor #555555
+skinparam ArrowFontSize 9
+
+skinparam class {
+  BackgroundColor #FFFBF5
+  BorderColor #C4782E
+  HeaderBackgroundColor #E8944A
+  HeaderFontColor white
+  FontColor #222222
+  FontSize 11
+  AttributeFontSize 10
+}
+
+hide circle
+hide methods
+skinparam classAttributeIconSize 0
+
+title Sơ đồ quan hệ collection — MongoDB (document model)
+
+' ── Pipeline ETL (Stage 1–6) ──
+class raw_events << (T,#E8944A) >> {
+  event_id : uuid <<PK>>
+  source : string
+  external_id : string <<UK>>
+  raw_text : string
+  metrics : object
+  timestamp : int
+}
+
+class dropped_events << (T,#E8944A) >> {
+  event_id : uuid <<PK>>
+  drop_stage : string
+  drop_reason : string
+  filter : object
+}
+
+class clean_events << (T,#E8944A) >> {
+  event_id : uuid <<PK>>
+  clean_text : string
+  filter : object
+  is_spam : bool
+}
+
+class mapped_events << (T,#E8944A) >> {
+  mapped_id : uuid <<PK>>
+  parent_event_id : uuid <<FK>>
+  coin_id : string
+  ner : object
+}
+
+class sentiment_events << (T,#E8944A) >> {
+  sentiment_id : uuid <<PK>>
+  mapped_id : uuid <<FK>>
+  coin_id : string
+  sentiment_score : float
+  sentiment_label : string
+  sentiment_confidence : float
+}
+
+class weighted_events << (T,#E8944A) >> {
+  weighted_id : uuid <<PK>>
+  source_event_key : string <<UK>>
+  influence_weight : float
+  weighted_sentiment : float
+  influence : object
+}
+
+class influence_aggregates << (T,#E8944A) >> {
+  coin_id : string <<PK>>
+  timeframe : string <<PK>>
+  window_start : datetime <<PK>>
+  sentiment_score : float
+  social_volume : int
+  total_influence : float
+}
+
+class scoring_signals << (T,#E8944A) >> {
+  signal_id : uuid <<PK>>
+  coin_id : string
+  action : string
+  metrics : object
+  execution : object
+  timestamp : int
+}
+
+' ── LLM Insight & Chat ──
+class analysis_reports << (T,#E8944A) >> {
+  report_id : uuid <<PK>>
+  signal_id : uuid <<FK>>
+  session_id : uuid <<FK>>
+  coin_id : string
+  summary : string
+  key_findings : array
+  recommendation : string
+  confidence : float
+  generated_at : datetime
+}
+
+class analysis_sessions << (T,#E8944A) >> {
+  session_id : uuid <<PK>>
+  coin_id : string
+  timeframe : string
+  job_id : uuid <<FK>>
+  report_id : uuid <<FK>>
+  status : string
+  created_at : datetime
+  completed_at : datetime
+}
+
+class chat_messages << (T,#E8944A) >> {
+  message_id : uuid <<PK>>
+  session_id : uuid <<FK>>
+  role : string
+  type : string
+  content : string
+  metadata : object
+  created_at : datetime
+}
+
+' ── Orchestrator ──
+class pipeline_jobs << (T,#E8944A) >> {
+  job_id : uuid <<PK>>
+  session_id : uuid <<FK>>
+  status : string
+  stages : array
+  started_at : datetime
+  finished_at : datetime
+}
+
+class pipeline_stage_runs << (T,#E8944A) >> {
+  run_id : uuid <<PK>>
+  job_id : uuid <<FK>>
+  stage : string
+  status : string
+  records_in : int
+  records_out : int
+  duration_ms : int
+  error : string
+}
+
+' Layout — pipeline ngang (trên)
+raw_events -[hidden]right- clean_events
+clean_events -[hidden]right- mapped_events
+mapped_events -[hidden]right- sentiment_events
+sentiment_events -[hidden]right- weighted_events
+weighted_events -[hidden]right- influence_aggregates
+influence_aggregates -[hidden]right- scoring_signals
+
+raw_events -[hidden]down- dropped_events
+
+' Layout — chat & jobs (dưới scoring)
+scoring_signals -[hidden]down- analysis_reports
+analysis_reports -[hidden]left- analysis_sessions
+analysis_sessions -[hidden]down- chat_messages
+analysis_sessions -[hidden]right- pipeline_jobs
+pipeline_jobs -[hidden]down- pipeline_stage_runs
+
+' Quan hệ (crow's foot)
+raw_events ||--o| clean_events : event_id
+raw_events ||--o| dropped_events : event_id
+clean_events ||--o{ mapped_events : parent_event_id
+mapped_events ||--o| sentiment_events : mapped_id + coin_id
+sentiment_events ||--o| weighted_events : sentiment_id
+weighted_events }o--|| influence_aggregates : rollup window
+influence_aggregates ||--o{ scoring_signals : join OHLCV
+scoring_signals ||--o| analysis_reports : signal_id
+analysis_sessions ||--o| analysis_reports : report_id
+analysis_sessions ||--|{ chat_messages : session_id
+analysis_sessions ||--o| pipeline_jobs : job_id
+pipeline_jobs ||--|{ pipeline_stage_runs : job_id
+
+@enduml
