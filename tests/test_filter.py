@@ -1,4 +1,16 @@
-"""P3 Filter unit tests — TC-01, TC-02, T3-04, T3-05 (không cần MongoDB/Redis)."""
+"""Kiểm tra Filter stage (Phase 3) — unit test, không cần MongoDB/Redis.
+
+Chạy: uv run pytest tests/test_filter.py -v
+
+Danh sách test:
+  test_tc01_pump_regex_drop       — tweet pump/scam → bị chặn ở L1 (regex)
+  test_tc02_fasttext_spam_drop    — model báo spam → bị chặn ở L3
+  test_t3_04_normal_tweet_passes  — tweet hợp lệ → qua hết L1/L2/L3
+  test_t3_05_filter_recall_benchmark — tập mẫu: bắt ≥85% spam, giữ ≥75% tweet sạch
+  test_l3_skips_when_model_missing — không có file model → L3 bỏ qua, log warning
+  test_l2_simhash_duplicate       — 2 tweet gần giống → cái sau bị chặn ở L2
+  test_news_source_skips_engagement — tin news không bị chặn vì thiếu likes/retweets
+"""
 
 from __future__ import annotations
 
@@ -34,7 +46,7 @@ def _raw_event(text: str, **extra) -> dict:
 
 # ── TC-01: L1 pump regex ─────────────────────────────────────────────────────
 def test_tc01_pump_regex_drop() -> None:
-    """TC-01: Tweet pump → DROP tại L1, drop_reason=pump_regex."""
+    """Tweet pump (100x, telegram...) → DROP ngay tại L1, lý do pump_regex."""
     event = _raw_event("🚀🚀 100x BUY NOW!!! Guaranteed profit join our telegram t.me/scam")
     result = check_heuristic(event, config=HeuristicConfig(), author_counts={})
     assert result.passed is False
@@ -66,7 +78,7 @@ class _MockSpamClassifier(SpamClassifier):
 
 
 def test_tc02_fasttext_spam_drop() -> None:
-    """TC-02: P(spam) ≥ 0.5 → DROP tại L3."""
+    """Model FastText báo spam (mock) → DROP tại L3, lý do fasttext_spam."""
     event = _raw_event("Click here for free crypto giveaway now")
     ml = _MockSpamClassifier()
     outcome = run_single(event, heuristic=HeuristicConfig(), ml=ml, dedup=DedupState())
@@ -82,7 +94,7 @@ def test_tc02_fasttext_spam_drop() -> None:
 
 # ── T3-04: Tweet hợp lệ PASS ─────────────────────────────────────────────────
 def test_t3_04_normal_tweet_passes() -> None:
-    """T3-04: Tweet hợp lệ → PASS L1/L2/L3 (cần text không bị FastText gắn spam)."""
+    """Tweet bình thường (không spam) → PASS qua cả 3 lớp filter."""
     event = _raw_event(
         "Federal Reserve holds rates steady in March meeting"
     )
@@ -112,7 +124,7 @@ _BENCHMARK = [
 
 
 def test_t3_05_filter_recall_benchmark() -> None:
-    """T3-05: Recall ≥ 85% spam bị DROP trên tập mẫu."""
+    """Chạy 8 câu mẫu — spam phải bị bắt ≥85%, tweet sạch giữ ≥75%."""
     reset_filter_pipeline()
     pipeline = FilterPipeline(ml=None)
     dedup = DedupState()
@@ -143,7 +155,7 @@ def test_t3_05_filter_recall_benchmark() -> None:
 
 # ── L3 model missing ─────────────────────────────────────────────────────────
 def test_l3_skips_when_model_missing(caplog) -> None:
-    """L3 bỏ qua và log warning khi không có spam_model.bin."""
+    """Không có spam_model.bin → L3 không chạy, in warning."""
     import logging
 
     caplog.set_level(logging.WARNING, logger="src.pipeline.filter.ml")
@@ -155,6 +167,7 @@ def test_l3_skips_when_model_missing(caplog) -> None:
 
 # ── L2 simhash duplicate ─────────────────────────────────────────────────────
 def test_l2_simhash_duplicate() -> None:
+    """Hai tweet gần giống nhau → cái đầu PASS, cái sau DROP (simhash_duplicate)."""
     dedup = DedupState()
     event1 = _raw_event("Bitcoin price analysis for today market outlook")
     event2 = _raw_event("Bitcoin price analysis for today market outlook!")
@@ -169,6 +182,7 @@ def test_l2_simhash_duplicate() -> None:
 
 # ── News bypass L1 metrics ───────────────────────────────────────────────────
 def test_news_source_skips_engagement_checks() -> None:
+    """Tin tức (source=news) không bị chặn dù thiếu likes/retweets."""
     event = {
         "event_id": "news-1",
         "source": "news",

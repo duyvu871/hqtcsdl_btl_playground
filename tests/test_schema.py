@@ -1,4 +1,17 @@
-"""P1 MongoDB schema tests (T1-01 .. T1-07)."""
+"""Kiểm tra schema MongoDB (Phase 1) — index, unique, validation.
+
+Chạy: uv run pytest tests/test_schema.py -v
+Cần: MongoDB (docker compose). Dùng DB riêng crypto_mvp_test, tự xóa sau test.
+
+Danh sách test:
+  test_t1_01_bootstrap_idempotent     — chạy bootstrap 2 lần không lỗi
+  test_t1_02_raw_events_unique_dedup  — trùng (source, external_id) bị chặn
+  test_t1_03_mapped_events_unique     — trùng (parent_event_id, coin_id) bị chặn
+  test_t1_04_influence_aggregates     — upsert cùng cửa sổ không tạo doc thừa
+  test_t1_05_chat_messages_explain    — query session_id dùng đúng index
+  test_t1_06_all_collections_exist    — đủ 14 collection sau bootstrap
+  test_t1_07_jsonschema_rejects       — doc thiếu field bắt buộc bị từ chối
+"""
 
 from __future__ import annotations
 
@@ -70,7 +83,7 @@ def _raw_event(event_id: str = "evt-001", external_id: str = "ext-001") -> dict[
 
 @pytest.mark.asyncio
 async def test_t1_01_bootstrap_idempotent(test_db) -> None:
-    """T1-01: Bootstrap safe to run multiple times."""
+    """Chạy bootstrap_indexes nhiều lần vẫn ổn — không crash, không trùng lỗi."""
     count_first = await bootstrap_indexes(test_db)
     count_second = await bootstrap_indexes(test_db)
     assert count_first > 0
@@ -79,7 +92,7 @@ async def test_t1_01_bootstrap_idempotent(test_db) -> None:
 
 @pytest.mark.asyncio
 async def test_t1_02_raw_events_unique_dedup(test_db) -> None:
-    """T1-02: Duplicate (source, external_id) raises DuplicateKeyError."""
+    """Hai tweet cùng nguồn + cùng external_id — lần 2 insert bị từ chối."""
     doc = _raw_event()
     await test_db.raw_events.insert_one(doc)
     with pytest.raises(DuplicateKeyError):
@@ -89,7 +102,7 @@ async def test_t1_02_raw_events_unique_dedup(test_db) -> None:
 
 @pytest.mark.asyncio
 async def test_t1_03_mapped_events_unique_fanout(test_db) -> None:
-    """T1-03: Duplicate (parent_event_id, coin_id) raises DuplicateKeyError."""
+    """Hai mapped event cùng parent + coin — lần 2 insert bị từ chối."""
     doc = {
         "mapped_id": "map-001",
         "parent_event_id": "evt-parent",
@@ -103,7 +116,7 @@ async def test_t1_03_mapped_events_unique_fanout(test_db) -> None:
 
 @pytest.mark.asyncio
 async def test_t1_04_influence_aggregates_upsert(test_db) -> None:
-    """T1-04: Upsert same aggregate window does not create extra document."""
+    """Ghi aggregate cùng coin + timeframe + window 2 lần — chỉ 1 doc, giá trị mới nhất."""
     window_start = datetime(2026, 6, 14, 10, 0, 0, tzinfo=UTC)
     base = {
         "coin_id": "BTC",
@@ -130,7 +143,7 @@ async def test_t1_04_influence_aggregates_upsert(test_db) -> None:
 
 @pytest.mark.asyncio
 async def test_t1_05_chat_messages_explain_uses_index(test_db) -> None:
-    """T1-05: Query on session_id uses idx_session_created."""
+    """Tìm chat theo session_id — MongoDB dùng index, không quét full collection."""
     now = datetime(2026, 6, 14, 12, 0, 0, tzinfo=UTC)
     await test_db.chat_messages.insert_many(
         [
@@ -160,7 +173,7 @@ async def test_t1_05_chat_messages_explain_uses_index(test_db) -> None:
 
 @pytest.mark.asyncio
 async def test_t1_06_all_collections_exist(test_db) -> None:
-    """T1-06: All 14 collections exist after bootstrap."""
+    """Sau bootstrap có đủ 14 collection theo thiết kế."""
     names = set(await test_db.list_collection_names())
     for coll in COLLECTIONS:
         assert coll in names, f"Missing collection: {coll}"
@@ -169,7 +182,7 @@ async def test_t1_06_all_collections_exist(test_db) -> None:
 
 @pytest.mark.asyncio
 async def test_t1_07_jsonschema_rejects_invalid_doc(test_db) -> None:
-    """T1-07: $jsonSchema rejects document missing required fields."""
+    """Ghi doc thiếu event_id — MongoDB $jsonSchema từ chối."""
     invalid = {
         # Thiếu event_id (required) → MongoDB $jsonSchema reject
         "source": "twitter",

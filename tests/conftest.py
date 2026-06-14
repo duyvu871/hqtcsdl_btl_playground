@@ -1,4 +1,8 @@
-"""Pytest fixtures and env defaults for infra smoke tests."""
+"""Fixture dùng chung cho toàn bộ tests/.
+
+- Thêm repo root vào sys.path (chạy được python tests/xxx.py trực tiếp)
+- Set mặc định MONGODB_URI / REDIS_URL trỏ localhost Docker nếu chưa có .env
+"""
 
 from __future__ import annotations
 

@@ -1,4 +1,15 @@
-"""P3 Ingest + Filter integration tests — T3-01..04, TC-09, stream flow."""
+"""Kiểm tra Ingest + Filter tích hợp (Phase 3) — MongoDB + Redis + API thật.
+
+Chạy: uv run pytest tests/test_ingest_filter_integration.py -v
+Cần: docker compose (MongoDB + Redis). Một số test cần API key trong .env.
+
+Danh sách test:
+  test_tc09_ingest_dedup           — insert trùng external_id → skip, chỉ 1 doc
+  test_t3_01_ingest_twitter        — gọi Twitter API thật, ghi raw_events
+  test_t3_02_ingest_news_av        — gọi Alpha Vantage thật, ghi raw_events
+  test_t3_03_stream_ingest_to_filter — raw event qua Redis stream → filter → clean_events
+  test_t3_04_ingest_processor_persists — ingest processor ghi MongoDB (dữ liệu giả)
+"""
 
 from __future__ import annotations
 
@@ -73,7 +84,7 @@ def _kickoff(coin_id: str = "BTC", sources: list[str] | None = None) -> dict:
 # ── TC-09: Dedup ingest ───────────────────────────────────────────────────────
 @pytest.mark.asyncio
 async def test_tc09_ingest_dedup(test_db) -> None:
-    """TC-09: Insert trùng (source, external_id) → skip, không thêm doc."""
+    """Ghi cùng tweet 2 lần → lần 2 bỏ qua, DB chỉ có 1 bản ghi."""
     doc = _base_event(
         source="twitter",
         raw_text="Dedup test tweet",
@@ -97,6 +108,7 @@ async def test_tc09_ingest_dedup(test_db) -> None:
 # ── T3-01: Ingest Twitter (cần RAPIDAPI_KEY) ────────────────────────────────
 @pytest.mark.asyncio
 async def test_t3_01_ingest_twitter(test_db) -> None:
+    """Gọi Twitter collector thật → có ít nhất 1 event trong raw_events."""
     if not settings.RAPIDAPI_KEY:
         pytest.skip("RAPIDAPI_KEY not set")
 
@@ -113,6 +125,7 @@ async def test_t3_01_ingest_twitter(test_db) -> None:
 # ── T3-02: Ingest Alpha Vantage (cần ALPHA_VANTAGE_API_KEY) ─────────────────
 @pytest.mark.asyncio
 async def test_t3_02_ingest_news_av(test_db) -> None:
+    """Gọi Alpha Vantage collector thật → có tin tức trong raw_events."""
     if not settings.ALPHA_VANTAGE_API_KEY:
         pytest.skip("ALPHA_VANTAGE_API_KEY not set")
 
@@ -130,7 +143,7 @@ async def test_t3_02_ingest_news_av(test_db) -> None:
 # ── T3-03: Stream flow ingest → filter ───────────────────────────────────────
 @pytest.mark.asyncio
 async def test_t3_03_stream_ingest_to_filter(test_db, redis_client) -> None:
-    """Kickoff → ingest processor → filter processor → clean_events."""
+    """Đẩy raw event vào Redis stream filter → worker xử lý → ghi clean_events."""
     session_id = f"sess-{uuid.uuid4().hex[:8]}"
     job_id = "job-int-03"
     trace_id = str(uuid.uuid4())
@@ -186,7 +199,7 @@ async def test_t3_03_stream_ingest_to_filter(test_db, redis_client) -> None:
 # ── T3-04: Stream ingest processor với synthetic data ────────────────────────
 @pytest.mark.asyncio
 async def test_t3_04_ingest_processor_persists(test_db, monkeypatch) -> None:
-    """Ingest processor ghi raw_events từ synthetic collector."""
+    """Ingest processor nhận kickoff → ghi 1 event giả vào raw_events."""
     def _fake_collect(payload: dict) -> list[dict]:
         return [
             _base_event(

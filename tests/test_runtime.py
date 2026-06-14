@@ -1,4 +1,16 @@
-"""P2 Redis Streams runtime tests (T2-01 .. T2-06)."""
+"""Kiểm tra Redis Streams runtime (Phase 2) — worker harness.
+
+Chạy: uv run pytest tests/test_runtime.py -v
+Cần: Redis (docker compose).
+
+Danh sách test:
+  test_echo_stage       — đọc 1 message, xử lý, ack, đẩy xuống stream tiếp
+  test_fanout           — 1 input → processor trả 3 doc → 3 message downstream
+  test_dlq_after_max_retry — lỗi 3 lần → message vào DLQ (dead-letter)
+  test_reclaim_pending  — worker crash → worker khác nhận lại message treo
+  test_state_counters   — đếm số output vào session:{id}:state
+  test_control_events   — ghi stage_started / stage_completed vào control bus
+"""
 
 from __future__ import annotations
 
@@ -73,7 +85,7 @@ async def test_env(redis_client):
 # ── T2-01: echo publish → consume → ack ─────────────────────────────────────
 @pytest.mark.asyncio
 async def test_echo_stage(echo_env) -> None:
-    """T2-01: Entry xử lý xong; PEL rỗng sau ack."""
+    """Gửi 1 message → worker xử lý → ack → có 1 entry ở stream downstream."""
     redis = echo_env
     session_id = "sess-t2-01"
 
@@ -107,7 +119,7 @@ async def test_echo_stage(echo_env) -> None:
 # ── T2-02: fan-out 1 input → 3 downstream ──────────────────────────────────
 @pytest.mark.asyncio
 async def test_fanout(echo_env) -> None:
-    """T2-02: Processor trả list 3 items → 3 entries downstream."""
+    """Processor trả list 3 item → stream downstream có đúng 3 message."""
     redis = echo_env
     session_id = "sess-t2-02"
 
@@ -138,7 +150,7 @@ async def test_fanout(echo_env) -> None:
 # ── T2-03: DLQ sau max retry ─────────────────────────────────────────────────
 @pytest.mark.asyncio
 async def test_dlq_after_max_retry(test_env, monkeypatch) -> None:
-    """T2-03: Processor fail liên tục → entry vào stage:test:dlq sau 3 lần."""
+    """Processor luôn lỗi → sau 3 lần retry message chuyển sang DLQ."""
     redis = test_env
     monkeypatch.setattr("src.common.config.settings.STREAM_MAX_RETRY", 3)
     session_id = "sess-t2-03"
@@ -183,7 +195,7 @@ async def test_dlq_after_max_retry(test_env, monkeypatch) -> None:
 # ── T2-04: XAUTOCLAIM reclaim entry treo ─────────────────────────────────────
 @pytest.mark.asyncio
 async def test_reclaim_pending(echo_env) -> None:
-    """T2-04: Entry pending ở worker-1 → worker-2 reclaim và xử lý."""
+    """Worker 1 đọc nhưng không ack → worker 2 reclaim và xử lý xong."""
     redis = echo_env
     session_id = "sess-t2-04"
     stream = in_stream(ECHO_STAGE)
@@ -229,7 +241,7 @@ async def test_reclaim_pending(echo_env) -> None:
 # ── T2-05: Hash counters ─────────────────────────────────────────────────────
 @pytest.mark.asyncio
 async def test_state_counters(echo_env) -> None:
-    """T2-05: session:{id}:state có echo_out=N sau xử lý."""
+    """Sau xử lý, hash session:{id}:state ghi đúng số output."""
     redis = echo_env
     session_id = "sess-t2-05"
 
@@ -263,7 +275,7 @@ async def test_state_counters(echo_env) -> None:
 # ── T2-06: Control events ────────────────────────────────────────────────────
 @pytest.mark.asyncio
 async def test_control_events(echo_env) -> None:
-    """T2-06: session:{id}:events có stage_started và stage_completed."""
+    """Control bus ghi stage_started và stage_completed khi worker chạy xong."""
     redis = echo_env
     session_id = "sess-t2-06"
 
