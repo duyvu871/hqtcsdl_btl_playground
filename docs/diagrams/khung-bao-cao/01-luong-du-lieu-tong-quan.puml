@@ -1,0 +1,52 @@
+@startuml 01-luong-du-lieu-tong-quan
+!theme plain
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam ArrowColor #334155
+skinparam ActivityBackgroundColor white
+skinparam ActivityBorderColor #334155
+skinparam ActivityFontSize 12
+skinparam PartitionBackgroundColor #f8fafc
+skinparam PartitionBorderColor #64748b
+skinparam PartitionFontStyle bold
+
+title Luồng dữ liệu tổng quan — ETL 7 stage + Web Application
+
+|User|
+start
+:/dashboard — xem TradingView chart\n(chọn coin · timeframe);
+:Bấm Phân tích;
+
+|#faf5ff|Web App|
+:POST /analysis/sessions\n→ redirect /analysis/:sessionId;
+:Kết nối WS /ws/analysis;
+
+|#ecfeff|Orchestrator|
+:Emit planning steps (7 bước);
+:Kickoff pipeline — gắn session_id · job_id;
+
+|#f0fdf4|Pipeline ETL → MongoDB|
+:Stage 1 Ingest → raw_events\n← Twitter · News · Reddit;
+:Stage 2 Filter → clean_events;
+:Stage 3 NER + LLM → mapped_events;
+:Stage 4 Sentiment → sentiment_events;
+:Stage 5 Influence → influence_aggregates;
+:Stage 6 Scoring → scoring_signals\n← Binance OHLCV;
+:Stage 7 LLM Insight → analysis_reports;
+
+|#ecfeff|Orchestrator|
+:Stream etl_progress → chat\nStream tokens LLM → chat;
+
+|User|
+:Nhận signal card + báo cáo LLM;
+:Tải PDF;
+
+|#faf5ff|Web App /etl (tuỳ chọn)|
+:Giám sát pipeline graph\nWS /ws/pipeline;
+
+stop
+
+@enduml

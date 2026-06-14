@@ -1,0 +1,59 @@
+---
+config:
+  flowchart:
+    htmlLabels: true
+    curve: basis
+    padding: 24
+  theme: base
+  themeVariables:
+    fontSize: 16px
+    fontFamily: Inter, Segoe UI, Arial, sans-serif
+    lineColor: "#334155"
+---
+flowchart LR
+    classDef actorBlue fill:#e8f2ff,stroke:#2b6cb0,stroke-width:2px,color:#1a365d
+    classDef actorYellow fill:#fffbeb,stroke:#d97706,stroke-width:2px,color:#92400e
+    classDef actorGreen fill:#ecfdf5,stroke:#059669,stroke-width:2px,color:#065f46
+    classDef uc fill:#ffffff,stroke:#334155,stroke-width:1.5px,color:#0f172a
+
+    subgraph ACTORS[" "]
+        direction TB
+        USR["User<br/><i>Người dùng</i>"]:::actorBlue
+        ORCH["Orchestrator<br/><i>Điều phối pipeline</i>"]:::actorGreen
+        EXT["External APIs<br/><i>Nguồn dữ liệu bên ngoài</i>"]:::actorYellow
+    end
+
+    subgraph SYS["Hệ thống Crypto Social Pipeline"]
+        direction TB
+        UC7(("Xem chart TradingView<br/>UC-07 · /dashboard")):::uc
+        UC11(("Chat phân tích session<br/>UC-11 · planning → LLM → PDF")):::uc
+        UC9(("Giám sát ETL<br/>UC-09 · /etl")):::uc
+        UC8(("Cấu hình pipeline<br/>UC-08 · env · registry")):::uc
+        UC2(("Lọc spam / trùng lặp<br/>UC-02 · Filter")):::uc
+        UC3(("Gán coin và fan-out<br/>UC-03 · NER + LLM")):::uc
+        UC4(("Chấm sentiment và tổng hợp<br/>UC-04 · FinBERT")):::uc
+        UC5(("Tính influence weight<br/>UC-05")):::uc
+        UC6(("Sinh tín hiệu scoring<br/>UC-06 · Galaxy Score")):::uc
+        UC10(("Phân tích tổng hợp LLM<br/>UC-10 · Stage 7 Insight")):::uc
+        UC1(("Thu thập và chuẩn hóa dữ liệu<br/>UC-01 · Ingest")):::uc
+    end
+
+    USR --> UC7
+    USR --> UC11
+    USR --> UC9
+    USR --> UC8
+
+    ORCH --> UC2
+    ORCH --> UC3
+    ORCH --> UC4
+    ORCH --> UC5
+    ORCH --> UC6
+    ORCH --> UC10
+    ORCH --> UC1
+
+    UC11 --> ORCH
+
+    EXT --> UC1
+    EXT --> UC3
+    EXT --> UC6
+    EXT --> UC10

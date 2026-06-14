@@ -1,0 +1,73 @@
+@startuml 02-use-case-diagram
+!theme plain
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam ArrowColor #334155
+skinparam ArrowThickness 1.2
+skinparam linetype ortho
+
+skinparam usecase {
+  BackgroundColor white
+  BorderColor #334155
+  FontColor #0f172a
+  FontSize 12
+}
+
+skinparam actor {
+  BackgroundColor #e8f2ff
+  BorderColor #2b6cb0
+  FontColor #1a365d
+}
+
+skinparam rectangle {
+  BorderColor #64748b
+  BackgroundColor #f8fafc
+  FontSize 14
+  FontStyle bold
+}
+
+left to right direction
+
+actor "User\nNgười dùng" as USER
+actor "Orchestrator\nĐiều phối pipeline" as ORCH
+actor "External APIs\nNguồn dữ liệu bên ngoài" as EXT
+
+rectangle "Hệ thống Crypto Social Pipeline" {
+  usecase "Xem chart TradingView\nUC-07 · /dashboard" as UC7
+  usecase "Chat phân tích session\nUC-11 · planning → LLM → PDF" as UC11
+  usecase "Giám sát ETL\nUC-09 · /etl" as UC9
+  usecase "Cấu hình pipeline\nUC-08 · env · registry" as UC8
+
+  usecase "Lọc spam / trùng lặp\nUC-02 · Filter" as UC2
+  usecase "Gán coin và fan-out\nUC-03 · NER + LLM" as UC3
+  usecase "Chấm sentiment và tổng hợp\nUC-04 · FinBERT" as UC4
+  usecase "Tính influence weight\nUC-05" as UC5
+  usecase "Sinh tín hiệu scoring\nUC-06 · Galaxy Score" as UC6
+  usecase "Phân tích tổng hợp LLM\nUC-10 · Stage 7 Insight" as UC10
+  usecase "Thu thập và chuẩn hóa dữ liệu\nUC-01 · Ingest" as UC1
+}
+
+USER --> UC7
+USER --> UC11
+USER --> UC9
+USER --> UC8
+
+ORCH --> UC1
+ORCH --> UC2
+ORCH --> UC3
+ORCH --> UC4
+ORCH --> UC5
+ORCH --> UC6
+ORCH --> UC10
+
+UC11 ..> ORCH : <<trigger pipeline>>
+
+EXT --> UC1
+EXT --> UC3
+EXT --> UC6
+EXT --> UC10
+
+@enduml
