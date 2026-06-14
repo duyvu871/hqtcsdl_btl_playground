@@ -1,0 +1,61 @@
+@startuml 03-activity-social-event
+!theme plain
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam ArrowColor #334155
+skinparam ActivityBackgroundColor white
+skinparam ActivityBorderColor #334155
+skinparam ActivityFontSize 12
+
+title Activity Diagram — Xử lý một social event (raw → signal)
+
+start
+:User bấm Phân tích\nOrchestrator kickoff pipeline;
+
+:Stage 1 — Ingest API\n→ raw_events;
+
+:Stage 2 — Cascade filter\nL1 heuristic → L2 SimHash → L3 FastText;
+
+if (PASS filter?) then (Có)
+  :Stage 3 — NER map coin_id\n→ mapped_events;
+
+  if (Có mention hợp lệ\n trong registry?) then (Có)
+    :Stage 4 — FinBERT sentiment\n→ sentiment_events;
+
+    :Stage 5 — Tính influence_weight\n→ weighted_events · influence_aggregates;
+
+    :Stage 6 — Join OHLCV (Binance)\n+ tính Galaxy Score;
+
+    if (Alpha > 60\nvà Safety > 40?) then (Có)
+      :action = BUY\ntarget +5% · stop -2%;
+    else (Không)
+      if (Alpha < 40?\ntest mock) then (Có)
+        :action = SELL;
+      else (Không)
+        :action = HOLD;
+      endif
+    endif
+
+    :Ghi scoring_signals;
+
+    :Stage 7 — LLM Insight\n→ analysis_reports;
+
+    :Chat UI — stream report\n+ nút Tải PDF;
+
+    :Lưu analysis_sessions\n+ chat_messages;
+
+    stop
+  else (Không)
+    :Bỏ qua event\n(không fan-out);
+    stop
+  endif
+
+else (Không — DROP)
+  :Ghi dropped_events\n(kèm drop_reason);
+  stop
+endif
+
+@enduml

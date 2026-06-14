@@ -1,0 +1,72 @@
+---
+config:
+  flowchart:
+    htmlLabels: true
+    curve: basis
+    padding: 16
+  theme: base
+  themeVariables:
+    fontSize: 15px
+    fontFamily: Inter, Segoe UI, Arial, sans-serif
+    primaryColor: "#dbeafe"
+    primaryBorderColor: "#2563eb"
+    primaryTextColor: "#1e3a5f"
+    secondaryColor: "#dcfce7"
+    secondaryBorderColor: "#16a34a"
+    tertiaryColor: "#fef3c7"
+    lineColor: "#475569"
+---
+flowchart TB
+    classDef source fill:#eff6ff,stroke:#3b82f6,stroke-width:2px,color:#1e40af
+    classDef stage fill:#f0fdf4,stroke:#22c55e,stroke-width:2px,color:#14532d
+    classDef stageLast fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef web fill:#faf5ff,stroke:#9333ea,stroke-width:2px,color:#581c87
+    classDef market fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#9a3412
+    classDef orch fill:#ecfeff,stroke:#0891b2,stroke-width:2px,color:#155e75
+
+    subgraph WEB["Web Application — User"]
+        direction LR
+        TV["/dashboard<br/>TradingView chart<br/>coin · timeframe · ticker"]:::web
+        CHAT["/analysis/:sessionId<br/>Chat phân tích<br/>planning → ETL → LLM → PDF"]:::web
+        ETL["/etl<br/>ETL Monitor<br/>graph 7 stage · Run All"]:::web
+    end
+
+    ORCH(["Orchestrator<br/>Stage 1 → 7 · session_id · job_id"]):::orch
+
+    subgraph PIPE["Nhánh Social — MongoDB ETL"]
+        direction LR
+        S1["Stage 1<br/>Ingest<br/>raw_events"]:::stage
+        S2["Stage 2<br/>Filter<br/>clean_events"]:::stage
+        S3["Stage 3<br/>NER + LLM<br/>mapped_events"]:::stage
+        S4["Stage 4<br/>Sentiment<br/>sentiment_events"]:::stage
+        S5["Stage 5<br/>Influence<br/>influence_agg"]:::stage
+        S6["Stage 6<br/>Scoring<br/>scoring_signals"]:::stage
+        S7["Stage 7<br/>LLM Insight<br/>analysis_reports"]:::stageLast
+        S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7
+    end
+
+    subgraph SRC["Nguồn dữ liệu Social"]
+        direction LR
+        TW["Twitter / X"]:::source
+        NW["News AV · Yahoo"]:::source
+        RD["Reddit"]:::source
+    end
+
+    BN["Binance CCXT<br/>OHLCV · ticker"]:::market
+
+    TV ==>|"Phân tích"| CHAT
+    CHAT -->|"tạo session"| ORCH
+    ORCH -->|"kickoff pipeline"| S1
+
+    TW --> S1
+    NW --> S1
+    RD --> S1
+
+    BN -->|"join scoring"| S6
+    BN -->|"candles"| TV
+
+    S5 -.->|"context LLM"| S7
+    S7 -->|"report · PDF"| CHAT
+
+    ORCH -.->|"WS progress<br/>/ws/analysis"| CHAT
+    ORCH -.->|"WS pipeline<br/>/ws/pipeline"| ETL
