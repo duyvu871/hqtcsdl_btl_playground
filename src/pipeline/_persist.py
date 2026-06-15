@@ -74,3 +74,71 @@ async def insert_sentiment_event(doc: dict) -> InsertResult:
     except DuplicateKeyError:
         logger.debug("sentiment_events duplicate: %s", doc.get("sentiment_id"))
         return "skipped"
+
+
+async def insert_weighted_event(doc: dict) -> InsertResult:
+    """Ghi weighted_events; skip nếu trùng source_event_key."""
+    db = await get_db()
+    try:
+        await db.weighted_events.insert_one(doc)
+        return "inserted"
+    except DuplicateKeyError:
+        logger.debug("weighted_events duplicate: %s", doc.get("source_event_key"))
+        return "skipped"
+
+
+async def upsert_influence_aggregate(doc: dict) -> None:
+    """Upsert influence_aggregates theo (coin_id, timeframe, window_start)."""
+    db = await get_db()
+    await db.influence_aggregates.update_one(
+        {
+            "coin_id": doc["coin_id"],
+            "timeframe": doc["timeframe"],
+            "window_start": doc["window_start"],
+        },
+        {"$set": doc},
+        upsert=True,
+    )
+
+
+async def insert_scoring_signal(doc: dict) -> InsertResult:
+    """Ghi scoring_signals; skip nếu trùng signal_id."""
+    db = await get_db()
+    try:
+        await db.scoring_signals.insert_one(doc)
+        return "inserted"
+    except DuplicateKeyError:
+        logger.debug("scoring_signals duplicate: %s", doc.get("signal_id"))
+        return "skipped"
+
+
+async def upsert_market_ohlcv(
+    coin_id: str,
+    timeframe: str,
+    candles: list[dict],
+) -> int:
+    """Cache OHLCV vào market_ohlcv (L-02). Trả số doc upserted."""
+    from datetime import datetime, timezone
+
+    db = await get_db()
+    upserted = 0
+    for candle in candles:
+        ts = candle.get("timestamp")
+        if ts is None:
+            continue
+        ts_int = int(ts) if isinstance(ts, (int, float)) else int(float(ts))
+        doc = {
+            "coin_id": coin_id.upper(),
+            "timeframe": timeframe,
+            "timestamp": ts_int,
+            "close": float(candle["close"]),
+            "volume": float(candle.get("volume", 0)),
+            "updated_at": datetime.now(timezone.utc),
+        }
+        await db.market_ohlcv.update_one(
+            {"coin_id": doc["coin_id"], "timeframe": timeframe, "timestamp": ts_int},
+            {"$set": doc},
+            upsert=True,
+        )
+        upserted += 1
+    return upserted

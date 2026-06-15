@@ -11,6 +11,7 @@ import logging
 import os
 import socket
 from collections.abc import Awaitable, Callable
+from datetime import date, datetime
 from typing import Any, cast
 
 import redis.asyncio as aioredis
@@ -56,6 +57,19 @@ def default_consumer(name: str | None = None) -> str:
     return name or f"{socket.gethostname()}-{os.getpid()}"
 
 
+def _json_safe(value: Any) -> Any:
+    """Chuẩn hóa payload trước json.dumps — datetime/date → ISO string."""
+    if isinstance(value, datetime):
+        return value.isoformat()
+    if isinstance(value, date):
+        return value.isoformat()
+    if isinstance(value, dict):
+        return {k: _json_safe(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_json_safe(v) for v in value]
+    return value
+
+
 def build_entry(
     payload: dict[str, Any],
     *,
@@ -67,7 +81,7 @@ def build_entry(
 ) -> StreamFields:
     """Tạo flat string fields cho transport entry (§5.3)."""
     # Bỏ _id MongoDB — không serializable qua JSON stream
-    safe = {k: v for k, v in payload.items() if k != "_id"}
+    safe = _json_safe({k: v for k, v in payload.items() if k != "_id"})
     return {
         "session_id": session_id,
         "job_id": job_id,

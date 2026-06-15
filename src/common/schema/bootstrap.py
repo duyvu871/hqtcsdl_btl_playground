@@ -84,6 +84,11 @@ async def _ensure_indexes(db: AsyncIOMotorDatabase) -> int:
     await _idx("scoring_signals", [("coin_id", 1), ("timestamp", -1)],
                name="idx_coin_timestamp")
 
+    # market_ohlcv cache (L-02)
+    await _idx("market_ohlcv",
+               [("coin_id", 1), ("timeframe", 1), ("timestamp", 1)],
+               unique=True, name="uq_market_candle")
+
     # analysis_reports
     await _idx("analysis_reports", [("session_id", 1)], name="idx_session_id")
     await _idx("analysis_reports", [("coin_id", 1), ("generated_at", -1)],

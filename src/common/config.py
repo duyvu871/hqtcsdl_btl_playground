@@ -26,6 +26,26 @@ class Settings(BaseSettings):
     NER_MODE: str = "hybrid"
     SENTIMENT_MODEL: str = "ProsusAI/finbert"
 
+    # Stage 5 — influence weighting
+    MAX_INFLUENCE: float = 20.0
+    CORE_SCALE: float = 8.0
+    ALPHA_AUTHOR: float = 0.35
+    BETA_ENGAGEMENT: float = 0.40
+    GAMMA_VIRALITY: float = 0.25
+    DELTA_NETWORK: float = 0.0
+    DEFAULT_EXPECTED_ENGAGEMENT: float = 50.0
+    INFLUENCE_TIMEFRAME: str = "1h"
+    TWITTER_HALF_LIFE_HOURS: float = 12.0
+    REDDIT_HALF_LIFE_HOURS: float = 24.0
+    NEWS_HALF_LIFE_HOURS: float = 36.0
+    DEFAULT_HALF_LIFE_HOURS: float = 24.0
+
+    # Stage 6 — scoring
+    SCORING_WINDOW: int = 12
+    SCORING_MIN_CANDLES: int = 15
+    SCORING_OHLCV_LIMIT: int = 48
+    SCORING_CARA_LAMBDA: float = 1.2
+
     REDDIT_CLIENT_ID: str = ""
     REDDIT_CLIENT_SECRET: str = ""
     REDDIT_USERNAME: str = ""
