@@ -54,3 +54,8 @@ def ctl_stream(session_id: str) -> str:
 def state_key(session_id: str) -> str:
     """Runtime counters hash: session:{id}:state"""
     return f"session:{session_id}:state"
+
+
+def orch_cursor_key(session_id: str) -> str:
+    """Orchestrator XREAD cursor — độc lập WS broadcaster (§6.3)."""
+    return f"cursor:orch:{session_id}"

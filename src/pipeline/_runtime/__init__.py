@@ -11,6 +11,7 @@ from src.pipeline._runtime.keys import (
     dlq_stream,
     group,
     in_stream,
+    orch_cursor_key,
     state_key,
 )
 from src.pipeline._runtime.worker import (
@@ -38,6 +39,7 @@ __all__ = [
     "ensure_consumer_group",
     "group",
     "in_stream",
+    "orch_cursor_key",
     "pending_count",
     "process_batch",
     "process_entry",
