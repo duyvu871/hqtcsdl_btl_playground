@@ -28,13 +28,20 @@ async def sentiment_processor(payload: dict[str, Any], _fields: dict[str, str]) 
     result = await insert_sentiment_event(doc)
 
     if result == "inserted":
+        score = float(doc.get("sentiment_score") or 0)
         logger.debug(
             "Sentiment %s %s: %s (%.2f)",
             doc.get("coin_id"),
             doc.get("method"),
             doc.get("sentiment_label"),
-            doc.get("sentiment_score", 0),
+            score,
         )
+        doc["_summary"] = {
+            "sentiment_score": round(score, 4),
+            "sentiment_label": doc.get("sentiment_label"),
+            "coin_id": doc.get("coin_id"),
+            "method": doc.get("method"),
+        }
         return [doc]
 
     logger.debug("Skip duplicate sentiment %s/%s", doc.get("mapped_id"), doc.get("coin_id"))

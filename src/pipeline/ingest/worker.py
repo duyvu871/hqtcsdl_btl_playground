@@ -26,13 +26,21 @@ async def ingest_processor(payload: dict[str, Any], _fields: dict[str, str]) -> 
     events = collect_from_kickoff(payload)
     persisted: list[dict[str, Any]] = []
 
-    # Chỉ fan-out doc mới insert — duplicate không đẩy xuống filter lần nữa
+    source_counts: dict[str, int] = {}
     for doc in events:
         result = await insert_raw_event(doc)
         if result == "inserted":
             persisted.append(doc)
+            src = str(doc.get("source", "unknown"))
+            source_counts[src] = source_counts.get(src, 0) + 1
         else:
             logger.debug("Skip duplicate raw_event %s", doc.get("event_id"))
 
     logger.info("Ingest: %d collected, %d persisted", len(events), len(persisted))
+
+    if persisted:
+        persisted[0]["_summary"] = {
+            "records_out": len(persisted),
+            "sources": source_counts,
+        }
     return persisted

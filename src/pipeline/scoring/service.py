@@ -94,7 +94,11 @@ class ScoringPipeline:
         recent_s = scored["sentiment_score"].tail(self.window).to_numpy()
         kl_div = calc_kl_divergence(recent_p, recent_s)
 
-        latest_rows = scored.drop_nulls()
+        latest_rows = scored.filter(
+            pl.col("galaxy_alpha_score").is_finite()
+            & pl.col("galaxy_safety_score").is_finite()
+            & pl.col("close").is_finite()
+        )
         if latest_rows.height == 0:
             raise InsufficientCandlesError("Ma trận trống sau rolling window")
 
@@ -144,11 +148,22 @@ class ScoringPipeline:
         if not market_list:
             raise InsufficientCandlesError(f"Không có OHLCV cho {coin_id}")
 
-        df = pl.DataFrame(market_list).join(
-            pl.DataFrame(social_history),
+        market_df = pl.DataFrame(market_list).sort("timestamp")
+        social_df = (
+            pl.DataFrame(social_history)
+            .sort("timestamp")
+            .select(["timestamp", "sentiment_score", "social_volume"])
+        )
+
+        # asof join: mỗi nến OHLCV lấy social data gần nhất (backward)
+        df = market_df.join_asof(
+            social_df,
             on="timestamp",
-            how="inner",
-        ).sort("timestamp")
+            strategy="backward",
+        ).with_columns([
+            pl.col("sentiment_score").fill_null(0.0),
+            pl.col("social_volume").fill_null(0),
+        ])
 
         if "coin_id" not in df.columns:
             df = df.with_columns(pl.lit(coin_id).alias("coin_id"))

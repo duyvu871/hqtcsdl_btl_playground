@@ -196,11 +196,23 @@ async def process_entry(
     grp = group(stage)
 
     payload = json.loads(fields["payload"])
-    await emit(redis, session_id, "stage_started", {"stage": stage}, job_id=job_id)
+    await emit(redis, session_id, "stage_started", {"stage": stage, "pct": 5}, job_id=job_id)
 
     try:
         result = await processor(payload, fields)
-        outputs = result if isinstance(result, list) else [result]
+        raw_outputs = result if isinstance(result, list) else [result]
+
+        # Trích _summary từ output docs (không forward xuống stage tiếp theo)
+        summary: dict = {}
+        outputs: list[dict] = []
+        for doc in raw_outputs:
+            if isinstance(doc, dict):
+                s = doc.pop("_summary", None)
+                if isinstance(s, dict):
+                    summary.update(s)
+                outputs.append(doc)
+            else:
+                outputs.append(doc)
 
         if persist_fn:
             for doc in outputs:
@@ -226,7 +238,7 @@ async def process_entry(
             redis,
             session_id,
             "stage_completed",
-            {"stage": stage, "records_in": 1, "records_out": len(outputs)},
+            {"stage": stage, "records_in": 1, "records_out": len(outputs), "pct": 100, **summary},
             job_id=job_id,
         )
         await redis.hincrby(state_key(session_id), f"{stage}_out", len(outputs))
@@ -346,32 +358,43 @@ async def run(
     downstream: str | None = None,
     reclaim_every: int = 10,
 ) -> None:
-    """Vòng lặp worker chính — dùng trong production (chạy vô hạn)."""
+    """Vòng lặp worker chính — chạy vô hạn, tự recover khi gặp lỗi."""
+    import asyncio
+
     cons = default_consumer(consumer)
     await ensure_consumer_group(redis := await _get_redis(), stage)
     batches = 0
 
     while True:
-        if reclaim_every and batches % reclaim_every == 0:
-            await reclaim_pending(
+        try:
+            if reclaim_every and batches % reclaim_every == 0:
+                await reclaim_pending(
+                    redis,
+                    stage,
+                    processor,
+                    consumer=cons,
+                    persist_fn=persist_fn,
+                    downstream=downstream,
+                )
+
+            await process_batch(
                 redis,
                 stage,
                 processor,
                 consumer=cons,
                 persist_fn=persist_fn,
                 downstream=downstream,
+                block_ms=5000,
             )
+            batches += 1
 
-        await process_batch(
-            redis,
-            stage,
-            processor,
-            consumer=cons,
-            persist_fn=persist_fn,
-            downstream=downstream,
-            block_ms=5000,
-        )
-        batches += 1
+        except asyncio.CancelledError:
+            logger.info("Worker %s cancelled.", stage)
+            raise  # cho phép shutdown graceful
+
+        except Exception as exc:
+            logger.error("Worker %s unhandled error (retry in 2s): %s", stage, exc, exc_info=True)
+            await asyncio.sleep(2)
 
 
 async def _get_redis() -> aioredis.Redis:

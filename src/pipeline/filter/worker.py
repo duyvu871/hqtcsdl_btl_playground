@@ -31,6 +31,11 @@ async def filter_processor(payload: dict[str, Any], _fields: dict[str, str]) -> 
     if clean_doc:
         await insert_clean_event(clean_doc)
         logger.debug("Filter PASS: %s", clean_doc.get("event_id"))
+        clean_doc["_summary"] = {
+            "verdict": "pass",
+            "drop_stage": None,
+            "drop_reason": None,
+        }
         return [clean_doc]
 
     # DROP: ghi audit, không đẩy xuống NER

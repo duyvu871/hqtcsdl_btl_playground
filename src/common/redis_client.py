@@ -18,7 +18,8 @@ async def get_redis() -> aioredis.Redis:
         _redis = aioredis.from_url(
             settings.REDIS_URL,
             decode_responses=True,
-            socket_connect_timeout=3,
+            socket_connect_timeout=3,  # timeout kết nối ban đầu
+            socket_timeout=None,        # không timeout khi đọc (XREADGROUP block cần giữ lâu)
         )
     return _redis
 

@@ -41,7 +41,7 @@ async def emit_planning(
             redis,
             session_id,
             "planning_step",
-            {"step": i, "stage": stage, "description": desc},
+            {"step": i, "stage": stage.lower(), "description": desc},
             job_id=job_id,
         )
         doc: dict[str, Any] = {
@@ -50,7 +50,7 @@ async def emit_planning(
             "role": "assistant",
             "type": "planning",
             "content": f"{i}. {stage} — {desc}",
-            "metadata": {"step": i, "stage": stage},
+            "metadata": {"step": i, "stage": stage.lower()},
             "created_at": utcnow(),
         }
         await db.chat_messages.insert_one(doc)

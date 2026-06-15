@@ -10,13 +10,15 @@ from __future__ import annotations
 import logging
 from typing import Any
 
+from src.common.redis_client import get_redis
 from src.pipeline._persist import insert_mapped_event
+from src.pipeline._runtime.session_context import coin_matches, get_session_context
 from src.pipeline.ner.service import get_ner_pipeline
 
 logger = logging.getLogger(__name__)
 
 
-async def ner_processor(payload: dict[str, Any], _fields: dict[str, str]) -> list[dict[str, Any]]:
+async def ner_processor(payload: dict[str, Any], fields: dict[str, str]) -> list[dict[str, Any]]:
     """
     Processor cho stage ner:
       1. Nhận clean_event từ stage:ner:in
@@ -26,6 +28,13 @@ async def ner_processor(payload: dict[str, Any], _fields: dict[str, str]) -> lis
     """
     pipeline = get_ner_pipeline()
     outcome, docs = pipeline.process(payload)
+
+    session_id = fields.get("session_id", "")
+    if session_id:
+        redis = await get_redis()
+        ctx = await get_session_context(redis, session_id)
+        if ctx:
+            docs = [d for d in docs if coin_matches(d.get("coin_id"), ctx["coin_id"])]
 
     if not docs:
         logger.debug("NER no mentions: %s", payload.get("event_id"))
@@ -49,4 +58,11 @@ async def ner_processor(payload: dict[str, Any], _fields: dict[str, str]) -> lis
         len(outcome.mentions),
         len(persisted),
     )
+
+    if persisted:
+        coins = list({d.get("coin_id") for d in persisted if d.get("coin_id")})
+        persisted[0]["_summary"] = {
+            "mentions": len(persisted),
+            "coins": coins[:5],  # top 5
+        }
     return persisted

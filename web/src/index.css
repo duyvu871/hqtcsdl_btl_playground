@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #0f1117;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Report markdown — insight LLM output */
+.report-markdown {
+  font-size: 0.925rem;
+  line-height: 1.75;
+}
+
+.report-markdown h1,
+.report-markdown h2,
+.report-markdown h3,
+.report-markdown h4 {
+  color: #e2e8f0;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+.report-markdown h1 { font-size: 1.35rem; margin-top: 0; }
+.report-markdown h2 { font-size: 1.15rem; }
+.report-markdown h3 { font-size: 1rem; color: #cbd5e1; }
+.report-markdown h4 { font-size: 0.9rem; color: #94a3b8; }
+
+.report-markdown p {
+  color: #a0aec0;
+  margin-bottom: 0.9em;
+}
+
+.report-markdown ul,
+.report-markdown ol {
+  color: #a0aec0;
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+.report-markdown li {
+  margin-bottom: 0.4em;
+}
+.report-markdown li::marker {
+  color: #15aabf;
+}
+
+.report-markdown strong {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+.report-markdown em {
+  color: #94a3b8;
+}
+
+.report-markdown blockquote {
+  border-left: 3px solid #15aabf;
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  background: rgba(21, 170, 191, 0.06);
+  border-radius: 0 6px 6px 0;
+  color: #94a3b8;
+}
+
+.report-markdown hr {
+  border: none;
+  border-top: 1px solid #2c2e33;
+  margin: 1.5em 0;
+}
+
+.report-markdown code {
+  background: #1a1b23;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: #79c0ff;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+}
+.report-markdown pre {
+  background: #1a1b23;
+  border: 1px solid #2c2e33;
+  border-radius: 8px;
+  padding: 1em;
+  overflow-x: auto;
+  margin-bottom: 1em;
+}
+.report-markdown pre code {
+  background: none;
+  padding: 0;
+}
+
+.report-markdown a {
+  color: #22d3ee;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.report-markdown a:hover {
+  color: #67e8f9;
+}
+
+.report-markdown .md-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 1em;
+}
+.report-markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.report-markdown th,
+.report-markdown td {
+  border: 1px solid #2c2e33;
+  padding: 0.5em 0.75em;
+  text-align: left;
+  color: #a0aec0;
+}
+.report-markdown th {
+  background: #1a1b23;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+.report-markdown tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}

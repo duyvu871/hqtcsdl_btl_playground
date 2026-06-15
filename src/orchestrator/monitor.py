@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 import uuid
@@ -9,6 +10,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 import redis.asyncio as aioredis
+from redis.exceptions import TimeoutError as RedisTimeoutError
 
 from src.common.config import settings
 from src.common.mongo_client import get_db
@@ -100,13 +102,23 @@ async def handle_control_event(
     sk = state_key(session_id)
     db = await get_db()
 
-    if event_type == "stage_completed":
-        stage = str(data.get("stage", ""))
-        await redis.hset(sk, "current_stage", stage)
-        if stage == "scoring":
-            await redis.hset(sk, "status", "insight_streaming")
-            await finalize_session(session_id, job_id, through_stage="scoring")
-            return "insight_streaming"
+    if event_type in ("stage_started", "stage_completed"):
+        stage = str(data.get("stage", "")).lower()
+        if stage in ("ingest", "insight"):
+            await db.chat_messages.insert_one({
+                "message_id": str(uuid.uuid4()),
+                "session_id": session_id,
+                "role": "assistant",
+                "type": "etl_progress",
+                "content": f"Stage {stage} — {event_type}",
+                "metadata": {**data, "stage": stage, "status": event_type},
+                "created_at": utcnow(),
+            })
+        if event_type == "stage_completed":
+            await redis.hset(sk, "current_stage", stage)
+            if stage == "scoring":
+                await redis.hset(sk, "status", "insight_streaming")
+                await finalize_session(session_id, job_id, through_stage="scoring")
         return None
 
     if event_type == "stage_failed":
@@ -247,7 +259,17 @@ async def monitor_session(
     await redis.hset(state_key(session_id), mapping={"status": "running", "job_id": job_id})
 
     while True:
-        entries = await redis.xread({stream: last_id}, block=block_ms, count=100)
+        try:
+            entries = await redis.xread({stream: last_id}, block=block_ms, count=100)
+        except (RedisTimeoutError, TimeoutError):
+            logger.debug("Redis xread timeout session=%s — retry", session_id)
+            continue
+        except asyncio.CancelledError:
+            raise
+        except Exception:
+            logger.exception("Redis xread error session=%s", session_id)
+            continue
+
         for entry_id, fields in _xread_messages(entries):
             last_id = entry_id
             await redis.set(cursor_key, last_id, ex=_cursor_ttl_seconds())
@@ -260,7 +282,7 @@ async def monitor_session(
                 data = {}
 
             terminal = await handle_control_event(redis, session_id, job_id, event_type, data)
-            if terminal in ("completed", "failed_partial", "insight_streaming"):
+            if terminal in ("completed", "failed_partial"):
                 logger.info("Session %s terminal status: %s", session_id, terminal)
                 return terminal
 

@@ -142,3 +142,25 @@ async def upsert_market_ohlcv(
         )
         upserted += 1
     return upserted
+
+
+async def insert_analysis_report(doc: dict) -> InsertResult:
+    """Ghi analysis_reports; skip nếu trùng report_id."""
+    db = await get_db()
+    try:
+        await db.analysis_reports.insert_one(doc)
+        return "inserted"
+    except DuplicateKeyError:
+        logger.debug("analysis_reports duplicate: %s", doc.get("report_id"))
+        return "skipped"
+
+
+async def insert_report_chat_message(doc: dict) -> InsertResult:
+    """Ghi chat_messages type=report."""
+    db = await get_db()
+    try:
+        await db.chat_messages.insert_one(doc)
+        return "inserted"
+    except DuplicateKeyError:
+        logger.debug("chat_messages duplicate: %s", doc.get("message_id"))
+        return "skipped"

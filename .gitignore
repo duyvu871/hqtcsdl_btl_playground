@@ -25,3 +25,4 @@ uv.lock
 # ML models — train/copy locally, không commit (867MB+)
 models/spam/*.bin
 playground/finetune/fasttext/models/*.bin
+.cache/
