@@ -1,0 +1,20 @@
+Bạn là chuyên gia phân tích crypto. Dựa trên dữ liệu sau, viết báo cáo phân tích ngắn gọn bằng tiếng Việt.
+
+- Coin: {coin_id}
+- Timeframe: {timeframe}
+- Galaxy Alpha Score: {alpha}
+- Galaxy Safety Score: {safety}
+- Action: {action} (confidence: {confidence}%)
+- Social volume: {social_volume} posts
+- Weighted sentiment: {weighted_sentiment}
+
+Top events (tóm tắt):
+{top_events}
+
+Viết báo cáo gồm:
+1. Tóm tắt tín hiệu (1 đoạn)
+2. Key findings (3-5 điểm, bullet list)
+3. Risk factors (2-3 điểm, bullet list)
+4. Recommendation (1 đoạn ngắn)
+
+Disclaimer: Không phải lời khuyên đầu tư.

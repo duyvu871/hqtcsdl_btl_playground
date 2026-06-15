@@ -1,0 +1,114 @@
+@startuml 04-kien-truc-container
+!theme plain
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam ArrowColor #334155
+skinparam linetype ortho
+skinparam componentStyle rectangle
+
+skinparam package {
+  BorderColor #64748b
+  BackgroundColor #f8fafc
+  FontStyle bold
+  FontSize 13
+}
+
+skinparam component {
+  BackgroundColor white
+  BorderColor #334155
+  FontSize 10
+}
+
+skinparam database {
+  BackgroundColor #ecfdf5
+  BorderColor #16a34a
+}
+
+skinparam queue {
+  BackgroundColor #fef3c7
+  BorderColor #d97706
+}
+
+skinparam cloud {
+  BackgroundColor #eff6ff
+  BorderColor #3b82f6
+}
+
+title Kiến trúc logic (C4 — Container level)
+
+top to bottom direction
+
+package "Presentation Layer — Web App" {
+  component "React SPA\nweb/" as WEB
+  component "/dashboard\nTradingView" as TV
+  component "/analysis/:id\nChat GPT-like" as CHAT
+  component "/etl\nETL Monitor" as ETLUI
+}
+
+package "API Layer" {
+  component "REST API\nFastAPI" as REST
+  component "WebSocket\n/ws/analysis" as WS1
+  component "WebSocket\n/ws/pipeline" as WS2
+  component "Orchestrator" as ORCH
+}
+
+package "Processing Layer — 7 Workers" {
+  component "Ingest\nStage 1" as W1
+  component "Filter\nStage 2" as W2
+  component "NER + LLM\nStage 3" as W3
+  component "Sentiment\nStage 4" as W4
+  component "Influence\nStage 5" as W5
+  component "Scoring\nStage 6" as W6
+  component "LLM Insight\nStage 7" as W7
+}
+
+package "Infrastructure" {
+  database "MongoDB\ncrypto_mvp" as MDB
+  queue "Redis Streams\n(transport)" as REDIS
+  queue "Redpanda\n(optional)" as MQ
+  cloud "Binance CCXT" as MKT
+  cloud "OpenRouter API" as LLM
+}
+
+WEB --> TV
+WEB --> CHAT
+WEB --> ETLUI
+
+TV --> REST
+CHAT --> REST
+CHAT --> WS1
+ETLUI --> REST
+ETLUI --> WS2
+
+REST --> ORCH
+WS1 --> ORCH
+WS2 --> ORCH
+
+ORCH --> W1
+
+W1 --> W2
+W2 --> W3
+W3 --> W4
+W4 --> W5
+W5 --> W6
+W6 --> W7
+
+W1 --> MDB
+W2 --> MDB
+W3 --> MDB
+W3 --> LLM
+W4 --> MDB
+W5 --> MDB
+W6 --> MDB
+W6 --> MKT
+W7 --> MDB
+W7 --> LLM
+
+ORCH ..> REDIS : stage streams\n+ session events
+W1 ..> MQ : optional
+MQ ..> W2 : optional
+
+@enduml

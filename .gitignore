@@ -8,3 +8,20 @@ __pycache__/
 *.pywz
 *.pyzw
 *.pyzwz
+
+# Environment
+.env
+.venv/
+venv/
+
+# Test / tooling
+.pytest_cache/
+.ruff_cache/
+uv.lock
+
+# IDE
+.vscode/
+
+# ML models — train/copy locally, không commit (867MB+)
+models/spam/*.bin
+playground/finetune/fasttext/models/*.bin

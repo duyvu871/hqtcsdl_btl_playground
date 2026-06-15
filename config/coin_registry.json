@@ -1,0 +1,54 @@
+{
+  "coins": [
+    {
+      "coin_id": "BTC",
+      "name": "Bitcoin",
+      "aliases": ["bitcoin", "btc", "xbt", "₿", "$BTC", "BTCUSDT"]
+    },
+    {
+      "coin_id": "ETH",
+      "name": "Ethereum",
+      "aliases": ["ethereum", "eth", "ether", "$ETH", "ETHUSDT"]
+    },
+    {
+      "coin_id": "SOL",
+      "name": "Solana",
+      "aliases": ["solana", "sol", "$SOL", "SOLUSDT"]
+    },
+    {
+      "coin_id": "BNB",
+      "name": "BNB",
+      "aliases": ["bnb", "binance coin", "binance", "$BNB", "BNBUSDT"]
+    },
+    {
+      "coin_id": "XRP",
+      "name": "XRP",
+      "aliases": ["xrp", "ripple", "$XRP", "XRPUSDT"]
+    },
+    {
+      "coin_id": "ADA",
+      "name": "Cardano",
+      "aliases": ["cardano", "ada", "$ADA", "ADAUSDT"]
+    },
+    {
+      "coin_id": "DOGE",
+      "name": "Dogecoin",
+      "aliases": ["dogecoin", "doge", "$DOGE", "DOGEUSDT"]
+    },
+    {
+      "coin_id": "AVAX",
+      "name": "Avalanche",
+      "aliases": ["avalanche", "avax", "$AVAX", "AVAXUSDT"]
+    },
+    {
+      "coin_id": "DOT",
+      "name": "Polkadot",
+      "aliases": ["polkadot", "dot", "$DOT", "DOTUSDT"]
+    },
+    {
+      "coin_id": "LINK",
+      "name": "Chainlink",
+      "aliases": ["chainlink", "link", "$LINK", "LINKUSDT"]
+    }
+  ]
+}

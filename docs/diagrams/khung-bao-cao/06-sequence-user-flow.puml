@@ -1,0 +1,73 @@
+@startuml 06-sequence-user-flow
+!theme plain
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+
+skinparam participant {
+  BackgroundColor #FFF9F2
+  BorderColor #C4782E
+  FontColor #222222
+}
+
+skinparam actor {
+  BackgroundColor #E8F2FF
+  BorderColor #2B6CB0
+}
+
+skinparam note {
+  BackgroundColor #F8FAFC
+  BorderColor #64748B
+}
+
+actor "User" as U
+participant "/dashboard\nTradingView" as TV
+participant "/analysis\nChat" as CH
+participant "FastAPI" as API
+participant "/ws/analysis" as WS
+participant "Orchestrator" as OR
+participant "OpenRouter" as LLM
+
+== Khởi tạo ==
+U -> TV : Mở dashboard, chọn BTC 1h
+TV -> API : GET /market/ohlcv + ticker
+API --> TV : candles realtime
+
+U -> TV : Bấm "Phân tích"
+TV -> API : POST /analysis/sessions
+API -> OR : create job (stages 1→7, session_id)
+API --> CH : redirect /analysis/:sessionId
+CH -> WS : connect WebSocket
+
+== Phase 1 — Planning ==
+note over CH, WS
+  Hiển thị kế hoạch 7 bước trong chat
+end note
+OR --> WS : planning_step × 7
+WS --> CH : render numbered plan
+
+== Phase 2 — ETL (embed in chat) ==
+loop Stage 1 → 6
+  OR --> WS : etl_progress
+  WS --> CH : mini pipeline card + progress
+end
+OR --> WS : signal_ready
+WS --> CH : signal card BUY/HOLD
+
+== Phase 3 — LLM Insight ==
+OR -> LLM : context from pipeline
+loop Stream tokens
+  LLM --> WS : llm_token
+  WS --> CH : typewriter effect
+end
+OR --> WS : report_done
+WS --> CH : enable "Tải PDF"
+
+== Kết thúc ==
+U -> API : GET /analysis/sessions/:id/export/pdf
+API --> U : PDF file
+
+@enduml
